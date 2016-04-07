@@ -8,6 +8,7 @@ public class GameMaster : MonoBehaviour
 	public int worldWidth;
 	public int worldHeigth;
 	public bool gameLoopActive;
+	public bool gamePaused;
 
 	public Player Player {
 		get
@@ -39,13 +40,33 @@ public class GameMaster : MonoBehaviour
 				Debug.Log ("player is dead");
 				gameLoopActive = false;
 			}
+
+			if (Input.GetKeyDown (KeyCode.P))
+			{
+				gamePaused = true;
+			}
 		}
 	}
 
 	public void StartGame ()
 	{
-		
 		gameLoopActive = true;
+		gamePaused = false;
+	}
 
+	public void RestartLevel ()
+	{
+		gameLoopActive = false;
+		player.Pos = new Vector2 (5, 1);
+		player.Alive = true;
+		gameLoopActive = true;
+	}
+
+	public void RestartGame ()
+	{
+		gameLoopActive = false;
+		player.Pos = new Vector2 (5, 1);
+		player.Alive = true;
+		gameLoopActive = true;
 	}
 }

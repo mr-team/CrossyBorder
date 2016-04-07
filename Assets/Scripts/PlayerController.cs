@@ -5,8 +5,9 @@ public class PlayerController : MonoBehaviour
 {
 	GameMaster GM;
 	SpriteRenderer playerRenderer;
+	Animator playerAnim;
 	Player player;
-	int startX = 1;
+	int startX = 5;
 	int startY = 1;
 	float timer;
 	float timer2;
@@ -17,11 +18,10 @@ public class PlayerController : MonoBehaviour
 	{
 		GM = GameObject.Find ("GameMaster").GetComponent<GameMaster> ();
 		playerRenderer = GetComponent<SpriteRenderer> ();
+		playerAnim = GetComponent<Animator> ();
 		player = GM.Player;
 		player.Pos = new Vector2 (startX, startY);
-		player.IntPos = IntPosition2D.Vector2ToIntPos2D (player.Pos);
 		transform.position = player.Pos;
-
 		playerRenderer.enabled = false;
 	}
 
@@ -30,8 +30,14 @@ public class PlayerController : MonoBehaviour
 		if (GM.gameLoopActive)
 		{
 			playerRenderer.enabled = true;
-			MovePlayer ();
+
 			CheckTile (player.IntPos);
+		}
+		if (!GM.gamePaused)
+		{
+			MovePlayer ();
+			if (player.Alive && player.Lives <= 0)
+				kill ();
 		}
 	}
 
@@ -125,32 +131,36 @@ public class PlayerController : MonoBehaviour
 
 	void MovePlayer ()
 	{
-		if (Input.GetKeyDown (KeyCode.W) && !moving)
+		if (GM.gameLoopActive)
 		{
-			player.MoveUp ();
+			if (Input.GetKeyDown (KeyCode.W) && !moving)
+			{
+				player.MoveUp ();
 
-			moving = true;
+				moving = true;
+			}
+			if (Input.GetKeyDown (KeyCode.A) && !moving)
+			{
+				player.MoveLeft ();
+
+				moving = true;
+			}
+			if (Input.GetKeyDown (KeyCode.S) && !moving)
+			{
+				player.MoveDown ();
+
+				moving = true;
+			}
+			if (Input.GetKeyDown (KeyCode.D) && !moving)
+			{
+				player.MoveRight ();
+
+				moving = true;
+			}
 		}
-		if (Input.GetKeyDown (KeyCode.A) && !moving)
-		{
-			player.MoveLeft ();
 
-			moving = true;
-		}
-		if (Input.GetKeyDown (KeyCode.S) && !moving)
-		{
-			player.MoveDown ();
 
-			moving = true;
-		}
-		if (Input.GetKeyDown (KeyCode.D) && !moving)
-		{
-			player.MoveRight ();
-
-			moving = true;
-		}
-
-		if (Input.GetKey (KeyCode.W) || Input.GetKey (KeyCode.A) || Input.GetKey (KeyCode.S) || Input.GetKey (KeyCode.D))
+		/*if (Input.GetKey (KeyCode.W) || Input.GetKey (KeyCode.A) || Input.GetKey (KeyCode.S) || Input.GetKey (KeyCode.D))
 		{
 			timer += Time.deltaTime;
 
@@ -207,7 +217,7 @@ public class PlayerController : MonoBehaviour
 		if (Input.GetKeyUp (KeyCode.W) || Input.GetKeyUp (KeyCode.A) || Input.GetKeyUp (KeyCode.S) || Input.GetKeyUp (KeyCode.D))
 		{
 			timer = 0;
-		}
+		}*/
 
 		MovePlayerSmoth (player.Pos);
 	}
@@ -215,7 +225,7 @@ public class PlayerController : MonoBehaviour
 	void MovePlayerSmoth (Vector3 targetPos)
 	{
 		if (moving)
-			transform.position = Vector2.MoveTowards (transform.position, targetPos, 0.05f);
+			transform.position = Vector2.MoveTowards (transform.position, targetPos, 0.13f);
 
 		if (transform.position == targetPos)
 			moving = false;
@@ -227,7 +237,23 @@ public class PlayerController : MonoBehaviour
 
 		if (tile.Deadly)
 		{
-			player.Alive = false;
+			LoseLife ();
 		}
+	}
+
+	public void LoseLife (int amount = 1)
+	{
+		player.Lives -= amount;
+	}
+
+	public void GainLife (int amount = 1)
+	{
+		player.Lives += amount;
+	}
+
+	public void kill ()
+	{
+		playerAnim.SetBool ("Dead", true);
+		player.Alive = false;
 	}
 }
