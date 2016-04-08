@@ -23,17 +23,13 @@ public class CarSpawner : MonoBehaviour
 	void Update ()
 	{
 		spawnTimer += Time.deltaTime;
-
-		if (GM.gameLoopActive)
+		if (spawnTimer > 2)
 		{
-			spawnTimer += Time.deltaTime;
-			if (spawnTimer > 2)
-			{
-				SpawnCar ();
-				spawnTimer = 0;
+			SpawnCar ();
+			spawnTimer = 0;
 
-			}
 		}
+
 	}
 
 	public void SpawnCar ()

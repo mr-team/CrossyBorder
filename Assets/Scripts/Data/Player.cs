@@ -129,4 +129,14 @@ public class Player
 			Debug.Log ("could not move down");
 		}
 	}
+
+	public void LoseLife (int amount = 1)
+	{
+		lives -= amount;
+	}
+
+	public void GainLife (int amount = 1)
+	{
+		lives += amount;
+	}
 }
