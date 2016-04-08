@@ -7,15 +7,12 @@ public class Player
 	IntPosition2D intPos;
 	Vector2 pos;
 	bool alive = true;
+	int lives = 5;
 
 	public IntPosition2D IntPos {
 		get
 		{
 			return intPos;
-		}
-		set
-		{
-			intPos = value;
 		}
 	}
 
@@ -27,6 +24,7 @@ public class Player
 		set
 		{
 			pos = value;
+			intPos = IntPosition2D.Vector2ToIntPos2D (pos);
 		}
 	}
 
@@ -38,6 +36,17 @@ public class Player
 		set
 		{
 			alive = value;
+		}
+	}
+
+	public int Lives {
+		get
+		{
+			return lives;
+		}
+		set
+		{
+			lives = value;
 		}
 	}
 
