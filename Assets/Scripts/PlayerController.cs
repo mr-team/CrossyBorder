@@ -3,6 +3,15 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
+	public enum Direction
+	{
+		up,
+		down,
+		left,
+		right
+	}
+
+	public  Direction direction;
 	GameMaster GM;
 	SpriteRenderer playerRenderer;
 	Animator playerAnim;
@@ -14,8 +23,16 @@ public class PlayerController : MonoBehaviour
 	float waitBeforeRun = 0.5f;
 	bool moving;
 
+	public Player Player {
+		get
+		{
+			return player;
+		}
+	}
+
 	void Start ()
 	{
+		
 		GM = GameObject.Find ("GameMaster").GetComponent<GameMaster> ();
 		playerRenderer = GetComponent<SpriteRenderer> ();
 		playerAnim = GetComponent<Animator> ();
@@ -38,6 +55,10 @@ public class PlayerController : MonoBehaviour
 			MovePlayer ();
 			if (player.Alive && player.Lives <= 0)
 				kill ();
+		}
+		if (GM.gameResetPause)
+		{
+			ResetPlayer ();
 		}
 	}
 
@@ -136,30 +157,29 @@ public class PlayerController : MonoBehaviour
 			if (Input.GetKeyDown (KeyCode.W) && !moving)
 			{
 				player.MoveUp ();
-
+				SetFaceDirection (Direction.up);
 				moving = true;
 			}
 			if (Input.GetKeyDown (KeyCode.A) && !moving)
 			{
 				player.MoveLeft ();
-
+				SetFaceDirection (Direction.left);
 				moving = true;
 			}
 			if (Input.GetKeyDown (KeyCode.S) && !moving)
 			{
 				player.MoveDown ();
-
+				SetFaceDirection (Direction.down);
 				moving = true;
 			}
 			if (Input.GetKeyDown (KeyCode.D) && !moving)
 			{
 				player.MoveRight ();
-
+				SetFaceDirection (Direction.right);
 				moving = true;
 			}
 		}
-
-
+	
 		/*if (Input.GetKey (KeyCode.W) || Input.GetKey (KeyCode.A) || Input.GetKey (KeyCode.S) || Input.GetKey (KeyCode.D))
 		{
 			timer += Time.deltaTime;
@@ -231,29 +251,61 @@ public class PlayerController : MonoBehaviour
 			moving = false;
 	}
 
+	void ResetPlayer ()
+	{
+		transform.position = (player.Pos);
+		GM.gameResetPause = false;
+		playerAnim.SetBool ("FaceUp", true);
+		playerAnim.SetBool ("FaceLeft", false);
+		playerAnim.SetBool ("FaceDown", false);
+		playerAnim.SetBool ("FaceRight", false);
+	}
+
 	void CheckTile (IntPosition2D pos)
 	{
 		Tile tile = GM.World.Tiles [pos.X, pos.Y];
 
 		if (tile.Deadly)
 		{
-			LoseLife ();
+			player.LoseLife ();
 		}
-	}
-
-	public void LoseLife (int amount = 1)
-	{
-		player.Lives -= amount;
-	}
-
-	public void GainLife (int amount = 1)
-	{
-		player.Lives += amount;
 	}
 
 	public void kill ()
 	{
 		playerAnim.SetBool ("Dead", true);
 		player.Alive = false;
+	}
+
+	void SetFaceDirection (Direction dir)
+	{
+		if (dir == Direction.up)
+		{
+			playerAnim.SetBool ("FaceUp", true);
+			playerAnim.SetBool ("FaceLeft", false);
+			playerAnim.SetBool ("FaceDown", false);
+			playerAnim.SetBool ("FaceRight", false);
+		}
+		if (dir == Direction.left)
+		{
+			playerAnim.SetBool ("FaceUp", false);
+			playerAnim.SetBool ("FaceLeft", true);
+			playerAnim.SetBool ("FaceDown", false);
+			playerAnim.SetBool ("FaceRight", false);
+		}
+		if (dir == Direction.down)
+		{
+			playerAnim.SetBool ("FaceUp", false);
+			playerAnim.SetBool ("FaceLeft", false);
+			playerAnim.SetBool ("FaceDown", true);
+			playerAnim.SetBool ("FaceRight", false);
+		}
+		if (dir == Direction.right)
+		{
+			playerAnim.SetBool ("FaceUp", false);
+			playerAnim.SetBool ("FaceLeft", false);
+			playerAnim.SetBool ("FaceDown", false);
+			playerAnim.SetBool ("FaceRight", true);
+		}
 	}
 }

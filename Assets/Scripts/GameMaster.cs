@@ -9,6 +9,8 @@ public class GameMaster : MonoBehaviour
 	public int worldHeigth;
 	public bool gameLoopActive;
 	public bool gamePaused;
+	public bool gameResetPause;
+	int prevlife;
 
 	public Player Player {
 		get
@@ -29,6 +31,7 @@ public class GameMaster : MonoBehaviour
 		world = new World (worldWidth, worldHeigth);
 		world.GenerateWorld ();
 		player = new Player (world);
+		prevlife = player.Lives;
 	}
 
 	void Update ()
@@ -37,13 +40,18 @@ public class GameMaster : MonoBehaviour
 		{
 			if (!player.Alive)
 			{
-				Debug.Log ("player is dead");
 				gameLoopActive = false;
 			}
 
 			if (Input.GetKeyDown (KeyCode.P))
 			{
 				gamePaused = true;
+			}
+			if (player.Lives < prevlife && player.Alive)
+			{
+				RestartLevel ();
+				Debug.Log ("hello");
+				prevlife = player.Lives;
 			}
 		}
 	}
@@ -56,17 +64,14 @@ public class GameMaster : MonoBehaviour
 
 	public void RestartLevel ()
 	{
-		gameLoopActive = false;
+		gameResetPause = true;
 		player.Pos = new Vector2 (5, 1);
-		player.Alive = true;
-		gameLoopActive = true;
+
+		//player.Alive = true;
 	}
 
 	public void RestartGame ()
 	{
-		gameLoopActive = false;
-		player.Pos = new Vector2 (5, 1);
-		player.Alive = true;
-		gameLoopActive = true;
+		Application.LoadLevel (0);	
 	}
 }

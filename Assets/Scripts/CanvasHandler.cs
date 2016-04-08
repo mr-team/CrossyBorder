@@ -13,13 +13,17 @@ public class CanvasHandler : MonoBehaviour
 	{
 		GM = GameObject.Find ("GameMaster").GetComponent<GameMaster> ();
 		deathScreen.enabled = false;
+		ui.enabled = false;
 	}
 
 	void Update ()
 	{
-		//main menu handler
+		//main menu handler / UI handler
 		if (GM.gameLoopActive)
+		{
+			ui.enabled = true;
 			mainMenu.enabled = false;
+		}
 
 		//death screen handler
 		if (!GM.Player.Alive)
