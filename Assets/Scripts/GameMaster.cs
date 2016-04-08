@@ -7,6 +7,8 @@ public class GameMaster : MonoBehaviour
 	World world;
 	public int worldWidth;
 	public int worldHeigth;
+    public float noiseScale;
+    public string seed;
 	public bool gameLoopActive;
 	public bool gamePaused;
 	public bool gameResetPause;
@@ -28,7 +30,7 @@ public class GameMaster : MonoBehaviour
 
 	void Awake ()
 	{
-		world = new World (worldWidth, worldHeigth);
+		world = new World (worldWidth, worldHeigth, noiseScale, seed);
 		world.GenerateWorld ();
 		player = new Player (world);
 		prevlife = player.Lives;
