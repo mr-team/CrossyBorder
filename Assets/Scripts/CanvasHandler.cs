@@ -8,12 +8,15 @@ public class CanvasHandler : MonoBehaviour
 	public Canvas pauseMenu;
 	public Canvas ui;
 	public Canvas deathScreen;
+	public Canvas winScreen;
 
 	void Start ()
 	{
+		Debug.Log ("saødk");
 		GM = GameObject.Find ("GameMaster").GetComponent<GameMaster> ();
 		deathScreen.enabled = false;
 		ui.enabled = false;
+		winScreen.enabled = false;
 	}
 
 	void Update ()
@@ -36,5 +39,10 @@ public class CanvasHandler : MonoBehaviour
 			pauseMenu.enabled = true;
 		else
 			pauseMenu.enabled = false;
+		
+		if (GM.roundWon)
+		{
+			winScreen.enabled = true;
+		}
 	}
 }
