@@ -10,6 +10,8 @@ public class CarSpawner : MonoBehaviour
 	}
 
 	public GameObject car;
+
+	public Sprite[] sprites = new Sprite[2];
 	GameMaster GM;
 	float spawnTimer;
 	bool spawned;
@@ -41,10 +43,12 @@ public class CarSpawner : MonoBehaviour
 		{
 			spawnedCar.transform.position = new Vector2 (transform.position.x - Random.Range (0, 6), transform.position.y);
 			carControl.MoveLeft ();
+			spawnedCar.GetComponent<SpriteRenderer> ().sprite = sprites [0];
 		} else
 		{
 			carControl.MoveRight ();
 			spawnedCar.transform.position = new Vector2 (transform.position.x + Random.Range (0, 10), transform.position.y);
+			spawnedCar.GetComponent<SpriteRenderer> ().sprite = sprites [1];
 		}
 	}
 }
