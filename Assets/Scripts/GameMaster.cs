@@ -7,11 +7,13 @@ public class GameMaster : MonoBehaviour
 	World world;
 	public int worldWidth;
 	public int worldHeigth;
-    public float noiseScale;
-    public string seed;
+	public float noiseScale;
+	public string seed;
 	public bool gameLoopActive;
 	public bool gamePaused;
 	public bool gameResetPause;
+	public bool roundWon;
+
 	int prevlife;
 
 	public Player Player {
@@ -56,6 +58,11 @@ public class GameMaster : MonoBehaviour
 				prevlife = player.Lives;
 			}
 		}
+
+		if (roundWon)
+		{
+			gameLoopActive = false;
+		}
 	}
 
 	public void StartGame ()
@@ -75,5 +82,10 @@ public class GameMaster : MonoBehaviour
 	public void RestartGame ()
 	{
 		Application.LoadLevel (0);	
+	}
+
+	public void WinRound ()
+	{
+
 	}
 }
