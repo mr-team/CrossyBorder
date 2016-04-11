@@ -7,6 +7,8 @@ public class World
 
 	int height;
 	int width;
+    float scale;
+    float[,] noiseMap;
 
 	public Tile[,] Tiles {
 		get
@@ -15,10 +17,14 @@ public class World
 		}
 	}
 
-	public World (int Width, int Height)
+	public World (int Width, int Height, float scale, string seedText)
 	{
 		height = Height;
 		width = Width;
+        this.scale = scale;
+        if(seedText == "")
+            seedText = "Matias er " + Random.Range(int.MinValue, int.MaxValue) + " meter høy.";
+        noiseMap = Noise.GenerateNoiseMap(width * 10, height * 10, scale, seedText);
 		tiles = new Tile[width, height];
 	}
 
@@ -28,7 +34,7 @@ public class World
 		{
 			for (int u = 0; u < tiles.GetLength (1); u++)
 			{
-				if (u == 0)
+                /*if (u == 0)
 				{
 					tiles [i, u] = new Tile (new Vector2 (i, u));
 					tiles [i, u].Walkable = false;
@@ -47,8 +53,15 @@ public class World
 				{
 					tiles [i, u] = new Tile (new Vector2 (i, u));
 					tiles [i, u].Walkable = true;
-				}
-			}
+				}*/
+                if(u == 0) {
+                    tiles[i, u] = new Tile(new Vector2(i, u));
+                    tiles[i, u].Walkable = false;
+                } else {
+                    tiles[i, u] = new Tile(new Vector2(i, u));
+                    tiles[i, u].Walkable = noiseMap[i, u] <= 0.65f;
+                }
+            }
 		}
 	}
 

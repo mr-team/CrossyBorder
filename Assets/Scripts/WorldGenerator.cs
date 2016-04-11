@@ -7,12 +7,10 @@ public class WorldGenerator : MonoBehaviour
 	World world;
 	public GameObject[] tileGraphic = new GameObject[10];
 
-
 	void Start ()
 	{
 		GM = GameObject.Find ("GameMaster").GetComponent<GameMaster> ();
 		world = GM.World;
-
 		DrawWorld ();
 	}
 
