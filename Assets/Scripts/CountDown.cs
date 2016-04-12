@@ -19,14 +19,14 @@ public class CountDown : MonoBehaviour
 
 	void Update ()
 	{
-		Debug.Log (timeLeft);
+		
 		if (GM.gameLoopActive)
 		{
 			timeText.text = ("Time left: " + (timeLimit - timeLeft));
 			livesLeft.text = ("Lives left: " + GM.Player.Lives);
 		}
 
-		if (GM.gameLoopActive)
+		if (GM.gameLoopActive && !GM.gamePaused)
 		{
 			timeLeft += Time.deltaTime * timeDelta;
 
@@ -36,5 +36,10 @@ public class CountDown : MonoBehaviour
 				timeLeft = 0;
 			}
 		}
+	}
+
+	public void ResetTimer ()
+	{
+		timeLeft = 0;
 	}
 }

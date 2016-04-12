@@ -74,6 +74,7 @@ public class GameMaster : MonoBehaviour
 	public void RestartLevel ()
 	{
 		gameResetPause = true;
+		GetComponent<CountDown> ().ResetTimer ();
 		player.Pos = new Vector2 (5, 1);
 
 		//player.Alive = true;
