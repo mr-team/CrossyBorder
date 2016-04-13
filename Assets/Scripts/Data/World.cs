@@ -64,7 +64,6 @@ public class World
 					tiles [i, u].Walkable = true;
 				} else if (u == 6)
 				{
-					Debug.Log ("he1");
 					tiles [i, u] = new Tile (new Vector2 (i, u));
 					tiles [i, u].Walkable = true;
 				} else if (u == 8)

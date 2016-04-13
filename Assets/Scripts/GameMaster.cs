@@ -5,10 +5,15 @@ public class GameMaster : MonoBehaviour
 {
 	Player player;
 	World world;
+
 	public int worldWidth;
 	public int worldHeigth;
+	public int ladderCount;
+	public int maxLadder = 5;
 	public float noiseScale;
+
 	public string seed;
+
 	public bool gameLoopActive;
 	public bool gamePaused;
 	public bool gameResetPause;

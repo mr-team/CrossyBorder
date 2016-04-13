@@ -18,7 +18,7 @@ public class EndZone : MonoBehaviour
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
-		if (other.transform.tag == ("Player"))
+		if (GM.ladderCount >= GM.maxLadder && other.transform.tag == ("Player"))
 		{
 			GM.roundWon = true;
 		}

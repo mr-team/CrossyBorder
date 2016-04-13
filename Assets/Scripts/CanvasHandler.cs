@@ -12,7 +12,7 @@ public class CanvasHandler : MonoBehaviour
 
 	void Start ()
 	{
-		Debug.Log ("saødk");
+		
 		GM = GameObject.Find ("GameMaster").GetComponent<GameMaster> ();
 		deathScreen.enabled = false;
 		ui.enabled = false;
