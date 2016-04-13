@@ -22,7 +22,7 @@ public class CountDown : MonoBehaviour
 		
 		if (GM.gameLoopActive)
 		{
-			timeText.text = ("Time left: " + (timeLimit - timeLeft));
+			timeText.text = ("Time left: " + ParseSeconds(timeLimit - timeLeft));
 			livesLeft.text = ("Lives left: " + GM.Player.Lives);
 		}
 
@@ -37,6 +37,11 @@ public class CountDown : MonoBehaviour
 			}
 		}
 	}
+
+    public string ParseSeconds(float time) {
+        string[] tid = time.ToString().Split(".".ToCharArray());
+        return tid[0];
+    }
 
 	public void ResetTimer ()
 	{
