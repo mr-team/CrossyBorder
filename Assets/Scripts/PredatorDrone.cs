@@ -3,13 +3,14 @@ using System.Collections;
 
 public class PredatorDrone : MonoBehaviour
 {
+	GameMaster GM;
+
 	public GameObject bomb;
 	public GameObject[] spawnPoints = new GameObject[5];
 	VerticalLanesController laneControl;
 
 	float moveSpeed = 6;
 	float bombTimer;
-
 	bool bombDroped;
 
 	IntPosition2D intPos;
@@ -28,41 +29,45 @@ public class PredatorDrone : MonoBehaviour
 
 	void Start ()
 	{
+		GM = GameObject.Find ("GameMaster").GetComponent<GameMaster> ();
 		lastIntPos = new IntPosition2D (0, 0);
 	}
 
 	void Update ()
 	{	//constant move down
-		transform.Translate (Vector2.down * Time.deltaTime * moveSpeed);
-
-		intPos = IntPosition2D.Vector2ToIntPos2D (transform.position);
-
-
-		//makes sure a bomb is dropped in every tile
-
-		if (intPos != lastIntPos)
-			bombDroped = false;
-
-		if (intPos.Y == 23)
+		if (!GM.gamePaused)
 		{
-			lastIntPos = intPos;
-		}
+			transform.Translate (Vector2.down * Time.deltaTime * moveSpeed);
 
-		if (!bombDroped && intPos.Y == (lastIntPos.Y - 1))
-		{
-			for (int i = 0; i < spawnPoints.Length; i++)
+			intPos = IntPosition2D.Vector2ToIntPos2D (transform.position);
+
+
+			//makes sure a bomb is dropped in every tile
+
+			if (intPos != lastIntPos)
+				bombDroped = false;
+
+			if (intPos.Y == 23)
 			{
-				DropBomb (spawnPoints [i]);
+				lastIntPos = intPos;
 			}
 
-			lastIntPos = intPos;
-			bombDroped = true;
-		}
+			if (!bombDroped && intPos.Y == (lastIntPos.Y - 1))
+			{
+				for (int i = 0; i < spawnPoints.Length; i++)
+				{
+					DropBomb (spawnPoints [i]);
+				}
 
-		if (transform.position.y <= -3)
-		{
-			laneControl.SomthingInLane = false;
-			DestroyImmediate (this.gameObject);
+				lastIntPos = intPos;
+				bombDroped = true;
+			}
+
+			if (transform.position.y <= -3)
+			{
+				laneControl.SomthingInLane = false;
+				DestroyImmediate (this.gameObject);
+			}
 		}
 	}
 

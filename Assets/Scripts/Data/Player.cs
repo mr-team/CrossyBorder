@@ -3,11 +3,26 @@ using System.Collections;
 
 public class Player
 {
+	public delegate void LoseLifeCB ();
+
+	LoseLifeCB loseLifeCB;
+
 	World world;
 	IntPosition2D intPos;
 	Vector2 pos;
 	bool alive = true;
 	int lives = 5;
+
+	public LoseLifeCB LoseLifeCB2 {
+		get
+		{
+			return loseLifeCB;
+		}
+		set
+		{
+			loseLifeCB = value;
+		}
+	}
 
 	public IntPosition2D IntPos {
 		get
@@ -133,6 +148,7 @@ public class Player
 	public void LoseLife (int amount = 1)
 	{
 		lives -= amount;
+		loseLifeCB ();
 	}
 
 	public void GainLife (int amount = 1)

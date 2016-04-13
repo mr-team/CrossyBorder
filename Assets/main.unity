@@ -10464,7 +10464,7 @@ Prefab:
       objectReference: {fileID: 2055321920}
     - target: {fileID: 11432358, guid: 29de2448d300d864dad6f36989eca3eb, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartGame
+      value: ResumeGame
       objectReference: {fileID: 0}
     - target: {fileID: 11463858, guid: 29de2448d300d864dad6f36989eca3eb, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -10592,6 +10592,14 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 171764, guid: 29de2448d300d864dad6f36989eca3eb, type: 2}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11432358, guid: 29de2448d300d864dad6f36989eca3eb, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11432358, guid: 29de2448d300d864dad6f36989eca3eb, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
