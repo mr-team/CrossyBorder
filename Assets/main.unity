@@ -2869,17 +2869,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e5f51f15e5d67e4799c5cd4fe0bbc7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sandTileGraphic: {fileID: 132172, guid: 62fc4ad228d69824b89db2c44804f737, type: 2}
   tileGraphic:
-  - {fileID: 132172, guid: 62fc4ad228d69824b89db2c44804f737, type: 2}
-  - {fileID: 151524, guid: 0ded1c200994a8947a4aae19621dda4e, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 151524, guid: 02e3915433b7d6944a6e79926de9d20a, type: 2}
+  - {fileID: 151524, guid: 61ff75d05d387ad48b60c02129988d6b, type: 2}
+  - {fileID: 151524, guid: ebba5e1b23643e949a3f244847833bd2, type: 2}
 --- !u!4 &362810068 stripped
 Transform:
   m_PrefabParentObject: {fileID: 459038, guid: 62fc4ad228d69824b89db2c44804f737, type: 2}
