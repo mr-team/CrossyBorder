@@ -37,7 +37,7 @@ public class VerticalLanesController : MonoBehaviour
 			{
 				SpawnpredatorDrone (Lanes [Random.Range (0, 3)]);
 				timer = 0;
-				spawnTime = Random.Range (40, 120);
+				spawnTime = Random.Range (5, 15);
 			}
 		}
 	}
