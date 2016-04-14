@@ -104,11 +104,11 @@ public class Player
 				intPos = IntPosition2D.Vector2ToIntPos2D (pos);
 			} else if (!world.Tiles [intPos.X, intPos.Y + 1].Walkable)
 			{
-				Debug.Log ("could not move up");
+				
 			}
 		} catch
 		{
-			Debug.Log ("could not move up");
+			
 		}
 	}
 
@@ -122,11 +122,11 @@ public class Player
 				intPos = IntPosition2D.Vector2ToIntPos2D (pos);
 			} else if (!world.Tiles [intPos.X, intPos.Y - 1].Walkable)
 			{
-				Debug.Log ("could not move down");
+				
 			}
 		} catch
 		{
-			Debug.Log ("could not move down");
+			
 		}
 	}
 
