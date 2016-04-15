@@ -29,7 +29,7 @@ public class VerticalLanesController : MonoBehaviour
 
 	void Update ()
 	{
-		if (GM.gameLoopActive && !GM.gamePaused)
+		if (GM.gameLoopActive)
 		{
 			timer += Time.deltaTime;
 

@@ -45,7 +45,7 @@ public class CarController : MonoBehaviour
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
-		if (other.gameObject.tag == "Player")
+		if (other.gameObject.tag == "Player" && !GM.gameResetPause)
 		{
 			other.gameObject.GetComponent<PlayerController> ().Player.LoseLife ();
 		}

@@ -11,33 +11,17 @@ public class PlayerController : MonoBehaviour
 		right
 	}
 
-	public enum States
-	{
-		playerDeactive,
-		playerAlive,
-		PlayerLostLife,
-		playerDead,
-
-	}
-
-	public States playerStates;
 	public  Direction direction;
-
 	GameMaster GM;
 	SpriteRenderer playerRenderer;
 	Animator playerAnim;
 	Player player;
-
 	int startX = 5;
 	int startY = 1;
-
 	float timer;
 	float timer2;
 	float waitBeforeRun = 0.5f;
-
 	bool moving;
-
-	public Vector2 startPos;
 
 	public Player Player {
 		get
@@ -50,12 +34,9 @@ public class PlayerController : MonoBehaviour
 	{
 		
 		GM = GameObject.Find ("GameMaster").GetComponent<GameMaster> ();
-		player = GM.Player;
-		startPos = new Vector2 (5, 1);
-		playerStates = States.playerAlive;
-		player.LoseLifeCB2 = TransToLostLife;
 		playerRenderer = GetComponent<SpriteRenderer> ();
 		playerAnim = GetComponent<Animator> ();
+		player = GM.Player;
 		player.Pos = new Vector2 (startX, startY);
 		transform.position = player.Pos;
 		playerRenderer.enabled = false;
@@ -63,78 +44,23 @@ public class PlayerController : MonoBehaviour
 
 	public void Update ()
 	{
-		
-
-		switch (playerStates)
-		{
-
-			case States.playerDeactive:
-				UpdatePlayerDeActive ();
-				break;
-
-			case States.playerAlive:
-				UpdatePlayerAlive ();
-				break;
-
-			case States.PlayerLostLife:
-				UpdatePlayerLostLife ();
-				break;
-
-			case States.playerDead:
-				UpdatePlayerDead ();
-				break;
-
-		}
-	}
-
-	//state handlers
-	void UpdatePlayerDeActive ()
-	{
-		playerRenderer.enabled = false;
 		if (GM.gameLoopActive)
-			playerStates = States.playerAlive;
-	}
+		{
+			playerRenderer.enabled = true;
 
-	void UpdatePlayerAlive ()
-	{
-		playerRenderer.enabled = true;
-		
+			CheckTile (player.IntPos);
+		}
 		if (!GM.gamePaused)
 		{
 			MovePlayer ();
 			if (player.Alive && player.Lives <= 0)
-				playerStates = States.playerDead;
+				kill ();
 		}
-
-		if (!GM.gameLoopActive)
-			playerStates = States.playerDeactive;
-	}
-
-	void UpdatePlayerLostLife ()
-	{
-		if (player.Lives > 0)
+		if (GM.gameResetPause)
 		{
-			player.Pos = startPos;
-			transform.position = (player.Pos);
-
-
-			playerAnim.SetBool ("FaceUp", true);
-			playerAnim.SetBool ("FaceLeft", false);
-			playerAnim.SetBool ("FaceDown", false);
-			playerAnim.SetBool ("FaceRight", false);
-
+			ResetPlayer ();
 		}
-		playerStates = States.playerAlive;
 	}
-
-	void UpdatePlayerDead ()
-	{
-		playerAnim.SetBool ("Dead", true);
-		player.Alive = false;
-	}
-
-
-	//functions
 
 	void MovePlayerLaggy ()
 	{
@@ -343,12 +269,6 @@ public class PlayerController : MonoBehaviour
 		{
 			player.LoseLife ();
 		}
-	}
-
-	void TransToLostLife ()
-	{
-		
-		playerStates = States.PlayerLostLife;
 	}
 
 	public void kill ()
