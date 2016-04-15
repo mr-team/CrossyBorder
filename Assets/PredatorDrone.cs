@@ -3,11 +3,12 @@ using System.Collections;
 
 public class PredatorDrone : MonoBehaviour
 {
+
 	public GameObject bomb;
-	public GameObject[] spawnPoints = new GameObject[5];
+	public GameObject[] spawnPoints = new GameObject[11];
 	VerticalLanesController laneControl;
 
-	float moveSpeed = 6;
+	float moveSpeed = 4;
 	float bombTimer;
 
 	bool bombDroped;
@@ -31,14 +32,13 @@ public class PredatorDrone : MonoBehaviour
 		lastIntPos = new IntPosition2D (0, 0);
 	}
 
+
 	void Update ()
-	{	//constant move down
+	{
+		//constant move down
 		transform.Translate (Vector2.down * Time.deltaTime * moveSpeed);
 
 		intPos = IntPosition2D.Vector2ToIntPos2D (transform.position);
-
-
-		//makes sure a bomb is dropped in every tile
 
 		if (intPos != lastIntPos)
 			bombDroped = false;
@@ -50,25 +50,28 @@ public class PredatorDrone : MonoBehaviour
 
 		if (!bombDroped && intPos.Y == (lastIntPos.Y - 1))
 		{
-			for (int i = 0; i < spawnPoints.Length; i++)
-			{
-				DropBomb (spawnPoints [i]);
-			}
+			
+			FireMissile ();
+
 
 			lastIntPos = intPos;
 			bombDroped = true;
 		}
 
-		if (transform.position.y <= -3)
-		{
-			laneControl.SomthingInLane = false;
-			DestroyImmediate (this.gameObject);
-		}
 	}
 
-	void DropBomb (GameObject spawnpos)
+	void FireMissile ()
 	{
-		GameObject bombRef = Instantiate (bomb, spawnpos.transform.position, Quaternion.identity) as GameObject;
+		int pos1;
+		int pos2;
+		int pos3;
 
+		pos1 = Random.Range (0, 4);
+		pos2 = Random.Range (4, 7);
+		pos3 = Random.Range (7, 11);
+
+		GameObject misilRef1 = Instantiate (bomb, spawnPoints [pos1].transform.position, Quaternion.identity) as GameObject;
+		GameObject misilRef2 = Instantiate (bomb, spawnPoints [pos2].transform.position, Quaternion.identity) as GameObject;
+		GameObject misilRef3 = Instantiate (bomb, spawnPoints [pos3].transform.position, Quaternion.identity) as GameObject;
 	}
 }

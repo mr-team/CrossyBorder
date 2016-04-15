@@ -806,6 +806,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 3cf8380aa396bc147a4da51d4eca5667, type: 3}
   - {fileID: 21300000, guid: 6c4fb72c60f024d43a38bf837e78d88c, type: 3}
   - {fileID: 21300000, guid: d81ed9d095e34a54d9712d8aa5aa8457, type: 3}
+  carParent: {fileID: 405212801}
   SpawnDir: 1
 --- !u!4 &85372715
 Transform:
@@ -3653,6 +3654,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 3cf8380aa396bc147a4da51d4eca5667, type: 3}
   - {fileID: 21300000, guid: 6c4fb72c60f024d43a38bf837e78d88c, type: 3}
   - {fileID: 21300000, guid: d81ed9d095e34a54d9712d8aa5aa8457, type: 3}
+  carParent: {fileID: 405212801}
   SpawnDir: 1
 --- !u!4 &389533407
 Transform:
@@ -3810,7 +3812,7 @@ MonoBehaviour:
   - {fileID: 512294169}
   laneObjects:
   - {fileID: 155976, guid: 249bff32371ab2545a747a3fa7a8af3a, type: 2}
-  - {fileID: 0}
+  - {fileID: 170600, guid: 9754da652e57c564faf77c5032df3f51, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -3818,6 +3820,33 @@ MonoBehaviour:
 Transform:
   m_PrefabParentObject: {fileID: 459038, guid: 62fc4ad228d69824b89db2c44804f737, type: 2}
   m_PrefabInternal: {fileID: 1397357801}
+--- !u!1 &405212800
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 405212801}
+  m_Layer: 0
+  m_Name: CarParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &405212801
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 405212800}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 18
 --- !u!1001 &405546198
 Prefab:
   m_ObjectHideFlags: 0
@@ -4844,6 +4873,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 3cf8380aa396bc147a4da51d4eca5667, type: 3}
   - {fileID: 21300000, guid: 6c4fb72c60f024d43a38bf837e78d88c, type: 3}
   - {fileID: 21300000, guid: d81ed9d095e34a54d9712d8aa5aa8457, type: 3}
+  carParent: {fileID: 405212801}
   SpawnDir: 1
 --- !u!4 &518990874
 Transform:
@@ -6814,6 +6844,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 3cf8380aa396bc147a4da51d4eca5667, type: 3}
   - {fileID: 21300000, guid: 6c4fb72c60f024d43a38bf837e78d88c, type: 3}
   - {fileID: 21300000, guid: d81ed9d095e34a54d9712d8aa5aa8457, type: 3}
+  carParent: {fileID: 405212801}
   SpawnDir: 0
 --- !u!4 &763303264
 Transform:
@@ -15111,6 +15142,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 3cf8380aa396bc147a4da51d4eca5667, type: 3}
   - {fileID: 21300000, guid: 6c4fb72c60f024d43a38bf837e78d88c, type: 3}
   - {fileID: 21300000, guid: d81ed9d095e34a54d9712d8aa5aa8457, type: 3}
+  carParent: {fileID: 405212801}
   SpawnDir: 0
 --- !u!4 &1704155466
 Transform:
@@ -15382,6 +15414,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 3cf8380aa396bc147a4da51d4eca5667, type: 3}
   - {fileID: 21300000, guid: 6c4fb72c60f024d43a38bf837e78d88c, type: 3}
   - {fileID: 21300000, guid: d81ed9d095e34a54d9712d8aa5aa8457, type: 3}
+  carParent: {fileID: 405212801}
   SpawnDir: 0
 --- !u!4 &1751554528
 Transform:

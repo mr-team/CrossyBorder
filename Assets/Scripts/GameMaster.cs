@@ -47,6 +47,7 @@ public class GameMaster : MonoBehaviour
 
 	//four abilities
 	public bool CarpetBombing;
+	public bool PredatorDrones;
 	public bool fbiTroops;
 	public bool bearTraps;
 	public bool mines;
