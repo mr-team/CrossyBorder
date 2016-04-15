@@ -12,6 +12,8 @@ public class WorldGenerator : MonoBehaviour
 	void Start ()
 	{
 		GM = GameObject.Find ("GameMaster").GetComponent<GameMaster> ();
+		GM.onNextRound += ClearWorld;
+		GM.onNextRound += DrawWorld;
 		world = GM.World;
 		DrawWorld ();
 	}
@@ -40,5 +42,15 @@ public class WorldGenerator : MonoBehaviour
 				}
 			}
 		}
+	}
+
+	void ClearWorld ()
+	{
+		foreach (Transform child in tileParent)
+		{
+			Debug.Log ("destoyed a tile");
+			GameObject.Destroy (child.gameObject);
+		}
+		world = GM.World;
 	}
 }

@@ -1622,7 +1622,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityCardTextures:
   - {fileID: 2800000, guid: 65ba04e7806aa5540a2e6f8ab75ee4cb, type: 3}
-  - {fileID: 2800000, guid: 65ba04e7806aa5540a2e6f8ab75ee4cb, type: 3}
+  - {fileID: 2800000, guid: c640c9078ae337940913d3fe45687e77, type: 3}
   UI: {fileID: 945290138}
   abilityCard: {fileID: 371363961}
 --- !u!4 &169943537 stripped
@@ -3382,6 +3382,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e5f51f15e5d67e4799c5cd4fe0bbc7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileParent: {fileID: 1937722347}
   sandTileGraphic: {fileID: 132172, guid: 62fc4ad228d69824b89db2c44804f737, type: 2}
   tileGraphic:
   - {fileID: 151524, guid: 02e3915433b7d6944a6e79926de9d20a, type: 2}
@@ -5569,7 +5570,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityCardTextures:
-  - {fileID: 2800000, guid: 65ba04e7806aa5540a2e6f8ab75ee4cb, type: 3}
+  - {fileID: 2800000, guid: f7c0a389fd140214b92ca1cb5ce1c350, type: 3}
   - {fileID: 2800000, guid: 65ba04e7806aa5540a2e6f8ab75ee4cb, type: 3}
   UI: {fileID: 945290138}
   abilityCard: {fileID: 371363961}
@@ -6353,6 +6354,14 @@ Prefab:
       propertyPath: clinton
       value: 
       objectReference: {fileID: 169872244}
+    - target: {fileID: 11426734, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
+      propertyPath: seed
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 11426734, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
+      propertyPath: gamePaused
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
   m_IsPrefabParent: 0
@@ -12463,7 +12472,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 463382, guid: 1305f25d774374f4092704a6be993b8c, type: 2}
       propertyPath: m_RootOrder
-      value: 14
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1305f25d774374f4092704a6be993b8c, type: 2}
@@ -14187,8 +14196,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityCardTextures:
-  - {fileID: 2800000, guid: 65ba04e7806aa5540a2e6f8ab75ee4cb, type: 3}
-  - {fileID: 2800000, guid: 65ba04e7806aa5540a2e6f8ab75ee4cb, type: 3}
+  - {fileID: 2800000, guid: 8b10c8dd0bf3c9d4b9a3e1a0b2a6f787, type: 3}
+  - {fileID: 2800000, guid: f7c0a389fd140214b92ca1cb5ce1c350, type: 3}
   UI: {fileID: 945290138}
   abilityCard: {fileID: 371363961}
 --- !u!4 &1648535142 stripped
@@ -14782,8 +14791,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityCardTextures:
-  - {fileID: 2800000, guid: 65ba04e7806aa5540a2e6f8ab75ee4cb, type: 3}
-  - {fileID: 2800000, guid: 65ba04e7806aa5540a2e6f8ab75ee4cb, type: 3}
+  - {fileID: 2800000, guid: c640c9078ae337940913d3fe45687e77, type: 3}
+  - {fileID: 2800000, guid: f7c0a389fd140214b92ca1cb5ce1c350, type: 3}
   UI: {fileID: 945290138}
   abilityCard: {fileID: 371363961}
 --- !u!1001 &1699407843
@@ -16540,6 +16549,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 213884078}
   m_RootOrder: 1
+--- !u!1 &1937722346
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1937722347}
+  m_Layer: 0
+  m_Name: TileParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1937722347
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1937722346}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.721674, y: 15.91747, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
 --- !u!1 &1938280437
 GameObject:
   m_ObjectHideFlags: 0

@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
 	float waitBeforeRun = 0.5f;
 
 	bool moving;
-
+	public bool stunned;
 	public Vector2 startPos;
 
 	public Player Player {
@@ -134,7 +134,7 @@ public class PlayerController : MonoBehaviour
 	//functions
 	void MovePlayer ()
 	{
-		if (GM.gameLoopActive)
+		if (GM.gameLoopActive && !stunned)
 		{
 			if (Input.GetKeyDown (KeyCode.W) && !moving || Input.GetKeyDown (KeyCode.UpArrow) && !moving)
 			{

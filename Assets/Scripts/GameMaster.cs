@@ -6,6 +6,8 @@ public class GameMaster : MonoBehaviour
 
 	public delegate void OnNextRoun ();
 
+	public delegate void OnPlayerLostLife ();
+
 	public enum States
 	{
 		gameActive,
@@ -20,6 +22,8 @@ public class GameMaster : MonoBehaviour
 	public States gameState;
 
 	public OnNextRoun onNextRound;
+	public OnPlayerLostLife onPlayerLostLife;
+
 	Player player;
 	World world;
 	//world settings
@@ -63,8 +67,8 @@ public class GameMaster : MonoBehaviour
 
 	void Awake ()
 	{
-		world = new World (worldWidth, worldHeigth, noiseScale, seed);
-		world.GenerateWorld ();
+		world = new World (worldWidth, worldHeigth, noiseScale);
+		world.GenerateWorld (seed);
 		player = new Player (world);
 		player.OnLoseLife += RestartCounter;
 		prevlife = player.Lives;
@@ -185,12 +189,13 @@ public class GameMaster : MonoBehaviour
 	public void RestartCounter ()
 	{
 		Debug.Log ("ran");
+		onPlayerLostLife ();
 		GetComponent<CountDown> ().ResetTimer ();
 	}
 
 	public void RestartGame ()
 	{
-		//Application.LoadLevel (0);	
+		Application.LoadLevel (0);	
 	}
 
 	public void WinRound ()
@@ -201,7 +206,7 @@ public class GameMaster : MonoBehaviour
 	public void NextRound ()
 	{	
 		
-		world = new World (worldWidth, worldHeigth, noiseScale, seed);
+		world.GenerateWorld (seed);
 		onNextRound ();
 		roundWon = false;
 		gameTransition = false;
