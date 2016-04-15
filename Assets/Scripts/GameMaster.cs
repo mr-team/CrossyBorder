@@ -210,6 +210,7 @@ public class GameMaster : MonoBehaviour
 		
 		world.GenerateWorld (seed);
 		onNextRound ();
+		RestartCounter ();
 		roundWon = false;
 		gameTransition = false;
 		gameState = States.gameActive;

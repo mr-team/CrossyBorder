@@ -3,76 +3,81 @@ using System.Collections;
 
 public class Bomb : MonoBehaviour
 {
-    Animator bombAnim;
-    GameMaster GM;
+	Animator bombAnim;
+	GameMaster GM;
+	public GameObject explosion;
+	float timer;
+	float fuseTime = 1;
 
-    float timer;
-    float fuseTime = 1;
+	bool explode;
+	bool hit;
+	bool overPlayer;
+	bool once;
 
-    bool explode;
-    bool hit;
-    bool overPlayer;
+	void Start ()
+	{
+		GM = GameObject.Find ("GameMaster").GetComponent<GameMaster> ();
+		bombAnim = GetComponent<Animator> ();
+	}
 
-    void Start()
-    {
-        GM = GameObject.Find("GameMaster").GetComponent<GameMaster>();
-        bombAnim = GetComponent<Animator>();
-    }
+	void Update ()
+	{
+		timer += Time.deltaTime;
 
-    void Update()
-    {
-        timer += Time.deltaTime;
+		if (timer >= fuseTime)
+		{
+			explode = true;
+			Destroy (this.gameObject, 1f);
+		}
 
-        if (timer >= fuseTime)
-        {
-            explode = true;
-            Destroy(this.gameObject, 1f);
-        }
+		HandleAnimation ();
 
-        HandleAnimation();
+		if (!hit && explode && overPlayer)
+		{
 
-        if (!hit && explode && overPlayer)
-        {
+			GM.Player.LoseLife ();
+			hit = true;
+		}
+	}
 
-            GM.Player.LoseLife();
-            hit = true;
-        }
-    }
+	void HandleAnimation ()
+	{
+		if (explode && !once)
+		{
+			Instantiate (explosion, transform.position, Quaternion.identity);
+			once = true;
 
-    void HandleAnimation()
-    {
-        if (explode)
-        {
-            bombAnim.SetBool("Explode", true);
-        }
-    }
+			//bombAnim.SetBool ("Explode", true);
+		}
+		Destroy (this.gameObject, 1.5f);
+	}
 
-    //Triggers
+	//Triggers
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.transform.tag == "Player")
-        {
+	void OnTriggerEnter2D (Collider2D other)
+	{
+		if (other.transform.tag == "Player")
+		{
 
-            overPlayer = true;
-        }
-    }
+			overPlayer = true;
+		}
+	}
 
-    //Only for destroying cars, is buggy with the player
-    void OnTriggerStay2D(Collider2D other)
-    {
-        if (explode && other.transform.tag == "Car")
-        {
-            Destroy(other.gameObject);
-        }
-    }
+	//Only for destroying cars, is buggy with the player
+	void OnTriggerStay2D (Collider2D other)
+	{
+		if (explode && other.transform.tag == "Car")
+		{
+			Destroy (other.gameObject);
+		}
+	}
 
-    void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.transform.tag == "Player")
-        {
+	void OnTriggerExit2D (Collider2D other)
+	{
+		if (other.transform.tag == "Player")
+		{
 
-            overPlayer = false;
-        }
-    }
+			overPlayer = false;
+		}
+	}
 }

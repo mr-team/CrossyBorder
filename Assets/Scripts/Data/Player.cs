@@ -83,11 +83,11 @@ public class Player
 				intPos = IntPosition2D.Vector2ToIntPos2D (pos);
 			} else if (!world.Tiles [intPos.X - 1, intPos.Y].Walkable)
 			{
-				Debug.Log ("could not move to the left");
+				//Debug.Log ("could not move to the left");
 			}
 		} catch
 		{
-			Debug.Log ("could not move to the left");
+			//Debug.Log ("could not move to the left");
 		}
 	}
 
@@ -101,11 +101,11 @@ public class Player
 				intPos = IntPosition2D.Vector2ToIntPos2D (pos);
 			} else if (!world.Tiles [intPos.X + 1, intPos.Y].Walkable)
 			{
-				Debug.Log ("could not move to the right");
+				//Debug.Log ("could not move to the right");
 			}
 		} catch
 		{
-			Debug.Log ("could not move to the right");
+			//Debug.Log ("could not move to the right");
 		}
 	}
 
