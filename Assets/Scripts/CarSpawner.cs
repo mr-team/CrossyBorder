@@ -24,6 +24,7 @@ public class CarSpawner : MonoBehaviour
 
 	void Update ()
 	{
+		
 		spawnTimer += Time.deltaTime;
 		if (spawnTimer > 2)
 		{
@@ -36,19 +37,42 @@ public class CarSpawner : MonoBehaviour
 
 	public void SpawnCar ()
 	{
-		GameObject spawnedCar = Instantiate (car, transform.position, Quaternion.identity) as GameObject;
-		CarController carControl = spawnedCar.GetComponent<CarController> ();
+        GameObject spawnedCar = Instantiate(car, transform.position, Quaternion.identity) as GameObject;
+        CarController carControl = spawnedCar.GetComponent<CarController>();
 
-		if (SpawnDir == directions.left)
-		{
-			spawnedCar.transform.position = new Vector2 (transform.position.x - Random.Range (0, 6), transform.position.y);
-			carControl.MoveLeft ();
-			spawnedCar.GetComponent<SpriteRenderer> ().sprite = sprites [0];
-		} else
-		{
-			carControl.MoveRight ();
-			spawnedCar.transform.position = new Vector2 (transform.position.x + Random.Range (0, 10), transform.position.y);
-			spawnedCar.GetComponent<SpriteRenderer> ().sprite = sprites [1];
-		}
-	}
+        if (SpawnDir == directions.left)
+        {
+            if (GM.fbiTroops)
+            {
+                spawnedCar.transform.position = new Vector2(transform.position.x - Random.Range(0, 6), transform.position.y);
+                carControl.MoveLeft();
+                spawnedCar.GetComponent<SpriteRenderer>().sprite = sprites[2];
+            }
+            else
+            {
+                spawnedCar.transform.position = new Vector2(transform.position.x - Random.Range(0, 6), transform.position.y);
+                carControl.MoveLeft();
+                spawnedCar.GetComponent<SpriteRenderer>().sprite = sprites[0];
+            }
+
+        }
+        else
+        {
+            if (GM.fbiTroops)
+            {
+                carControl.MoveRight();
+                spawnedCar.transform.position = new Vector2(transform.position.x + Random.Range(0, 10), transform.position.y);
+                spawnedCar.GetComponent<SpriteRenderer>().sprite = sprites[3];
+
+
+            }
+            else
+            {
+                carControl.MoveRight();
+                spawnedCar.transform.position = new Vector2(transform.position.x + Random.Range(0, 10), transform.position.y);
+                spawnedCar.GetComponent<SpriteRenderer>().sprite = sprites[1];
+
+            }
+        }
+    }
 }

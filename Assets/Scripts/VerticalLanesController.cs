@@ -29,7 +29,7 @@ public class VerticalLanesController : MonoBehaviour
 
 	void Update ()
 	{
-		if (GM.gameLoopActive)
+		if (GM.gameLoopActive && GM.CarpetBombing)
 		{
 			timer += Time.deltaTime;
 
