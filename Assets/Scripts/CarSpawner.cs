@@ -11,7 +11,7 @@ public class CarSpawner : MonoBehaviour
 
 	public GameObject car;
 
-	public Sprite[] sprites = new Sprite[2];
+	public Sprite[] sprites = new Sprite[4];
 	GameMaster GM;
 	float spawnTimer;
 	bool spawned;
@@ -24,7 +24,7 @@ public class CarSpawner : MonoBehaviour
 
 	void Update ()
 	{
-		if (!GM.gamePaused)
+		if (!GM.gamePaused && !GM.gameTransition)
 		{
 			spawnTimer += Time.deltaTime;
 			if (spawnTimer > 2)
@@ -43,14 +43,34 @@ public class CarSpawner : MonoBehaviour
 
 		if (SpawnDir == directions.left)
 		{
-			spawnedCar.transform.position = new Vector2 (transform.position.x - Random.Range (0, 6), transform.position.y);
-			carControl.MoveLeft ();
-			spawnedCar.GetComponent<SpriteRenderer> ().sprite = sprites [0];
+			if (GM.fbiTroops)
+			{
+				spawnedCar.transform.position = new Vector2 (transform.position.x - Random.Range (0, 6), transform.position.y);
+				carControl.MoveLeft ();
+				spawnedCar.GetComponent<SpriteRenderer> ().sprite = sprites [2];
+			} else
+			{
+				spawnedCar.transform.position = new Vector2 (transform.position.x - Random.Range (0, 6), transform.position.y);
+				carControl.MoveLeft ();
+				spawnedCar.GetComponent<SpriteRenderer> ().sprite = sprites [0];
+			}
+
 		} else
 		{
-			carControl.MoveRight ();
-			spawnedCar.transform.position = new Vector2 (transform.position.x + Random.Range (0, 10), transform.position.y);
-			spawnedCar.GetComponent<SpriteRenderer> ().sprite = sprites [1];
+			if (GM.fbiTroops)
+			{
+				carControl.MoveRight ();
+				spawnedCar.transform.position = new Vector2 (transform.position.x + Random.Range (0, 10), transform.position.y);
+				spawnedCar.GetComponent<SpriteRenderer> ().sprite = sprites [3];
+
+
+			} else
+			{
+				carControl.MoveRight ();
+				spawnedCar.transform.position = new Vector2 (transform.position.x + Random.Range (0, 10), transform.position.y);
+				spawnedCar.GetComponent<SpriteRenderer> ().sprite = sprites [1];
+
+			}
 		}
 	}
 }

@@ -53,7 +53,7 @@ public class Bomb : MonoBehaviour
 	{
 		if (other.transform.tag == "Player")
 		{
-			Debug.Log ("over player");
+			
 			overPlayer = true;
 		}
 	}
@@ -71,7 +71,7 @@ public class Bomb : MonoBehaviour
 	{
 		if (other.transform.tag == "Player")
 		{
-			Debug.Log ("the player escaped");
+			
 			overPlayer = false;
 		}
 	}
