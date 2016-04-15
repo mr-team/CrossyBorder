@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Settings {
+public static class GameSettings {
 
-    private float music;
-    private float sound;
+    private static float music;
+    private static float sound;
 
-    public float musicVolume {
+    public static float musicVolume {
         get {
             return music;
         }
@@ -16,7 +16,7 @@ public class Settings {
         }
     }
 
-    public float soundVolume {
+    public static float soundVolume {
         get {
             return sound;
         }
@@ -26,13 +26,13 @@ public class Settings {
         }
     }
 
-    public void updateFromPrefs() {
+    public static void updateFromPrefs() {
         musicVolume = PlayerPrefs.GetFloat("musicVolume");
         soundVolume = PlayerPrefs.GetFloat("soundVolume");
     }
 
-    private float lastMV = -1f;
-    public bool muteMusic() {
+    private static float lastMV = -1f;
+    public static bool muteMusic() {
         if(lastMV == -1f) {
             lastMV = musicVolume;
             musicVolume = 0f;
@@ -43,8 +43,8 @@ public class Settings {
         return false;
     }
 
-    private float lastSV = -1f;
-    public bool muteSounds() {
+    private static float lastSV = -1f;
+    public static bool muteSounds() {
         if(lastSV == -1f) {
             lastSV = soundVolume;
             soundVolume = 0f;
