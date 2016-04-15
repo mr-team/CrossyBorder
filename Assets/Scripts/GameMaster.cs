@@ -3,11 +3,15 @@ using System.Collections;
 
 public class GameMaster : MonoBehaviour
 {
+
+	public delegate void OnNextRoun ();
+
 	public enum States
 	{
 		gameActive,
 		gameDeActive,
 		gamePaused,
+		roundWon,
 		gameWon,
 		gameLost,
 
@@ -15,6 +19,7 @@ public class GameMaster : MonoBehaviour
 
 	public States gameState;
 
+	public OnNextRoun onNextRound;
 	Player player;
 	World world;
 	//world settings
@@ -28,7 +33,7 @@ public class GameMaster : MonoBehaviour
 	//game state stuff
 	public bool gameLoopActive;
 	public bool gamePaused;
-	public bool gameResetPause;
+	public bool gameReset;
 	public bool roundWon;
 	public bool gameLost;
 	public bool gameTransition;
@@ -61,10 +66,10 @@ public class GameMaster : MonoBehaviour
 		world = new World (worldWidth, worldHeigth, noiseScale, seed);
 		world.GenerateWorld ();
 		player = new Player (world);
+		player.OnLoseLife += RestartCounter;
 		prevlife = player.Lives;
 
 		gameState = States.gameDeActive;
-
 
 	}
 
@@ -82,6 +87,10 @@ public class GameMaster : MonoBehaviour
 
 			case States.gamePaused:
 				UpdateGamePaused ();
+				break;
+
+			case States.roundWon:
+				UpdateRoundWon ();
 				break;
 
 			case States.gameWon:
@@ -109,12 +118,19 @@ public class GameMaster : MonoBehaviour
 			gameState = States.gamePaused;
 
 		if (roundWon)
-			gameState = States.gameWon;
+			gameState = States.roundWon;
 	}
 	//handle the game when deactive
 	void UpdateGameDeActive ()
 	{
 		gameLoopActive = false;
+	}
+
+	void UpdateRoundWon ()
+	{
+		gameLoopActive = false;
+
+		gameTransition = true;
 	}
 
 	//handle the game when paused
@@ -132,7 +148,7 @@ public class GameMaster : MonoBehaviour
 
 		//move the camera to the top of the wall
 		//spawn in politicians
-		gameTransition = true;
+		//gameTransition = true;
 
 
 		//after choose, spin wheel of abilities
@@ -166,23 +182,30 @@ public class GameMaster : MonoBehaviour
 		gameState = States.gameActive;
 	}
 
-	public void RestartLevel ()
+	public void RestartCounter ()
 	{
-		gameResetPause = true;
+		Debug.Log ("ran");
 		GetComponent<CountDown> ().ResetTimer ();
-
 	}
 
 	public void RestartGame ()
 	{
 		//Application.LoadLevel (0);	
-
-
-
 	}
 
 	public void WinRound ()
 	{
+
+	}
+
+	public void NextRound ()
+	{	
+		
+		world = new World (worldWidth, worldHeigth, noiseScale, seed);
+		onNextRound ();
+		roundWon = false;
+		gameTransition = false;
+		gameState = States.gameActive;
 
 	}
 		

@@ -18,6 +18,7 @@ public class HilaryClinton : politician
 	protected override void OnMouseDown ()
 	{
 		base.OnMouseDown ();
+		clickCB (this.gameObject);
 	}
 
 	protected override void ActivateAbility (int cardNum)
