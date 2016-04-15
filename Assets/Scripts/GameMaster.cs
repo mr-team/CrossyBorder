@@ -3,23 +3,44 @@ using System.Collections;
 
 public class GameMaster : MonoBehaviour
 {
+	public enum States
+	{
+		gameActive,
+		gameDeActive,
+		gamePaused,
+		gameWon,
+		gameLost,
+
+	}
+
+	public States gameState;
+
 	Player player;
 	World world;
-
+	//world settings
 	public int worldWidth;
 	public int worldHeigth;
 	public int ladderCount;
-	public int maxLadder = 5;
+	public int maxLadder = 0;
 	public float noiseScale;
-
 	public string seed;
 
+	//game state stuff
 	public bool gameLoopActive;
 	public bool gamePaused;
 	public bool gameResetPause;
 	public bool roundWon;
+	public bool gameLost;
+	public bool gameTransition;
 
 	int prevlife;
+
+
+	//four abilities
+	public bool CarpetBombing;
+	public bool fbiTroops;
+	public bool bearTraps;
+	public bool mines;
 
 	public Player Player {
 		get
@@ -41,57 +62,128 @@ public class GameMaster : MonoBehaviour
 		world.GenerateWorld ();
 		player = new Player (world);
 		prevlife = player.Lives;
+
+		gameState = States.gameDeActive;
+
+
 	}
 
 	void Update ()
 	{
-		if (gameLoopActive)
+		switch (gameState)
 		{
-			if (!player.Alive)
-			{
-				gameLoopActive = false;
-			}
+			case States.gameActive:
+				UpdateGameActive ();
+				break;
 
-			if (Input.GetKeyDown (KeyCode.P))
-			{
-				gamePaused = true;
-			}
-			if (player.Lives < prevlife && player.Alive)
-			{
-				RestartLevel ();
-				Debug.Log ("hello");
-				prevlife = player.Lives;
-			}
+			case States.gameDeActive:
+				UpdateGameDeActive ();
+				break;
+
+			case States.gamePaused:
+				UpdateGamePaused ();
+				break;
+
+			case States.gameWon:
+				UpdateGameWon ();
+				break;
+
+			case States.gameLost:
+				UpdateGameLost ();
+				break;
+
 		}
 
-		if (roundWon)
+		if (!player.Alive)
 		{
 			gameLoopActive = false;
 		}
+
+	}
+	//handle the game when active
+	void UpdateGameActive ()
+	{
+		gameLoopActive = true;
+		gamePaused = false;
+		if (Input.GetKeyDown (KeyCode.P))
+			gameState = States.gamePaused;
+
+		if (roundWon)
+			gameState = States.gameWon;
+	}
+	//handle the game when deactive
+	void UpdateGameDeActive ()
+	{
+		gameLoopActive = false;
+	}
+
+	//handle the game when paused
+	void UpdateGamePaused ()
+	{
+		gamePaused = true;
+			
+	}
+	//handle the game when the player has won
+	void UpdateGameWon ()
+	{
+		//if not last round
+		//deactivate cars,lanes,player and everything which will interfeer with the transition
+		gameLoopActive = false;
+
+		//move the camera to the top of the wall
+		//spawn in politicians
+		gameTransition = true;
+
+
+		//after choose, spin wheel of abilities
+
+		//start next round
+
+		//if last round
+		//play victory animation
+
+		//show highscore
+
+	}
+	//handle the game when the player has lost
+	void UpdateGameLost ()
+	{
+		//show highscore
+
+		//prompt main menu
+
+		//promt restart
+		
+	}
+
+	public void ResumeGame ()
+	{
+		gameState = States.gameActive;
 	}
 
 	public void StartGame ()
 	{
-		gameLoopActive = true;
-		gamePaused = false;
+		gameState = States.gameActive;
 	}
 
 	public void RestartLevel ()
 	{
 		gameResetPause = true;
 		GetComponent<CountDown> ().ResetTimer ();
-		player.Pos = new Vector2 (5, 1);
 
-		//player.Alive = true;
 	}
 
 	public void RestartGame ()
 	{
-		Application.LoadLevel (0);	
+		//Application.LoadLevel (0);	
+
+
+
 	}
 
 	public void WinRound ()
 	{
 
 	}
+		
 }
