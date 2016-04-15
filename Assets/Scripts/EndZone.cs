@@ -3,32 +3,33 @@ using System.Collections;
 
 public class EndZone : MonoBehaviour
 {
-	GameMaster GM;
 
-	void Start ()
-	{
-		GM = GameObject.Find ("GameMaster").GetComponent<GameMaster> ();
-	
-	}
+    GameMaster GM;
 
-	void Update ()
-	{
-	
-	}
+    void Start()
+    {
+        GM = GameObject.Find("GameMaster").GetComponent<GameMaster>();
 
-	void OnTriggerEnter2D (Collider2D other)
-	{
-		if (GM.ladderCount >= GM.maxLadder && other.transform.tag == ("Player"))
-		{
-			GM.roundWon = true;
-		}
-	}
+    }
 
-	void OnTriggerExit2D (Collider2D other)
-	{
-		if (other.transform.tag == ("Player"))
-		{
-			Debug.Log ("player not in endzone");
-		}
-	}
+    void Update()
+    {
+
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.transform.tag == ("Player"))
+        {
+            GM.roundWon = true;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.transform.tag == ("Player"))
+        {
+            Debug.Log("player not in endzone");
+        }
+    }
 }
