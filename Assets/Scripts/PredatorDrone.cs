@@ -69,11 +69,6 @@ public class PredatorDrone : MonoBehaviour
 				DestroyImmediate (this.gameObject);
 			}
 		}
-
-		if (GM.gameTransition)
-		{
-			Destroy (this.gameObject);
-		}
 	}
 
 	void DropBomb (GameObject spawnpos)

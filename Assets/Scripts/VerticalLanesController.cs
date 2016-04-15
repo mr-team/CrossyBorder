@@ -29,15 +29,13 @@ public class VerticalLanesController : MonoBehaviour
 
 	void Update ()
 	{
-
-		//carpetBombings
-		if (GM.CarpetBombing && GM.gameLoopActive && !GM.gamePaused)
+		if (GM.gameLoopActive && !GM.gamePaused)
 		{
 			timer += Time.deltaTime;
 
 			if (timer >	spawnTime)
 			{
-				SpawnpredatorDrone (Lanes [1]);
+				SpawnpredatorDrone (Lanes [Random.Range (0, 3)]);
 				timer = 0;
 				spawnTime = Random.Range (5, 15);
 			}

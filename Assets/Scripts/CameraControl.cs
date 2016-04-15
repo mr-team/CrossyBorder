@@ -24,9 +24,6 @@ public class CameraControl : MonoBehaviour
 			{
 				transform.position = Vector3.Slerp (transform.position, new Vector3 (5f, 4.5f, -10), 0.2f);
 			}
-		} else if (GM.gameTransition)
-		{
-			transform.position = Vector3.Slerp (transform.position, new Vector3 (5f, 32f, -10), 0.02f);
 		}
 	}
 }

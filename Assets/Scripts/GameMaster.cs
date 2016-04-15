@@ -17,30 +17,21 @@ public class GameMaster : MonoBehaviour
 
 	Player player;
 	World world;
-	//world settings
+
 	public int worldWidth;
 	public int worldHeigth;
 	public int ladderCount;
-	public int maxLadder = 0;
+	public int maxLadder = 5;
 	public float noiseScale;
+
 	public string seed;
 
-	//game state stuff
 	public bool gameLoopActive;
 	public bool gamePaused;
 	public bool gameResetPause;
 	public bool roundWon;
-	public bool gameLost;
-	public bool gameTransition;
 
 	int prevlife;
-
-
-	//four abilities
-	public bool CarpetBombing;
-	public bool fbiTroops;
-	public bool bearTraps;
-	public bool mines;
 
 	public Player Player {
 		get
@@ -64,8 +55,6 @@ public class GameMaster : MonoBehaviour
 		prevlife = player.Lives;
 
 		gameState = States.gameDeActive;
-
-
 	}
 
 	void Update ()
@@ -107,9 +96,6 @@ public class GameMaster : MonoBehaviour
 		gamePaused = false;
 		if (Input.GetKeyDown (KeyCode.P))
 			gameState = States.gamePaused;
-
-		if (roundWon)
-			gameState = States.gameWon;
 	}
 	//handle the game when deactive
 	void UpdateGameDeActive ()
@@ -126,33 +112,11 @@ public class GameMaster : MonoBehaviour
 	//handle the game when the player has won
 	void UpdateGameWon ()
 	{
-		//if not last round
-		//deactivate cars,lanes,player and everything which will interfeer with the transition
-		gameLoopActive = false;
-
-		//move the camera to the top of the wall
-		//spawn in politicians
-		gameTransition = true;
-
-
-		//after choose, spin wheel of abilities
-
-		//start next round
-
-		//if last round
-		//play victory animation
-
-		//show highscore
-
+		
 	}
 	//handle the game when the player has lost
 	void UpdateGameLost ()
 	{
-		//show highscore
-
-		//prompt main menu
-
-		//promt restart
 		
 	}
 
@@ -175,15 +139,11 @@ public class GameMaster : MonoBehaviour
 
 	public void RestartGame ()
 	{
-		//Application.LoadLevel (0);	
-
-
-
+		Application.LoadLevel (0);	
 	}
 
 	public void WinRound ()
 	{
 
 	}
-		
 }

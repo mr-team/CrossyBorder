@@ -11,7 +11,6 @@ GameObject:
   - 114: {fileID: 11426734}
   - 114: {fileID: 11437336}
   - 114: {fileID: 11494804}
-  - 114: {fileID: 11444572}
   m_Layer: 0
   m_Name: GameMaster
   m_TagString: Untagged
@@ -42,23 +41,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 122d39bdce1a50c4f825dd0180c977fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameState: 0
   worldWidth: 11
   worldHeigth: 24
-  ladderCount: 0
-  maxLadder: 0
   noiseScale: 0.3
   seed: 1337
   gameLoopActive: 0
   gamePaused: 0
   gameResetPause: 0
   roundWon: 0
-  gameLost: 0
-  gameTransition: 0
-  CarpetBombing: 0
-  fbiTroops: 0
-  bearTraps: 0
-  mines: 0
 --- !u!114 &11437336
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -75,22 +65,6 @@ MonoBehaviour:
   ui: {fileID: 0}
   deathScreen: {fileID: 0}
   winScreen: {fileID: 0}
---- !u!114 &11444572
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 138074}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fde4970f2bdd99f44b1b1e6191064c8d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  choseState: 0
-  sanders: {fileID: 0}
-  cruz: {fileID: 0}
-  trump: {fileID: 0}
-  clinton: {fileID: 0}
 --- !u!114 &11494804
 MonoBehaviour:
   m_ObjectHideFlags: 1

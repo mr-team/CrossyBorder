@@ -63,6 +63,8 @@ public class PlayerController : MonoBehaviour
 
 	public void Update ()
 	{
+		
+
 		switch (playerStates)
 		{
 
@@ -115,6 +117,7 @@ public class PlayerController : MonoBehaviour
 			player.Pos = startPos;
 			transform.position = (player.Pos);
 
+
 			playerAnim.SetBool ("FaceUp", true);
 			playerAnim.SetBool ("FaceLeft", false);
 			playerAnim.SetBool ("FaceDown", false);
@@ -132,29 +135,118 @@ public class PlayerController : MonoBehaviour
 
 
 	//functions
+
+	void MovePlayerLaggy ()
+	{
+		if (Input.GetKeyDown (KeyCode.W))
+		{
+			player.MoveUp ();
+			transform.position = player.Pos;
+
+		}
+		if (Input.GetKeyDown (KeyCode.A))
+		{
+
+			player.MoveLeft ();
+			transform.position = player.Pos;
+		}
+		if (Input.GetKeyDown (KeyCode.S))
+		{
+			player.MoveDown ();
+			transform.position = player.Pos;
+
+		}
+		if (Input.GetKeyDown (KeyCode.D))
+		{
+			
+			player.MoveRight ();
+			transform.position = player.Pos;
+		}
+
+		//if key is held for more than 1.5 seconds
+		if (Input.GetKey (KeyCode.W) || Input.GetKey (KeyCode.A) || Input.GetKey (KeyCode.S) || Input.GetKey (KeyCode.D))
+		{
+			
+			timer += Time.deltaTime;
+			
+			if (Input.GetKey (KeyCode.W) && timer > waitBeforeRun)
+			{
+				
+				timer2 += Time.deltaTime;
+
+				if (timer2 > 0.1f)
+				{
+					player.MoveUp ();
+					transform.position = player.Pos;
+					timer2 = 0;
+				}
+			}
+			if (Input.GetKey (KeyCode.A) && timer > waitBeforeRun)
+			{
+				
+				timer2 += Time.deltaTime;
+
+				if (timer2 > 0.1f)
+				{
+					player.MoveLeft ();
+					transform.position = player.Pos;
+					timer2 = 0;
+				}
+			}
+			if (Input.GetKey (KeyCode.S) && timer > waitBeforeRun)
+			{
+				
+				timer2 += Time.deltaTime;
+
+				if (timer2 > 0.1f)
+				{
+					player.MoveDown ();
+					transform.position = player.Pos;
+					timer2 = 0;
+				}
+			}
+			if (Input.GetKey (KeyCode.D) && timer > waitBeforeRun)
+			{
+				
+				timer2 += Time.deltaTime;
+
+				if (timer2 > 0.1f)
+				{
+					player.MoveRight ();
+					transform.position = player.Pos;
+					timer2 = 0;
+				}
+			}
+		}
+		if (Input.GetKeyUp (KeyCode.W) || Input.GetKeyUp (KeyCode.A) || Input.GetKeyUp (KeyCode.S) || Input.GetKeyUp (KeyCode.D))
+		{
+			timer = 0;
+		}
+	}
+
 	void MovePlayer ()
 	{
 		if (GM.gameLoopActive)
 		{
-			if (Input.GetKeyDown (KeyCode.W) && !moving || Input.GetKeyDown (KeyCode.UpArrow) && !moving)
+			if (Input.GetKeyDown (KeyCode.W) && !moving)
 			{
 				player.MoveUp ();
 				SetFaceDirection (Direction.up);
 				moving = true;
 			}
-			if (Input.GetKeyDown (KeyCode.A) && !moving || Input.GetKeyDown (KeyCode.LeftArrow) && !moving)
+			if (Input.GetKeyDown (KeyCode.A) && !moving)
 			{
 				player.MoveLeft ();
 				SetFaceDirection (Direction.left);
 				moving = true;
 			}
-			if (Input.GetKeyDown (KeyCode.S) && !moving || Input.GetKeyDown (KeyCode.DownArrow) && !moving)
+			if (Input.GetKeyDown (KeyCode.S) && !moving)
 			{
 				player.MoveDown ();
 				SetFaceDirection (Direction.down);
 				moving = true;
 			}
-			if (Input.GetKeyDown (KeyCode.D) && !moving || Input.GetKeyDown (KeyCode.RightArrow) && !moving)
+			if (Input.GetKeyDown (KeyCode.D) && !moving)
 			{
 				player.MoveRight ();
 				SetFaceDirection (Direction.right);
@@ -233,6 +325,16 @@ public class PlayerController : MonoBehaviour
 			moving = false;
 	}
 
+	void ResetPlayer ()
+	{
+		transform.position = (player.Pos);
+		GM.gameResetPause = false;
+		playerAnim.SetBool ("FaceUp", true);
+		playerAnim.SetBool ("FaceLeft", false);
+		playerAnim.SetBool ("FaceDown", false);
+		playerAnim.SetBool ("FaceRight", false);
+	}
+
 	void CheckTile (IntPosition2D pos)
 	{
 		Tile tile = GM.World.Tiles [pos.X, pos.Y];
@@ -251,8 +353,8 @@ public class PlayerController : MonoBehaviour
 
 	public void kill ()
 	{
-		playerStates = States.playerDead;
-
+		playerAnim.SetBool ("Dead", true);
+		player.Alive = false;
 	}
 
 	void SetFaceDirection (Direction dir)
