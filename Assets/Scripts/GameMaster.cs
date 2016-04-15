@@ -188,8 +188,9 @@ public class GameMaster : MonoBehaviour
 
 	public void RestartCounter ()
 	{
-		Debug.Log ("ran");
-		onPlayerLostLife ();
+		
+		if (onPlayerLostLife != null)
+			onPlayerLostLife ();
 		GetComponent<CountDown> ().ResetTimer ();
 	}
 
