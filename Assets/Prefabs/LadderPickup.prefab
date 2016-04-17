@@ -11,6 +11,7 @@ GameObject:
   - 212: {fileID: 21241350}
   - 114: {fileID: 11475988}
   - 61: {fileID: 6191008}
+  - 114: {fileID: 11460380}
   m_Layer: 0
   m_Name: LadderPickup
   m_TagString: Untagged
@@ -37,13 +38,31 @@ BoxCollider2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 180784}
   m_Enabled: 1
-  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 0.8, y: 0.8}
+  m_Size: {x: .800000012, y: .800000012}
+--- !u!114 &11460380
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 180784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b1b64d7dffe28643aa41ec3f387c00a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 21300000, guid: 108e565210a5bb24f9565f092cc2326f, type: 3}
+  - {fileID: 21300002, guid: 108e565210a5bb24f9565f092cc2326f, type: 3}
+  - {fileID: 21300004, guid: 108e565210a5bb24f9565f092cc2326f, type: 3}
+  - {fileID: 21300006, guid: 108e565210a5bb24f9565f092cc2326f, type: 3}
+  - {fileID: 21300004, guid: 108e565210a5bb24f9565f092cc2326f, type: 3}
+  - {fileID: 21300002, guid: 108e565210a5bb24f9565f092cc2326f, type: 3}
+  speed: .0450000018
 --- !u!114 &11475988
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -73,25 +92,104 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 20
-  m_Sprite: {fileID: 21300000, guid: 57349e7ea7d7b724197831951dc9350a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: aec6a1b452a46e3419e238cdbd2e7e1b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: sprites.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Size.x
+      value: .800000012
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: aec6a1b452a46e3419e238cdbd2e7e1b,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: sprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 108e565210a5bb24f9565f092cc2326f,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: sprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300002, guid: 108e565210a5bb24f9565f092cc2326f,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: sprites.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300004, guid: 108e565210a5bb24f9565f092cc2326f,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: sprites.Array.data[3]
+      value: 
+      objectReference: {fileID: 21300006, guid: 108e565210a5bb24f9565f092cc2326f,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: sprites.Array.data[4]
+      value: 
+      objectReference: {fileID: 21300004, guid: 108e565210a5bb24f9565f092cc2326f,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: sprites.Array.data[5]
+      value: 
+      objectReference: {fileID: 21300002, guid: 108e565210a5bb24f9565f092cc2326f,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: speed
+      value: .0450000018
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: audioType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: playOnWake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4b320a50aea5f9d40a5141af7bd90949, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 180784}

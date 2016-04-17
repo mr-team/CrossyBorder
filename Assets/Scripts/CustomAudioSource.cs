@@ -6,6 +6,7 @@ public class CustomAudioSource : MonoBehaviour {
     public AudioTypes audioType;
     public AudioClip clip;
     public bool loop = false;
+    public bool playOnWake = false;
 
     private AudioSource source;
     private string[] typeText = { "musicVolume", "musicVolume" };
@@ -15,14 +16,16 @@ public class CustomAudioSource : MonoBehaviour {
         source = gameObject.AddComponent<AudioSource>();
         source.clip = clip;
         source.loop = loop;
+        source.playOnAwake = playOnWake;
         currentType = audioType == AudioTypes.Music ? typeText[0] : typeText[1];
         source.volume = PlayerPrefs.GetFloat(currentType);
+        if(playOnWake)
+            source.Play();
     }
 	
 	void Update() {
-        currentType = audioType == AudioTypes.Music ? typeText[0] : typeText[1];
-        setLoop(loop);
-        source.volume = PlayerPrefs.GetFloat(currentType);
+        if(source.volume != PlayerPrefs.GetFloat(currentType))
+            source.volume = PlayerPrefs.GetFloat(currentType);
     }
 
     public void setLoop(bool _loop) {
