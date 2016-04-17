@@ -23,7 +23,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 139762}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .186907753, y: -.0456890091, z: .025390625}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -39,6 +39,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e5f51f15e5d67e4799c5cd4fe0bbc7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileParent: {fileID: 0}
   sandTileGraphic: {fileID: 132172, guid: 62fc4ad228d69824b89db2c44804f737, type: 2}
   ladderPrefab: {fileID: 180784, guid: dc8e5dd1aaa2c2c41bbf8b54c07d0f27, type: 2}
   tileGraphic:
