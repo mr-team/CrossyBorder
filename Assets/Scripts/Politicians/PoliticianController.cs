@@ -50,11 +50,13 @@ public class PoliticianController : MonoBehaviour
 
 	void UpdateChosen ()
 	{
-		GM.gameState = GameMaster.States.gameActive;
+		GM.NextRound ();
+		choseState = ChoseState.notchosen;
 	}
 
 	void ClickOnpolitician (GameObject politician)
 	{
 		choseState = ChoseState.chosen;
+
 	}
 }

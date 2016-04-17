@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
 	float waitBeforeRun = 0.5f;
 
 	bool moving;
-
+	public bool stunned;
 	public Vector2 startPos;
 
 	public Player Player {
@@ -50,10 +50,11 @@ public class PlayerController : MonoBehaviour
 	{
 		
 		GM = GameObject.Find ("GameMaster").GetComponent<GameMaster> ();
+		GM.onNextRound = ResetPlayer;
 		player = GM.Player;
 		startPos = new Vector2 (5, 1);
 		playerStates = States.playerAlive;
-		player.LoseLifeCB2 = TransToLostLife;
+		player.OnLoseLife += TransToLostLife;
 		playerRenderer = GetComponent<SpriteRenderer> ();
 		playerAnim = GetComponent<Animator> ();
 		player.Pos = new Vector2 (startX, startY);
@@ -65,7 +66,6 @@ public class PlayerController : MonoBehaviour
 	{
 		switch (playerStates)
 		{
-
 			case States.playerDeactive:
 				UpdatePlayerDeActive ();
 				break;
@@ -134,7 +134,7 @@ public class PlayerController : MonoBehaviour
 	//functions
 	void MovePlayer ()
 	{
-		if (GM.gameLoopActive)
+		if (GM.gameLoopActive && !stunned)
 		{
 			if (Input.GetKeyDown (KeyCode.W) && !moving || Input.GetKeyDown (KeyCode.UpArrow) && !moving)
 			{
@@ -245,7 +245,7 @@ public class PlayerController : MonoBehaviour
 
 	void TransToLostLife ()
 	{
-		
+		Debug.Log ("transed");
 		playerStates = States.PlayerLostLife;
 	}
 
@@ -253,6 +253,16 @@ public class PlayerController : MonoBehaviour
 	{
 		playerStates = States.playerDead;
 
+	}
+
+	public void ResetPlayer ()
+	{
+		player.Pos = startPos;
+		transform.position = (player.Pos);
+		playerAnim.SetBool ("FaceUp", true);
+		playerAnim.SetBool ("FaceLeft", false);
+		playerAnim.SetBool ("FaceDown", false);
+		playerAnim.SetBool ("FaceRight", false);
 	}
 
 	void SetFaceDirection (Direction dir)

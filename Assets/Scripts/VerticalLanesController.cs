@@ -35,18 +35,40 @@ public class VerticalLanesController : MonoBehaviour
 
 			if (timer >	spawnTime)
 			{
-				SpawnpredatorDrone (Lanes [Random.Range (0, 3)]);
+				SpawnB52Bomber (Lanes [Random.Range (0, 3)]);
 				timer = 0;
 				spawnTime = Random.Range (5, 15);
+
+			}
+		}
+
+		if (GM.gameLoopActive && GM.PredatorDrones)
+		{
+			timer += Time.deltaTime;
+
+			if (timer >	spawnTime)
+			{
+				SpawnPredatorDrone (Lanes [1]);
+				timer = 0;
+				spawnTime = Random.Range (5, 15);
+
 			}
 		}
 	}
 
-	void SpawnpredatorDrone (GameObject lane)
+	void SpawnB52Bomber (GameObject lane)
 	{
-		GameObject predDrone = Instantiate (laneObjects [0], lane.transform.position, Quaternion.identity) as GameObject;
-		predDrone.GetComponent<PredatorDrone> ().LaneControl = this;
-		Debug.Log ("spawned drone in lane: " + lane);
+		GameObject B52Bomber = Instantiate (laneObjects [0], lane.transform.position, Quaternion.identity) as GameObject;
+		B52Bomber.GetComponent<B52Bomber> ().LaneControl = this;
+		Debug.Log ("spawned bomber in lane: " + lane);
+		somthingInLane = true;
+	}
+
+	void SpawnPredatorDrone (GameObject lane)
+	{
+		GameObject PredDrone = Instantiate (laneObjects [1], lane.transform.position, Quaternion.identity) as GameObject;
+		PredDrone.GetComponent<PredatorDrone> ().LaneControl = this;
+		Debug.Log ("spawned Drone");
 		somthingInLane = true;
 	}
 }

@@ -4,13 +4,16 @@ using System.Collections;
 public class WorldGenerator : MonoBehaviour
 {
 	GameMaster GM;
+	public Transform tileParent;
 	World world;
-    public GameObject sandTileGraphic;
+	public GameObject sandTileGraphic;
 	public GameObject[] tileGraphic = new GameObject[10];
 
 	void Start ()
 	{
 		GM = GameObject.Find ("GameMaster").GetComponent<GameMaster> ();
+		GM.onNextRound += ClearWorld;
+		GM.onNextRound += DrawWorld;
 		world = GM.World;
 		DrawWorld ();
 	}
@@ -21,21 +24,33 @@ public class WorldGenerator : MonoBehaviour
 		{
 			for (int u = 0; u < world.Tiles.GetLength (1); u++)
 			{
-                GameObject tileObj = Instantiate(sandTileGraphic, new Vector2(world.GetTilePos(i, u).x, world.GetTilePos(i, u).y), Quaternion.identity) as GameObject;
-                tileObj.name = ("Tile: " + i + " , " + u);
+				GameObject tileObj = Instantiate (sandTileGraphic, new Vector2 (world.GetTilePos (i, u).x, world.GetTilePos (i, u).y), Quaternion.identity) as GameObject;
+				tileObj.name = ("Tile: " + i + " , " + u);
+				tileObj.transform.parent = tileParent;
 
-                if(!world.Tiles[i, u].Walkable && u == 0) {
-                    GameObject rock = Instantiate(tileGraphic[0], new Vector3(world.GetTilePos(i, u).x, world.GetTilePos(i, u).y, -0.1f), Quaternion.identity) as GameObject;
-                    rock.name = ("Rock");
-                    rock.transform.parent = tileObj.transform;
-                }
-                else if (!world.Tiles [i, u].Walkable)
+				if (!world.Tiles [i, u].Walkable && u == 0)
 				{
-					GameObject rock = Instantiate (tileGraphic [Random.Range(0, tileGraphic.Length)], new Vector3(world.GetTilePos (i, u).x, world.GetTilePos (i, u).y, -0.1f), Quaternion.identity) as GameObject;
-                    rock.name = ("Rock");
-                    rock.transform.parent = tileObj.transform;
+					GameObject rock = Instantiate (tileGraphic [0], new Vector3 (world.GetTilePos (i, u).x, world.GetTilePos (i, u).y, -0.1f), Quaternion.identity) as GameObject;
+					rock.name = ("Rock");
+					rock.transform.parent = tileObj.transform;
+
+				} else if (!world.Tiles [i, u].Walkable)
+				{
+					GameObject rock = Instantiate (tileGraphic [Random.Range (0, tileGraphic.Length)], new Vector3 (world.GetTilePos (i, u).x, world.GetTilePos (i, u).y, -0.1f), Quaternion.identity) as GameObject;
+					rock.name = ("Rock");
+					rock.transform.parent = tileObj.transform;
 				}
 			}
 		}
+	}
+
+	void ClearWorld ()
+	{
+		foreach (Transform child in tileParent)
+		{
+			Debug.Log ("destoyed a tile");
+			GameObject.Destroy (child.gameObject);
+		}
+		world = GM.World;
 	}
 }

@@ -3,17 +3,26 @@ using System.Collections;
 
 public class GameMaster : MonoBehaviour
 {
+
+	public delegate void OnNextRoun ();
+
+	public delegate void OnPlayerLostLife ();
+
 	public enum States
 	{
 		gameActive,
 		gameDeActive,
 		gamePaused,
+		roundWon,
 		gameWon,
 		gameLost,
 
 	}
 
 	public States gameState;
+
+	public OnNextRoun onNextRound;
+	public OnPlayerLostLife onPlayerLostLife;
 
 	Player player;
 	World world;
@@ -28,7 +37,7 @@ public class GameMaster : MonoBehaviour
 	//game state stuff
 	public bool gameLoopActive;
 	public bool gamePaused;
-	public bool gameResetPause;
+	public bool gameReset;
 	public bool roundWon;
 	public bool gameLost;
 	public bool gameTransition;
@@ -38,6 +47,7 @@ public class GameMaster : MonoBehaviour
 
 	//four abilities
 	public bool CarpetBombing;
+	public bool PredatorDrones;
 	public bool fbiTroops;
 	public bool bearTraps;
 	public bool mines;
@@ -58,13 +68,13 @@ public class GameMaster : MonoBehaviour
 
 	void Awake ()
 	{
-		world = new World (worldWidth, worldHeigth, noiseScale, seed);
-		world.GenerateWorld ();
+		world = new World (worldWidth, worldHeigth, noiseScale);
+		world.GenerateWorld (seed);
 		player = new Player (world);
+		player.OnLoseLife += RestartCounter;
 		prevlife = player.Lives;
 
 		gameState = States.gameDeActive;
-
 
 	}
 
@@ -82,6 +92,10 @@ public class GameMaster : MonoBehaviour
 
 			case States.gamePaused:
 				UpdateGamePaused ();
+				break;
+
+			case States.roundWon:
+				UpdateRoundWon ();
 				break;
 
 			case States.gameWon:
@@ -109,12 +123,19 @@ public class GameMaster : MonoBehaviour
 			gameState = States.gamePaused;
 
 		if (roundWon)
-			gameState = States.gameWon;
+			gameState = States.roundWon;
 	}
 	//handle the game when deactive
 	void UpdateGameDeActive ()
 	{
 		gameLoopActive = false;
+	}
+
+	void UpdateRoundWon ()
+	{
+		gameLoopActive = false;
+
+		gameTransition = true;
 	}
 
 	//handle the game when paused
@@ -132,7 +153,7 @@ public class GameMaster : MonoBehaviour
 
 		//move the camera to the top of the wall
 		//spawn in politicians
-		gameTransition = true;
+		//gameTransition = true;
 
 
 		//after choose, spin wheel of abilities
@@ -166,23 +187,33 @@ public class GameMaster : MonoBehaviour
 		gameState = States.gameActive;
 	}
 
-	public void RestartLevel ()
+	public void RestartCounter ()
 	{
-		gameResetPause = true;
+		
+		if (onPlayerLostLife != null)
+			onPlayerLostLife ();
 		GetComponent<CountDown> ().ResetTimer ();
-
 	}
 
 	public void RestartGame ()
 	{
-		//Application.LoadLevel (0);	
-
-
-
+		Application.LoadLevel (0);	
 	}
 
 	public void WinRound ()
 	{
+
+	}
+
+	public void NextRound ()
+	{	
+		
+		world.GenerateWorld (seed);
+		onNextRound ();
+		RestartCounter ();
+		roundWon = false;
+		gameTransition = false;
+		gameState = States.gameActive;
 
 	}
 		

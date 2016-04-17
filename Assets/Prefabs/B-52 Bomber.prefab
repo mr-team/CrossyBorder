@@ -71,7 +71,7 @@ GameObject:
   - 212: {fileID: 21297742}
   - 114: {fileID: 11448816}
   m_Layer: 0
-  m_Name: predatorDrone
+  m_Name: B-52 Bomber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -213,7 +213,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 100
-  m_Sprite: {fileID: 21300000, guid: f96a93c19b6a2d14c867a64742ec18bf, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2f2e5b2c3f3366948bff3d4bf6fa01fd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

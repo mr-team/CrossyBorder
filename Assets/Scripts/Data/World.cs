@@ -17,19 +17,20 @@ public class World
 		}
 	}
 
-	public World (int Width, int Height, float scale, string seedText)
+	public World (int Width, int Height, float scale)
 	{
 		height = Height;
 		width = Width;
 		this.scale = scale;
-		if (seedText == "")
-			seedText = "Matias er " + Random.Range (int.MinValue, int.MaxValue) + " meter høy.";
-		noiseMap = Noise.GenerateNoiseMap (width * 10, height * 10, scale, seedText);
 		tiles = new Tile[width, height];
 	}
 
-	public void GenerateWorld ()
+	public void GenerateWorld (string seedText)
 	{
+		if (seedText == "")
+			seedText = "Matias er " + Random.Range (int.MinValue, int.MaxValue) + " meter høy.";
+		noiseMap = Noise.GenerateNoiseMap (width * 10, height * 10, scale, seedText);
+		
 		for (int i = 0; i < tiles.GetLength (0); i++)
 		{
 			for (int u = 0; u < tiles.GetLength (1); u++)

@@ -5,7 +5,7 @@ public class Player
 {
 	public delegate void LoseLifeCB ();
 
-	LoseLifeCB loseLifeCB;
+	LoseLifeCB onLoseLife;
 
 	World world;
 	IntPosition2D intPos;
@@ -13,14 +13,14 @@ public class Player
 	bool alive = true;
 	int lives = 5;
 
-	public LoseLifeCB LoseLifeCB2 {
+	public LoseLifeCB OnLoseLife {
 		get
 		{
-			return loseLifeCB;
+			return onLoseLife;
 		}
 		set
 		{
-			loseLifeCB = value;
+			onLoseLife = value;
 		}
 	}
 
@@ -83,11 +83,11 @@ public class Player
 				intPos = IntPosition2D.Vector2ToIntPos2D (pos);
 			} else if (!world.Tiles [intPos.X - 1, intPos.Y].Walkable)
 			{
-				Debug.Log ("could not move to the left");
+				//Debug.Log ("could not move to the left");
 			}
 		} catch
 		{
-			Debug.Log ("could not move to the left");
+			//Debug.Log ("could not move to the left");
 		}
 	}
 
@@ -101,11 +101,11 @@ public class Player
 				intPos = IntPosition2D.Vector2ToIntPos2D (pos);
 			} else if (!world.Tiles [intPos.X + 1, intPos.Y].Walkable)
 			{
-				Debug.Log ("could not move to the right");
+				//Debug.Log ("could not move to the right");
 			}
 		} catch
 		{
-			Debug.Log ("could not move to the right");
+			//Debug.Log ("could not move to the right");
 		}
 	}
 
@@ -148,7 +148,7 @@ public class Player
 	public void LoseLife (int amount = 1)
 	{
 		lives -= amount;
-		loseLifeCB ();
+		onLoseLife ();
 	}
 
 	public void GainLife (int amount = 1)
