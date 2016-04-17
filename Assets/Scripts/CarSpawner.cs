@@ -13,6 +13,9 @@ public class CarSpawner : MonoBehaviour
 
 	public Sprite[] sprites = new Sprite[2];
 	GameMaster GM;
+
+	public Transform carParent;
+
 	float spawnTimer;
 	bool spawned;
 	public directions SpawnDir;
@@ -24,6 +27,7 @@ public class CarSpawner : MonoBehaviour
 
 	void Update ()
 	{
+		
 		spawnTimer += Time.deltaTime;
 		if (spawnTimer > 2)
 		{
@@ -38,17 +42,37 @@ public class CarSpawner : MonoBehaviour
 	{
 		GameObject spawnedCar = Instantiate (car, transform.position, Quaternion.identity) as GameObject;
 		CarController carControl = spawnedCar.GetComponent<CarController> ();
-
+		spawnedCar.transform.parent = carParent;
 		if (SpawnDir == directions.left)
 		{
-			spawnedCar.transform.position = new Vector2 (transform.position.x - Random.Range (0, 6), transform.position.y);
-			carControl.MoveLeft ();
-			spawnedCar.GetComponent<SpriteRenderer> ().sprite = sprites [0];
+			if (GM.fbiTroops)
+			{
+				spawnedCar.transform.position = new Vector2 (transform.position.x - Random.Range (0, 6), transform.position.y);
+				carControl.MoveLeft ();
+				spawnedCar.GetComponent<SpriteRenderer> ().sprite = sprites [2];
+			} else
+			{
+				spawnedCar.transform.position = new Vector2 (transform.position.x - Random.Range (0, 6), transform.position.y);
+				carControl.MoveLeft ();
+				spawnedCar.GetComponent<SpriteRenderer> ().sprite = sprites [0];
+			}
+
 		} else
 		{
-			carControl.MoveRight ();
-			spawnedCar.transform.position = new Vector2 (transform.position.x + Random.Range (0, 10), transform.position.y);
-			spawnedCar.GetComponent<SpriteRenderer> ().sprite = sprites [1];
+			if (GM.fbiTroops)
+			{
+				carControl.MoveRight ();
+				spawnedCar.transform.position = new Vector2 (transform.position.x + Random.Range (0, 10), transform.position.y);
+				spawnedCar.GetComponent<SpriteRenderer> ().sprite = sprites [3];
+
+
+			} else
+			{
+				carControl.MoveRight ();
+				spawnedCar.transform.position = new Vector2 (transform.position.x + Random.Range (0, 10), transform.position.y);
+				spawnedCar.GetComponent<SpriteRenderer> ().sprite = sprites [1];
+
+			}
 		}
 	}
 }

@@ -3,6 +3,7 @@ using System.Collections;
 
 public class CameraControl : MonoBehaviour
 {
+
 	GameMaster GM;
 	GameObject player;
 	Camera mainCam;
@@ -24,6 +25,9 @@ public class CameraControl : MonoBehaviour
 			{
 				transform.position = Vector3.Slerp (transform.position, new Vector3 (5f, 4.5f, -10), 0.2f);
 			}
+		} else if (GM.gameTransition)
+		{
+			transform.position = Vector3.Slerp (transform.position, new Vector3 (5f, 34f, -10), 0.02f);
 		}
 	}
 }
