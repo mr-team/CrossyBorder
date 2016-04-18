@@ -55,6 +55,9 @@ public class World
 					tiles [i, u] = new Tile (new Vector2 (i, u));
 					tiles [i, u].Walkable = true;
 				}*/
+
+				//Car lanes
+
 				if (u == 0)
 				{
 					tiles [i, u] = new Tile (new Vector2 (i, u));
