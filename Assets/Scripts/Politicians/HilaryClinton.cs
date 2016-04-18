@@ -26,12 +26,12 @@ public class HilaryClinton : politician
 		if (cardNum == 0)
 		{
 			GM.CarpetBombing = true;
-			Debug.Log ("card " + cardNum + " on " + gameObject.name + " was activated");
+
 		}
 		if (cardNum == 1)
 		{
 			GM.fbiTroops = true;
-			Debug.Log ("card " + cardNum + " on " + gameObject.name + " was activated");
+
 		}
 	}
 }
