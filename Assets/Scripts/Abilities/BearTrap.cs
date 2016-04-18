@@ -47,11 +47,15 @@ public class BearTrap : MonoBehaviour
 	//called by a callback from the GM when the player loses a life.
 	void Reset ()
 	{
-		player.gameObject.GetComponent<PlayerController> ().stunned = false;
-		anim.SetBool ("Close", false);
-		timer = 0;
-		sprung = false;
-		player = null;
+		if (player != null)
+		{
+			player.gameObject.GetComponent<PlayerController> ().stunned = false;
+			anim.SetBool ("Close", false);
+			timer = 0;
+			sprung = false;
+			player = null;
+			
+		}
 	}
 
 	void OnTriggerStay2D (Collider2D other)
@@ -68,7 +72,7 @@ public class BearTrap : MonoBehaviour
 		if (other.tag == "Player")
 		{
 			sprung = false;
-			Debug.Log ("the player was released");
+			player = null;
 			timer = 0;
 		}
 	}
