@@ -30,7 +30,7 @@ public class GameMaster : MonoBehaviour
 	public int worldWidth;
 	public int worldHeigth;
 	public int ladderCount;
-	public int maxLadder = 0;
+	public int maxLadder;
 	public float noiseScale;
 	public string seed;
 

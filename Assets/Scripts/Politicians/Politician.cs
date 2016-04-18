@@ -60,11 +60,11 @@ public class politician : MonoBehaviour
 	{
 		if (cardNum == 0)
 		{
-			Debug.Log ("card " + cardNum + " on " + gameObject.name + " was activated");
+			//Debug.Log ("card " + cardNum + " on " + gameObject.name + " was activated");
 		}
 		if (cardNum == 1)
 		{
-			Debug.Log ("card " + cardNum + " on " + gameObject.name + " was activated");
+			//Debug.Log ("card " + cardNum + " on " + gameObject.name + " was activated");
 		}
 	}
 }

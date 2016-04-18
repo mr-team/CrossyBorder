@@ -5,6 +5,7 @@ public class EndZone : MonoBehaviour
 {
 
 	GameMaster GM;
+	bool playerInEndzone;
 
 	void Start ()
 	{
@@ -14,14 +15,18 @@ public class EndZone : MonoBehaviour
 
 	void Update ()
 	{
-
+		if (playerInEndzone)
+		{
+			if (GM.ladderCount >= GM.maxLadder)
+				GM.roundWon = true;
+		}
 	}
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
 		if (other.transform.tag == ("Player"))
 		{
-			GM.roundWon = true;
+			playerInEndzone = true;
 		}
 	}
 
@@ -29,7 +34,7 @@ public class EndZone : MonoBehaviour
 	{
 		if (other.transform.tag == ("Player"))
 		{
-			Debug.Log ("player not in endzone");
+			playerInEndzone = false;
 		}
 	}
 }
