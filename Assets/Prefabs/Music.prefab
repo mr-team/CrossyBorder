@@ -115,7 +115,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 11424008}
   m_OnClick:
     m_PersistentCalls:
@@ -198,6 +198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de75383d89034fd4cb6ba81fe0f88010, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volume: .0199999996
 --- !u!114 &11467656
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -287,7 +288,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 105684}

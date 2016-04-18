@@ -15,6 +15,6 @@ public class NoSound : MonoBehaviour {
     }
 	
 	void Update() {
-        i.enabled = PlayerPrefs.GetFloat(soundType == SoundType.Sound ? "soundVolume" : "musicVolume") != 0f;
+        i.enabled = PlayerPrefs.GetFloat(soundType == SoundType.Sound ? "soundVolume" : "musicVolume") == 0f;
     }
 }
