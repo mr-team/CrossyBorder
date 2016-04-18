@@ -26,12 +26,12 @@ public class DonaldTrump : politician
 		if (cardNum == 0)
 		{
 			GM.fbiTroops = true;
-			Debug.Log ("card " + cardNum + " on " + gameObject.name + " was activated");
+
 		}
 		if (cardNum == 1)
 		{
 			GM.mines = true;
-			Debug.Log ("card " + cardNum + " on " + gameObject.name + " was activated");
+
 		}
 	}
 

@@ -12,6 +12,8 @@ public class CountDown : MonoBehaviour
 	float timeLimit = 200;
 	float timeDelta = 10;
 
+	public bool debugStopCount;
+
 	void Start ()
 	{
 		GM = GameObject.Find ("GameMaster").GetComponent<GameMaster> ();
@@ -26,7 +28,7 @@ public class CountDown : MonoBehaviour
 			livesLeft.text = ("Lives left: " + GM.Player.Lives);
 		}
 
-		if (GM.gameLoopActive && !GM.gamePaused)
+		if (GM.gameLoopActive && !GM.gamePaused && !debugStopCount)
 		{
 			timeLeft += Time.deltaTime * timeDelta;
 

@@ -245,7 +245,7 @@ public class PlayerController : MonoBehaviour
 
 	void TransToLostLife ()
 	{
-		Debug.Log ("transed");
+		
 		playerStates = States.PlayerLostLife;
 	}
 

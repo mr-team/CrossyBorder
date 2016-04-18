@@ -60,7 +60,7 @@ public class VerticalLanesController : MonoBehaviour
 	{
 		GameObject B52Bomber = Instantiate (laneObjects [0], lane.transform.position, Quaternion.identity) as GameObject;
 		B52Bomber.GetComponent<B52Bomber> ().LaneControl = this;
-		Debug.Log ("spawned bomber in lane: " + lane);
+		//Debug.Log ("spawned bomber in lane: " + lane);
 		somthingInLane = true;
 	}
 
@@ -68,7 +68,7 @@ public class VerticalLanesController : MonoBehaviour
 	{
 		GameObject PredDrone = Instantiate (laneObjects [1], lane.transform.position, Quaternion.identity) as GameObject;
 		PredDrone.GetComponent<PredatorDrone> ().LaneControl = this;
-		Debug.Log ("spawned Drone");
+		//Debug.Log ("spawned Drone");
 		somthingInLane = true;
 	}
 }

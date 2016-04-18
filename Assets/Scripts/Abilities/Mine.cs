@@ -41,7 +41,7 @@ public class Mine : MonoBehaviour
 	{
 		if (other.tag == "Player")
 		{
-			Debug.Log ("player entered");
+			
 			Sprung = true;
 			playerInRange = true;
 		}
@@ -51,7 +51,7 @@ public class Mine : MonoBehaviour
 	{
 		if (other.tag == "Player")
 		{
-			Debug.Log ("player exited");
+			
 			playerInRange = false;
 		}
 	}
@@ -63,7 +63,6 @@ public class Mine : MonoBehaviour
 			{
 				for (int o = -1; o < 2; o++)
 				{
-					Debug.Log ("spawned");
 					Vector2 pos = new Vector2 (transform.position.x + i, transform.position.y + o);
 					Instantiate (explotion, pos, Quaternion.identity);
 					numExplotions++;

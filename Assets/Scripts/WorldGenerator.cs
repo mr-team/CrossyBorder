@@ -53,14 +53,14 @@ public class WorldGenerator : MonoBehaviour
 					laddr.transform.parent = tileObj.transform;
 				} else if (GM.mines && mineRan >= 2f && mineRan <= 3f)
 				{
-					Debug.Log ("spawned a Mine");
+					
 					GameObject mine = Instantiate (mineprefab, new Vector3 (GM.World.GetTilePos (i, u).x, GM.World.GetTilePos (i, u).y, -0.1f), Quaternion.identity) as GameObject;
 					mine.name = ("mine");
 					mine.transform.parent = tileObj.transform;
 					
 				} else if (GM.bearTraps && BTrand >= 2f && BTrand <= 3f)
 				{
-					Debug.Log ("spawned a bear trap");
+					
 					GameObject BearTrap = Instantiate (bearTrapPrefab, new Vector3 (GM.World.GetTilePos (i, u).x, GM.World.GetTilePos (i, u).y, -0.1f), Quaternion.identity) as GameObject;
 					BearTrap.name = ("BearTrap");
 					BearTrap.transform.parent = tileObj.transform;
@@ -76,7 +76,6 @@ public class WorldGenerator : MonoBehaviour
 		
 		foreach (Transform child in tileParent)
 		{
-			Debug.Log ("destoyed a tile");
 			GameObject.Destroy (child.gameObject);
 		}
 	}
