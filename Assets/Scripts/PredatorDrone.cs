@@ -58,6 +58,11 @@ public class PredatorDrone : MonoBehaviour
 			bombDroped = true;
 		}
 
+		if (transform.position.y <= -5)
+		{
+			DestroyImmediate (this.gameObject);
+		}
+
 	}
 
 	void FireMissile ()

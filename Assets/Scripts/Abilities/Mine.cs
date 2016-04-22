@@ -13,6 +13,8 @@ public class Mine : MonoBehaviour
 	bool playerInRange;
 	int numExplotions;
 
+	bool hit;
+
 	void Start ()
 	{
 		GM = GameObject.Find ("GameMaster").GetComponent<GameMaster> ();
@@ -29,9 +31,10 @@ public class Mine : MonoBehaviour
 			{
 				SpawnExplotions ();
 				Destroy (this.gameObject, 0.5f);
-				if (playerInRange)
+				if (playerInRange && !hit)
 				{
 					GM.Player.LoseLife ();
+					hit = true;
 				}
 			}
 		}
