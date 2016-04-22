@@ -46,7 +46,8 @@ public class politician : MonoBehaviour
 	{
 		abilityCard.enabled = true;
 		abilityCard.texture = abilityCardTextures [cardNum];
-		abilityCard.transform.position = new Vector2 (Input.mousePosition.x - 100, Input.mousePosition.y + 110);
+        int offset = Input.mousePosition.x < (Screen.width / 2f) ? 100 : -100;
+        abilityCard.transform.position = new Vector2 (Input.mousePosition.x + offset, Input.mousePosition.y + 110);
 
 	}
 
