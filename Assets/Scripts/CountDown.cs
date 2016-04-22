@@ -30,8 +30,8 @@ public class CountDown : MonoBehaviour
 
 		if (GM.gameLoopActive && !GM.gamePaused && !debugStopCount)
 		{
-			timeLeft += Time.deltaTime * timeDelta;
-
+            //timeLeft += Time.deltaTime * timeDelta;
+            timeLeft = 0f;
 			if (timeLeft >= timeLimit)
 			{
 				GM.Player.LoseLife ();
