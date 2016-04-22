@@ -27,11 +27,9 @@ public class World
 
 	public void GenerateWorld (string seedText)
 	{
-		if (seedText == "")
-			seedText = "Matias er " + Random.Range (int.MinValue, int.MaxValue) + " meter høy.";
 		noiseMap = Noise.GenerateNoiseMap (width * 10, height * 10, scale, seedText);
-		
-		for (int i = 0; i < tiles.GetLength (0); i++)
+
+        for (int i = 0; i < tiles.GetLength (0); i++)
 		{
 			for (int u = 0; u < tiles.GetLength (1); u++)
 			{

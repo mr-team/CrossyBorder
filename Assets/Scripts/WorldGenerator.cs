@@ -17,8 +17,10 @@ public class WorldGenerator : MonoBehaviour
 		GM = GameObject.Find ("GameMaster").GetComponent<GameMaster> ();
 		GM.onNextRound += ClearWorld;
 		GM.onNextRound += DrawWorld;
-		rand = new System.Random (GM.seed.GetHashCode ());
-		DrawWorld ();
+        if(GM.seed == "")
+            GM.seed = "Matias er " + Random.Range(int.MinValue, int.MaxValue) + " meter høy.";
+        rand = new System.Random(GM.seed.GetHashCode());
+        DrawWorld ();
 	}
 
 	void DrawWorld ()
@@ -73,8 +75,11 @@ public class WorldGenerator : MonoBehaviour
 	void ClearWorld ()
 	{
 		Debug.Log ("cleared the world");
-		
-		foreach (Transform child in tileParent)
+
+        //Reset ladder spawning, maybe
+        rand = new System.Random(GM.seed.GetHashCode());
+        
+        foreach (Transform child in tileParent)
 		{
 			GameObject.Destroy (child.gameObject);
 		}

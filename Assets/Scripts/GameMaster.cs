@@ -70,12 +70,11 @@ public class GameMaster : MonoBehaviour
 	{
 		world = new World (worldWidth, worldHeigth, noiseScale);
 		world.GenerateWorld (seed);
-		player = new Player (world);
+        player = new Player (world);
 		player.OnLoseLife += RestartCounter;
 		prevlife = player.Lives;
 
 		gameState = States.gameDeActive;
-
 	}
 
 	void Update ()
