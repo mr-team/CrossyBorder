@@ -100,8 +100,11 @@ public class PlayerController : MonoBehaviour
 		if (!GM.gamePaused)
 		{
 			MovePlayer ();
-			if (player.Alive && player.Lives <= 0)
-				playerStates = States.playerDead;
+            if(player.Alive && player.Lives <= 0) {
+                GetComponent<CustomAudioSource>().Play();
+                playerStates = States.playerDead;
+            }
+				
 		}
 
 		if (!GM.gameLoopActive)
@@ -252,7 +255,6 @@ public class PlayerController : MonoBehaviour
 	public void kill ()
 	{
 		playerStates = States.playerDead;
-
 	}
 
 	public void ResetPlayer ()
