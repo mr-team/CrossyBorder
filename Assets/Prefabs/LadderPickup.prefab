@@ -12,6 +12,7 @@ GameObject:
   - 114: {fileID: 11475988}
   - 61: {fileID: 6191008}
   - 114: {fileID: 11460380}
+  - 114: {fileID: 11469262}
   m_Layer: 0
   m_Name: LadderPickup
   m_TagString: Untagged
@@ -63,6 +64,21 @@ MonoBehaviour:
   - {fileID: 21300004, guid: 108e565210a5bb24f9565f092cc2326f, type: 3}
   - {fileID: 21300002, guid: 108e565210a5bb24f9565f092cc2326f, type: 3}
   speed: .0450000018
+--- !u!114 &11469262
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 180784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafe42a581b0b6c419e68b328bddb23a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioType: 1
+  clip: {fileID: 8300000, guid: f3998e38d35eaa64aa7d12a877a568d2, type: 3}
+  loop: 0
+  playOnWake: 0
 --- !u!114 &11475988
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -189,7 +205,51 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: clip
       value: 
-      objectReference: {fileID: 8300000, guid: 4b320a50aea5f9d40a5141af7bd90949, type: 3}
+      objectReference: {fileID: 8300000, guid: f3998e38d35eaa64aa7d12a877a568d2, type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6118e832ee3412148812568ee04e4afa, type: 3}
+    - target: {fileID: 0}
+      propertyPath: Priority
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: rolloffMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: rolloffCustomCurve.m_Curve.Array.data[0].time
+      value: .00200000009
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: rolloffCustomCurve.m_Curve.Array.data[0].outSlope
+      value: -1.00200403
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: rolloffCustomCurve.m_Curve.Array.data[1].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: rolloffCustomCurve.m_Curve.Array.data[1].inSlope
+      value: -1.00200403
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: rolloffCustomCurve.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 180784}

@@ -4,6 +4,7 @@ using System.Collections;
 public class Ladder : MonoBehaviour
 {
 	GameMaster GM;
+    private bool CHECKED = false;
 
 	void Start ()
 	{
@@ -15,8 +16,14 @@ public class Ladder : MonoBehaviour
 	{
 		if (other.transform.tag == "Player")
 		{
-			GM.ladderCount++;
-			Destroy (this.gameObject);
+            if(!CHECKED) {
+                CHECKED = true;
+                GM.ladderCount++;
+                GetComponent<CustomAudioSource>().PlayOnce();
+                GetComponent<SpriteRenderer>().enabled = false;
+			    Destroy (this.gameObject, 0.204f);
+            }
+            
 		}
 	}
 }
