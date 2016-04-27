@@ -27,17 +27,17 @@ public class politician : MonoBehaviour
 		GM = GameObject.Find ("GameMaster").GetComponent<GameMaster>();
         speechBubble = transform.FindChild("Speech Bubble").gameObject;
         speechBubble.SetActive(false);
-        speechBubble.GetComponent<SpriteRenderer>().sprite = quotes[Random.Range(0, quotes.Length - 1)];
+        speechBubble.GetComponent<SpriteRenderer>().sprite = quotes[Random.Range(0, quotes.Length)];
         abilityCard.enabled = false;
 	}
 
 	protected virtual void Update ()
 	{
-		if (GM.roundWon && !cardChosen)
-		{
-			cardNum = Random.Range (0, 2);
-			cardChosen = true;
-		}
+        if(GM.roundWon && !cardChosen) {
+            cardNum = Random.Range(0, 2);
+            cardChosen = true;
+            speechBubble.GetComponent<SpriteRenderer>().sprite = quotes[Random.Range(0, quotes.Length)];
+        }
 	}
 
 	protected virtual void OnMouseDown ()
@@ -46,7 +46,6 @@ public class politician : MonoBehaviour
 		//clickCB (this.gameObject);
 		cardChosen = false;
         speechBubble.SetActive(false);
-        speechBubble.GetComponent<SpriteRenderer>().sprite = quotes[Random.Range(0, quotes.Length - 1)];
     }
 
 	void OnMouseOver ()
