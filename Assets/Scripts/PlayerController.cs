@@ -20,6 +20,14 @@ public class PlayerController : MonoBehaviour
 
 	}
 
+	public enum ActionStates
+	{
+
+		idle,
+		tunneling,
+	}
+
+	public ActionStates actionStates;
 	public States playerStates;
 	public  Direction direction;
 
@@ -31,11 +39,16 @@ public class PlayerController : MonoBehaviour
 	int startX = 5;
 	int startY = 1;
 
+	public int shovelCount;
+
 	float timer;
 	float timer2;
+	float tpDelayTimer;
+	float getOutOfHoleTimer;
 	float waitBeforeRun = 0.5f;
 
 	bool moving;
+	bool tunnel;
 	public bool stunned;
 	public Vector2 startPos;
 
@@ -99,11 +112,24 @@ public class PlayerController : MonoBehaviour
 		
 		if (!GM.gamePaused)
 		{
+
+			switch (actionStates)
+			{
+				case ActionStates.idle:
+					UpdateIdle ();
+					break;
+				
+				case ActionStates.tunneling:
+					UpdateTunneling ();
+					break;
+			}
+
 			MovePlayer ();
-            if(player.Alive && player.Lives <= 0) {
-                GetComponent<CustomAudioSource>().Play();
-                playerStates = States.playerDead;
-            }
+			if (player.Alive && player.Lives <= 0)
+			{
+				GetComponent<CustomAudioSource> ().Play ();
+				playerStates = States.playerDead;
+			}
 				
 		}
 
@@ -267,6 +293,46 @@ public class PlayerController : MonoBehaviour
 		playerAnim.SetBool ("FaceRight", false);
 	}
 
+	/// <summary>
+	/// Tps the player.
+	/// </summary>
+	/// <param name="pos">Position.</param>
+	public void tpPlayer (Vector2 pos)
+	{
+		player.Pos = pos;
+		transform.position = (player.Pos);
+		playerAnim.SetBool ("FaceUp", true);
+		playerAnim.SetBool ("FaceLeft", false);
+		playerAnim.SetBool ("FaceDown", false);
+		playerAnim.SetBool ("FaceRight", false);
+		
+	}
+
+	/// <summary>
+	/// Tps the player with a delay.
+	/// </summary>
+	/// <returns><c>true</c>, if player was tped, <c>false</c> otherwise.</returns>
+	/// <param name="pos">Position.</param>
+	/// <param name="delay">Delay.</param>
+	public bool tpPlayer (Vector2 pos, float delay)
+	{
+		tpDelayTimer += Time.deltaTime;
+
+		if (tpDelayTimer >= delay)
+		{
+			player.Pos = pos;
+			transform.position = (player.Pos);
+			playerAnim.SetBool ("FaceUp", true);
+			playerAnim.SetBool ("FaceLeft", false);
+			playerAnim.SetBool ("FaceDown", false);
+			playerAnim.SetBool ("FaceRight", false);
+			tpDelayTimer = 0f;
+			return true;
+		}
+		return false;
+	}
+
+
 	void SetFaceDirection (Direction dir)
 	{
 		if (dir == Direction.up)
@@ -296,6 +362,57 @@ public class PlayerController : MonoBehaviour
 			playerAnim.SetBool ("FaceLeft", false);
 			playerAnim.SetBool ("FaceDown", false);
 			playerAnim.SetBool ("FaceRight", true);
+		}
+	}
+
+	void UpdateIdle ()
+	{
+		if (Input.GetKeyDown (KeyCode.T))
+		{
+			if (shovelCount > 0)
+			{
+				actionStates = ActionStates.tunneling;
+			} else
+				Debug.Log ("you aint got no shovels to be shovveling no tunnel");
+		}
+	}
+
+	void UpdateTunneling ()
+	{
+		bool canTunnel;
+
+		//get the end tile based on hov many shovels the player is carrying
+		int travelTilesAmount;
+		travelTilesAmount = 5 * shovelCount;
+		IntPosition2D endPos = new IntPosition2D (player.IntPos.X, player.IntPos.Y + travelTilesAmount);
+
+		//check if end tile is walkable
+		if (GM.World.Tiles [endPos.X, endPos.Y].Walkable == true)
+		{
+			Debug.Log ("i can tunnel to the end!");
+			canTunnel = true;
+
+		} else
+		{
+			Debug.Log ("i Can't tunnel to the end");
+
+			canTunnel = false;
+		}
+
+		//transport player && removeshovels
+
+		if (canTunnel && Input.GetKeyDown (KeyCode.T))
+			tunnel = true;
+		
+		if (tunnel)
+		{
+			if (tpPlayer (new Vector2 (endPos.X, endPos.Y), 1f))
+			{
+				
+				shovelCount = 0;
+				tunnel = false;
+				actionStates = ActionStates.idle;
+			}
 		}
 	}
 }
