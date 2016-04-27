@@ -25,7 +25,6 @@ public class WorldGenerator : MonoBehaviour
 
 	void DrawWorld ()
 	{
-		Debug.Log ("drew a new world");
 		for (int i = 0; i < GM.World.Tiles.GetLength (0); i++)
 		{
 			for (int u = 0; u < GM.World.Tiles.GetLength (1); u++)
@@ -49,21 +48,25 @@ public class WorldGenerator : MonoBehaviour
 					rock.transform.parent = tileObj.transform;
 				} else if (ladder <= 1f)
 				{
-					GameObject laddr = Instantiate (ladderPrefab, new Vector3 (GM.World.GetTilePos (i, u).x, GM.World.GetTilePos (i, u).y, -0.1f), Quaternion.identity) as GameObject;
+                    if(u == 1 && i == 5)
+                        continue;
+                    GameObject laddr = Instantiate (ladderPrefab, new Vector3 (GM.World.GetTilePos (i, u).x, GM.World.GetTilePos (i, u).y, -0.1f), Quaternion.identity) as GameObject;
 					laddr.name = ("Ladder");
 					GM.maxLadder++;
 					laddr.transform.parent = tileObj.transform;
 				} else if (GM.mines && mineRan >= 2f && mineRan <= 3f)
 				{
-					
-					GameObject mine = Instantiate (mineprefab, new Vector3 (GM.World.GetTilePos (i, u).x, GM.World.GetTilePos (i, u).y, -0.1f), Quaternion.identity) as GameObject;
+                    if(u <= 2)
+                        continue;
+                    GameObject mine = Instantiate (mineprefab, new Vector3 (GM.World.GetTilePos (i, u).x, GM.World.GetTilePos (i, u).y, -0.1f), Quaternion.identity) as GameObject;
 					mine.name = ("mine");
 					mine.transform.parent = tileObj.transform;
 					
 				} else if (GM.bearTraps && BTrand >= 2f && BTrand <= 3f)
 				{
-					
-					GameObject BearTrap = Instantiate (bearTrapPrefab, new Vector3 (GM.World.GetTilePos (i, u).x, GM.World.GetTilePos (i, u).y, -0.1f), Quaternion.identity) as GameObject;
+                    if(u == 1 && i == 5)
+                        continue;
+                    GameObject BearTrap = Instantiate (bearTrapPrefab, new Vector3 (GM.World.GetTilePos (i, u).x, GM.World.GetTilePos (i, u).y, -0.1f), Quaternion.identity) as GameObject;
 					BearTrap.name = ("BearTrap");
 					BearTrap.transform.parent = tileObj.transform;
 				}
@@ -75,10 +78,13 @@ public class WorldGenerator : MonoBehaviour
 	void ClearWorld ()
 	{
 		Debug.Log ("cleared the world");
-
+        if(GM.seed.Length >= 10)
+            GM.seed = GM.seed.Remove(10, GM.seed.Length - 10);
+        GM.seed = GM.seed + rand.Next();
         //Reset ladder spawning, maybe
         rand = new System.Random(GM.seed.GetHashCode());
         
+
         foreach (Transform child in tileParent)
 		{
 			GameObject.Destroy (child.gameObject);
