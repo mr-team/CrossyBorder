@@ -31,6 +31,9 @@ public class PlayerController : MonoBehaviour
 	public States playerStates;
 	public  Direction direction;
 
+	public delegate void OnPlayerChangePos ();
+
+	public OnPlayerChangePos onPlayerChangePos;
 	GameMaster GM;
 	SpriteRenderer playerRenderer;
 	Animator playerAnim;
@@ -170,24 +173,28 @@ public class PlayerController : MonoBehaviour
 				player.MoveUp ();
 				SetFaceDirection (Direction.up);
 				moving = true;
+				onPlayerChangePos ();
 			}
 			if (Input.GetKeyDown (KeyCode.A) && !moving || Input.GetKeyDown (KeyCode.LeftArrow) && !moving)
 			{
 				player.MoveLeft ();
 				SetFaceDirection (Direction.left);
 				moving = true;
+				onPlayerChangePos ();
 			}
 			if (Input.GetKeyDown (KeyCode.S) && !moving || Input.GetKeyDown (KeyCode.DownArrow) && !moving)
 			{
 				player.MoveDown ();
 				SetFaceDirection (Direction.down);
 				moving = true;
+				onPlayerChangePos ();
 			}
 			if (Input.GetKeyDown (KeyCode.D) && !moving || Input.GetKeyDown (KeyCode.RightArrow) && !moving)
 			{
 				player.MoveRight ();
 				SetFaceDirection (Direction.right);
 				moving = true;
+				onPlayerChangePos ();
 			}
 		}
 	
