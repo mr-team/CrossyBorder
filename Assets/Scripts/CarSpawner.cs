@@ -12,17 +12,30 @@ public class CarSpawner : MonoBehaviour
 	public GameObject car;
 
 	public Sprite[] sprites = new Sprite[2];
-	GameMaster GM;
+    public Sprite[] roadSprites;
+    [Range(0, 100)]
+    public int roadLength = 30;
+    GameMaster GM;
 
 	public Transform carParent;
 
 	float spawnTimer;
 	bool spawned;
-	public directions SpawnDir;
+    public directions SpawnDir;
 
 	void Start ()
 	{	
 		GM = GameObject.Find ("GameMaster").GetComponent<GameMaster> ();
+        
+        float add = 1f;
+        if(SpawnDir != directions.left)
+            add = -1f;
+        for(int i = 0; i < roadLength; i++) {
+            GameObject road = new GameObject("Road " + i);
+            road.transform.parent = this.transform;
+            road.AddComponent<SpriteRenderer>().sprite = roadSprites[Random.Range(0, roadSprites.Length)];
+            road.transform.position = new Vector3(transform.position.x + (add * i), transform.position.y - 0.4f, transform.position.z);
+        }
 	}
 
 	void Update ()
