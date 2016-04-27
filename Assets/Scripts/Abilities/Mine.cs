@@ -6,6 +6,7 @@ public class Mine : MonoBehaviour
 	GameMaster GM;
 	Animator anim;
 	public GameObject explotion;
+	public GameObject shovelPrefab;
 	float timer;
 	float fuseTime = 1.5f;
 
@@ -69,9 +70,24 @@ public class Mine : MonoBehaviour
 			{
 				for (int o = -1; o < 2; o++)
 				{
+					int ran = Random.Range (0, 900);
+
 					Vector2 pos = new Vector2 (transform.position.x + i, transform.position.y + o);
 					Instantiate (explotion, pos, Quaternion.identity);
 					numExplotions++;
+					Debug.Log (ran);
+					if (ran > 0 && ran <= 3)
+					{
+						try
+						{
+							if (GM.World.Tiles [(int)pos.x, (int)pos.y].Walkable == true)
+								Instantiate (shovelPrefab, pos, Quaternion.identity);
+		
+						} catch
+						{
+							Debug.Log ("did not spawn a shovel");
+						}
+					}
 				}
 			}
 		}
