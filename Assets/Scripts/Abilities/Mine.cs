@@ -13,6 +13,7 @@ public class Mine : MonoBehaviour
 	bool playerInRange;
 	int numExplotions;
 
+	bool explode;
 	bool hit;
 
 	void Start ()
@@ -29,6 +30,7 @@ public class Mine : MonoBehaviour
 
 			if (timer > fuseTime)
 			{
+				
 				SpawnExplotions ();
 				Destroy (this.gameObject, 0.5f);
 				if (playerInRange && !hit)
@@ -62,6 +64,7 @@ public class Mine : MonoBehaviour
 	void SpawnExplotions ()
 	{
 		if (numExplotions <= 9)
+		{
 			for (int i = -1; i < 2; i++)
 			{
 				for (int o = -1; o < 2; o++)
@@ -71,5 +74,6 @@ public class Mine : MonoBehaviour
 					numExplotions++;
 				}
 			}
+		}
 	}
 }
