@@ -75,7 +75,7 @@ public class Mine : MonoBehaviour
 					Vector2 pos = new Vector2 (transform.position.x + i, transform.position.y + o);
 					Instantiate (explotion, pos, Quaternion.identity);
 					numExplotions++;
-					Debug.Log (ran);
+					//Debug.Log (ran);
 					if (ran > 0 && ran <= 3)
 					{
 						try
