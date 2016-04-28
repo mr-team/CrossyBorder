@@ -8332,11 +8332,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11468616, guid: 42fe7aee0052ee54a8fab093983da4d3, type: 2}
       propertyPath: shovelCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11468616, guid: 42fe7aee0052ee54a8fab093983da4d3, type: 2}
-      propertyPath: tunnelDistance
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 42fe7aee0052ee54a8fab093983da4d3, type: 2}
