@@ -228,7 +228,7 @@ public class PlayerController : MonoBehaviour
 			canTunnel = false;
 			tunnel = false;
 		}
-		if (canTunnel && Input.GetKeyDown (KeyCode.Alpha1))
+		if (canTunnel && !tunnel && Input.GetKeyDown (KeyCode.Alpha1))
 		{
 			hudGizmos.clearHUD = true;
 			StunPlayer ();
