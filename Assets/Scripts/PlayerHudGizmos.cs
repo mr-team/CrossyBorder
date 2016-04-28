@@ -63,22 +63,23 @@ public class PlayerHudGizmos : MonoBehaviour
 	{
 		runs = 0;
 
-
 		if (runs <= 6)
 		{
-			for (int u = 1; u < playerControl.tunnelDistance + 1; u++)
+			for (int u = 1; u < playerControl.TunnelDistance + 1; u++)
 			{
-				if (u != playerControl.tunnelDistance)
+				if (u != playerControl.TunnelDistance)
 				{
+					
 					Vector2 pos = new Vector2 (transform.position.x, transform.position.y + u);
 					GameObject hudObj = Instantiate (tunnelingHUD [0], pos, Quaternion.identity)as GameObject;
 					hudObj.name = ("Body: " + u);
 					hudObj.transform.parent = HudObjParent.transform;
 					
-				} else if (u == playerControl.tunnelDistance)
+				} else if (u == playerControl.TunnelDistance)
 				{
 					if (playerControl.canTunnel)
 					{
+						
 						Vector2 pos = new Vector2 (transform.position.x, transform.position.y + u);
 						GameObject hudTipObj = Instantiate (tunnelingHUD [1], pos, Quaternion.identity)as GameObject;
 						hudTipObj.name = ("Tip: " + u);
@@ -86,6 +87,7 @@ public class PlayerHudGizmos : MonoBehaviour
 
 					} else if (!playerControl.canTunnel)
 					{
+						
 						Vector2 pos = new Vector2 (transform.position.x, transform.position.y + u);
 						GameObject hudTipObj = Instantiate (tunnelingHUD [2], pos, Quaternion.identity)as GameObject;
 						hudTipObj.name = ("Tip: " + u);
@@ -100,8 +102,10 @@ public class PlayerHudGizmos : MonoBehaviour
 
 	void UpdateTunnelingHudPosition ()
 	{
+		
 		if (playerControl.actionStates == PlayerController.ActionStates.tunneling)
 		{
+			
 			DestroyImmediate (HudObjParent);
 			HudObjParent = Instantiate (HudObjParentPrefab, Vector2.zero, Quaternion.identity) as GameObject;
 			SpawnTunnelingHud ();

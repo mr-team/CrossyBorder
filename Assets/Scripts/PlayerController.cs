@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
 	int startX = 5;
 	int startY = 1;
 
-	public int tunnelDistance;
+	int tunnelDistance = 6;
 	public int shovelCount;
 
 	float timer;
@@ -61,6 +61,13 @@ public class PlayerController : MonoBehaviour
 	public bool stunned;
 
 	public Vector2 startPos;
+
+	public int TunnelDistance {
+		get
+		{
+			return tunnelDistance;
+		}
+	}
 
 	public Player Player {
 		get
