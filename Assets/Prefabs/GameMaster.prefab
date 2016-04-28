@@ -45,10 +45,13 @@ MonoBehaviour:
   gameState: 0
   worldWidth: 11
   worldHeigth: 24
+  EndWall: {fileID: 0}
+  carSpawner: {fileID: 118070, guid: 0ef642d84be382348af1c5f9dcf049b1, type: 2}
   ladderCount: 0
   maxLadder: 0
   noiseScale: .300000012
   seed: 
+  carLanes: 
   gameLoopActive: 0
   gamePaused: 0
   gameReset: 0
@@ -112,7 +115,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: carSpawner
+      value: 
+      objectReference: {fileID: 118070, guid: 0ef642d84be382348af1c5f9dcf049b1, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 138074}
