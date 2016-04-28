@@ -71,9 +71,7 @@ public class BearTrap : MonoBehaviour
 	{
 		if (other.tag == "Player")
 		{
-			sprung = false;
-			player = null;
-			timer = 0;
+			Reset ();
 		}
 	}
 }

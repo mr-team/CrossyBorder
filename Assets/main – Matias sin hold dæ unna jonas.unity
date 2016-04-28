@@ -407,6 +407,7 @@ MonoBehaviour:
   - {fileID: 124736, guid: 210d0365b1698784589c38ab9823b326, type: 2}
   HudObjParentPrefab: {fileID: 182440, guid: 6626e6de1bfe64d448c543fe03ed41ea, type: 2}
   HudObjParent: {fileID: 335907570}
+  clearHUD: 0
 --- !u!1001 &40507193
 Prefab:
   m_ObjectHideFlags: 0
@@ -6679,6 +6680,10 @@ Prefab:
       objectReference: {fileID: 446213907}
     - target: {fileID: 11426734, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
       propertyPath: mines
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11426734, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
+      propertyPath: bearTraps
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
