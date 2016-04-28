@@ -50,8 +50,10 @@ public class PlayerController : MonoBehaviour
 	float getOutOfHoleTimer;
 	float waitBeforeRun = 0.5f;
 
+
 	bool moving;
 	bool tunnel;
+	public bool canTunnel;
 	public bool stunned;
 	public Vector2 startPos;
 
@@ -133,7 +135,6 @@ public class PlayerController : MonoBehaviour
 				GetComponent<CustomAudioSource> ().Play ();
 				playerStates = States.playerDead;
 			}
-				
 		}
 
 		if (!GM.gameLoopActive)
@@ -153,6 +154,7 @@ public class PlayerController : MonoBehaviour
 			playerAnim.SetBool ("FaceRight", false);
 
 		}
+		actionStates = ActionStates.idle;
 		playerStates = States.playerAlive;
 	}
 
@@ -267,6 +269,8 @@ public class PlayerController : MonoBehaviour
 
 		if (transform.position == targetPos)
 			moving = false;
+
+		onPlayerChangePos ();
 	}
 
 	void CheckTile (IntPosition2D pos)
@@ -386,7 +390,7 @@ public class PlayerController : MonoBehaviour
 
 	void UpdateTunneling ()
 	{
-		bool canTunnel;
+		
 
 		//get the end tile based on hov many shovels the player is carrying
 		int travelTilesAmount;

@@ -7,9 +7,8 @@ public class PlayerHudGizmos : MonoBehaviour
 
 	public GameObject[] tunnelingHUD;
 
-	public List<GameObject> HudObjects = new List<GameObject> ();
-
-
+	public GameObject HudObjParentPrefab;
+	public GameObject HudObjParent;
 	GameMaster GM;
 	PlayerController playerControl;
 	int runs;
@@ -28,11 +27,17 @@ public class PlayerHudGizmos : MonoBehaviour
 		{
 
 			case  PlayerController.ActionStates.idle:
+				UpdateIdle ();
 				break;
 			case  PlayerController.ActionStates.tunneling:
 				UpdateTunneling ();
 				break;
 		}
+	}
+
+	void UpdateIdle ()
+	{
+		ClearHUD ();
 	}
 
 	void UpdateTunneling ()
@@ -43,8 +48,6 @@ public class PlayerHudGizmos : MonoBehaviour
 			SpawnTunnelingHud ();
 			spawned = true;
 		}
-
-
 		//at the end draw the tip (5th, 10th, 15th osv)
 	}
 
@@ -63,13 +66,31 @@ public class PlayerHudGizmos : MonoBehaviour
 						Vector2 pos = new Vector2 (transform.position.x, transform.position.y + u);
 						GameObject hudObj = Instantiate (tunnelingHUD [0], pos, Quaternion.identity)as GameObject;
 						hudObj.name = ("Body: " + u);
-						HudObjects.Add (hudObj);
+						hudObj.transform.parent = HudObjParent.transform;
+					
 					} else if (u == 5)
 					{
-						Vector2 pos = new Vector2 (transform.position.x, transform.position.y + u);
-						GameObject hudTipObj = Instantiate (tunnelingHUD [1], pos, Quaternion.identity)as GameObject;
-						hudTipObj.name = ("Tip: " + u);
-						HudObjects.Add (hudTipObj);
+						if (playerControl.shovelCount == 1 && playerControl.canTunnel)
+						{
+							Vector2 pos = new Vector2 (transform.position.x, transform.position.y + u);
+							GameObject hudTipObj = Instantiate (tunnelingHUD [1], pos, Quaternion.identity)as GameObject;
+							hudTipObj.name = ("Tip: " + u);
+							hudTipObj.transform.parent = HudObjParent.transform;
+
+						} else if (playerControl.shovelCount == 1 && !playerControl.canTunnel)
+						{
+							Vector2 pos = new Vector2 (transform.position.x, transform.position.y + u);
+							GameObject hudTipObj = Instantiate (tunnelingHUD [2], pos, Quaternion.identity)as GameObject;
+							hudTipObj.name = ("Tip: " + u);
+							hudTipObj.transform.parent = HudObjParent.transform;
+							
+						} else
+						{
+							Vector2 pos = new Vector2 (transform.position.x, transform.position.y + u);
+							GameObject hudObj = Instantiate (tunnelingHUD [0], pos, Quaternion.identity)as GameObject;
+							hudObj.name = ("Body: " + u);
+							hudObj.transform.parent = HudObjParent.transform;
+						}
 					}
 					runs++;
 				}
@@ -81,11 +102,15 @@ public class PlayerHudGizmos : MonoBehaviour
 	{
 		if (playerControl.actionStates == PlayerController.ActionStates.tunneling)
 		{
-			for (int i = 0; i < tunnelingHUD.Length; i++)
-			{
-				DestroyImmediate (HudObjects [i]);
-				HudObjects.RemoveAt (i);
-			}
+			DestroyImmediate (HudObjParent);
+			HudObjParent = Instantiate (HudObjParentPrefab, Vector2.zero, Quaternion.identity) as GameObject;
+			SpawnTunnelingHud ();
 		}
+	}
+
+	void ClearHUD ()
+	{
+		DestroyImmediate (HudObjParent);
+		HudObjParent = Instantiate (HudObjParentPrefab, Vector2.zero, Quaternion.identity) as GameObject;
 	}
 }
