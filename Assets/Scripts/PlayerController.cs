@@ -50,8 +50,10 @@ public class PlayerController : MonoBehaviour
 	float getOutOfHoleTimer;
 	float waitBeforeRun = 0.5f;
 
+
 	bool moving;
 	bool tunnel;
+	public bool canTunnel;
 	public bool stunned;
 	public Vector2 startPos;
 
@@ -133,7 +135,6 @@ public class PlayerController : MonoBehaviour
 				GetComponent<CustomAudioSource> ().Play ();
 				playerStates = States.playerDead;
 			}
-				
 		}
 
 		if (!GM.gameLoopActive)
@@ -153,6 +154,7 @@ public class PlayerController : MonoBehaviour
 			playerAnim.SetBool ("FaceRight", false);
 
 		}
+		actionStates = ActionStates.idle;
 		playerStates = States.playerAlive;
 	}
 
@@ -267,6 +269,8 @@ public class PlayerController : MonoBehaviour
 
 		if (transform.position == targetPos)
 			moving = false;
+
+		onPlayerChangePos ();
 	}
 
 	void CheckTile (IntPosition2D pos)
@@ -339,7 +343,6 @@ public class PlayerController : MonoBehaviour
 		return false;
 	}
 
-
 	void SetFaceDirection (Direction dir)
 	{
 		if (dir == Direction.up)
@@ -380,13 +383,13 @@ public class PlayerController : MonoBehaviour
 			{
 				actionStates = ActionStates.tunneling;
 			} else
-				Debug.Log ("you aint got no shovels to be shovveling no tunnel");
+				Debug.Log ("you aint got no shovels to be shovelin no tunnel");
 		}
 	}
 
 	void UpdateTunneling ()
 	{
-		bool canTunnel;
+		
 
 		//get the end tile based on hov many shovels the player is carrying
 		int travelTilesAmount;
@@ -409,7 +412,11 @@ public class PlayerController : MonoBehaviour
 		//transport player && removeshovels
 
 		if (canTunnel && Input.GetKeyDown (KeyCode.T))
+		{
 			tunnel = true;
+			playerAnim.SetBool ("DigDown", true);
+		}
+
 		
 		if (tunnel)
 		{
@@ -418,6 +425,7 @@ public class PlayerController : MonoBehaviour
 				
 				shovelCount = 0;
 				tunnel = false;
+				playerAnim.SetBool ("DigDown", false);
 				actionStates = ActionStates.idle;
 			}
 		}
