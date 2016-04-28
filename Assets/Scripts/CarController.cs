@@ -47,7 +47,9 @@ public class CarController : MonoBehaviour
 	{
 		if (other.gameObject.tag == "Player" && !GM.gameReset)
 		{
-			other.gameObject.GetComponent<PlayerController> ().Player.LoseLife ();
+			GetComponent<CustomAudioSource>().Play();
+            other.gameObject.GetComponent<PlayerController> ().Player.LoseLife ();
+            
 		}
 	}
 }

@@ -23,10 +23,17 @@ public class CarSpawner : MonoBehaviour
 	bool spawned;
     public directions SpawnDir;
 
+    void Awake() {
+        GM = GameObject.Find("GameMaster").GetComponent<GameMaster>();
+        GM.carLanes.Add(Mathf.RoundToInt(transform.position.y));
+    }
+
 	void Start ()
 	{	
-		GM = GameObject.Find ("GameMaster").GetComponent<GameMaster> ();
-        
+
+        if(carParent == null)
+            carParent = transform;
+
         float add = 1f;
         if(SpawnDir != directions.left)
             add = -1f;

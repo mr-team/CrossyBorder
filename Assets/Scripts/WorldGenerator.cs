@@ -12,13 +12,16 @@ public class WorldGenerator : MonoBehaviour
 	public GameObject[] tileGraphic = new GameObject[10];
 	public System.Random rand;
 
-	void Start ()
-	{
-		GM = GameObject.Find ("GameMaster").GetComponent<GameMaster> ();
-		GM.onNextRound += ClearWorld;
-		GM.onNextRound += DrawWorld;
+    void Awake() {
+        GM = GameObject.Find ("GameMaster").GetComponent<GameMaster> ();
         if(GM.seed == "")
             GM.seed = "Matias er " + Random.Range(int.MinValue, int.MaxValue) + " meter høy.";
+    }
+
+	void Start()
+	{
+		GM.onNextRound += ClearWorld;
+		GM.onNextRound += DrawWorld;
         rand = new System.Random(GM.seed.GetHashCode());
         DrawWorld ();
 	}
@@ -78,6 +81,7 @@ public class WorldGenerator : MonoBehaviour
 	void ClearWorld ()
 	{
 		Debug.Log ("cleared the world");
+        GM.carLanes.Clear();
         if(GM.seed.Length >= 10)
             GM.seed = GM.seed.Remove(10, GM.seed.Length - 10);
         GM.seed = GM.seed + rand.Next();
