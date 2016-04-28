@@ -55,7 +55,8 @@ public class WorldGenerator : MonoBehaviour
                         continue;
                     GameObject laddr = Instantiate (ladderPrefab, new Vector3 (GM.World.GetTilePos (i, u).x, GM.World.GetTilePos (i, u).y, -0.1f), Quaternion.identity) as GameObject;
 					laddr.name = ("Ladder");
-					GM.maxLadder++;
+                    if(rand.Next(0, 100) <= 30 /* % */) //Percentage needed to complete the level
+					    GM.maxLadder++;
 					laddr.transform.parent = tileObj.transform;
 				} else if (GM.mines && mineRan >= 2f && mineRan <= 3f)
 				{
