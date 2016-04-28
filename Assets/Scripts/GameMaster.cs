@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GameMaster : MonoBehaviour
 {
@@ -33,6 +34,8 @@ public class GameMaster : MonoBehaviour
 	public int maxLadder;
 	public float noiseScale;
 	public string seed;
+    [HideInInspector]
+    public List<int> carLanes = new List<int>();
 
 	//game state stuff
 	public bool gameLoopActive;
@@ -73,7 +76,6 @@ public class GameMaster : MonoBehaviour
         player = new Player (world);
 		player.OnLoseLife += RestartCounter;
 		prevlife = player.Lives;
-
 		gameState = States.gameDeActive;
 	}
 

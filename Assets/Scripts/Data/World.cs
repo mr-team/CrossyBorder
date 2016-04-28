@@ -9,6 +9,7 @@ public class World
 	int width;
 	float scale;
 	float[,] noiseMap;
+    GameMaster GM;
 
 	public Tile[,] Tiles {
 		get
@@ -28,6 +29,8 @@ public class World
 	public void GenerateWorld (string seedText)
 	{
 		noiseMap = Noise.GenerateNoiseMap (width * 10, height * 10, scale, seedText);
+
+        GM = GameObject.Find("GameMaster").GetComponent<GameMaster>();
 
         for (int i = 0; i < tiles.GetLength (0); i++)
 		{
@@ -54,37 +57,15 @@ public class World
 					tiles [i, u].Walkable = true;
 				}*/
 
-				//Car lanes
-
-				if (u == 0)
+				if (u == 0) //First lane
 				{
 					tiles [i, u] = new Tile (new Vector2 (i, u));
 					tiles [i, u].Walkable = false;
-				} else if (u == 1)
+				} else if (u == 1) //Player Spawn
 				{
 					tiles [i, u] = new Tile (new Vector2 (i, u));
 					tiles [i, u].Walkable = true;
-				} else if (u == 6)
-				{
-					tiles [i, u] = new Tile (new Vector2 (i, u));
-					tiles [i, u].Walkable = true;
-				} else if (u == 8)
-				{
-					tiles [i, u] = new Tile (new Vector2 (i, u));
-					tiles [i, u].Walkable = true;
-				} else if (u == 10)
-				{
-					tiles [i, u] = new Tile (new Vector2 (i, u));
-					tiles [i, u].Walkable = true;
-				} else if (u == 13)
-				{
-					tiles [i, u] = new Tile (new Vector2 (i, u));
-					tiles [i, u].Walkable = true;
-				} else if (u == 16)
-				{
-					tiles [i, u] = new Tile (new Vector2 (i, u));
-					tiles [i, u].Walkable = true;
-				} else if (u == 18)
+				} else if (GM.carLanes.Contains(u)) //Car lanes
 				{
 					tiles [i, u] = new Tile (new Vector2 (i, u));
 					tiles [i, u].Walkable = true;
