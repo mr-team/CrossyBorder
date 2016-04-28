@@ -11,7 +11,19 @@ public class Player
 	IntPosition2D intPos;
 	Vector2 pos;
 	bool alive = true;
+	bool imortal;
 	int lives = 5;
+
+	public bool Imortal {
+		get
+		{
+			return imortal;
+		}
+		set
+		{
+			imortal = value;
+		}
+	}
 
 	public LoseLifeCB OnLoseLife {
 		get
@@ -147,8 +159,11 @@ public class Player
 
 	public void LoseLife (int amount = 1)
 	{
-		lives -= amount;
-		onLoseLife ();
+		if (!imortal)
+		{
+			lives -= amount;
+			onLoseLife ();
+		}
 	}
 
 	public void GainLife (int amount = 1)

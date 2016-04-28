@@ -59,6 +59,7 @@ public class PlayerController : MonoBehaviour
 
 	public bool canTunnel;
 	public bool stunned;
+
 	public Vector2 startPos;
 
 	public Player Player {
@@ -150,6 +151,10 @@ public class PlayerController : MonoBehaviour
 	{
 		if (player.Lives > 0)
 		{
+			DeStunPlayer ();
+			playerAnim.SetBool ("DigDown", false);
+			canTunnel = false;
+			tunnel = false;
 			player.Pos = startPos;
 			transform.position = (player.Pos);
 
@@ -159,6 +164,7 @@ public class PlayerController : MonoBehaviour
 			playerAnim.SetBool ("FaceRight", false);
 
 		}
+			
 		actionStates = ActionStates.idle;
 		playerStates = States.playerAlive;
 	}
@@ -173,6 +179,8 @@ public class PlayerController : MonoBehaviour
 	//Action States handlers
 	void UpdateIdle ()
 	{
+		player.Imortal = false;
+		tpDelayTimer = 0f;
 		hudGizmos.clearHUD = false;
 		if (Input.GetKeyDown (KeyCode.Alpha1))
 		{
@@ -194,30 +202,39 @@ public class PlayerController : MonoBehaviour
 		IntPosition2D endPos = new IntPosition2D (player.IntPos.X, player.IntPos.Y + travelTilesAmount);
 
 		//check if end tile is walkable
-		if (GM.World.Tiles [endPos.X, endPos.Y].Walkable == true)
-		{
-			Debug.Log ("i can tunnel to the end!");
-			canTunnel = true;
 
-		} else
+		try
 		{
-			Debug.Log ("i Can't tunnel to the end");
+			if (GM.World.Tiles [endPos.X, endPos.Y].Walkable == true)
+			{
+				Debug.Log ("i can tunnel to the end!");
+				canTunnel = true;
+
+			} else
+			{
+				Debug.Log ("i Can't tunnel to the end");
+				canTunnel = false;
+			}
+		} catch
+		{
 			canTunnel = false;
 		}
+
 
 		//transport player && remove shovels
 		if (Input.GetKeyDown (KeyCode.Q))
 		{
-			
+			actionStates = ActionStates.idle;
+			canTunnel = false;
+			tunnel = false;
 		}
 		if (canTunnel && Input.GetKeyDown (KeyCode.Alpha1))
 		{
 			hudGizmos.clearHUD = true;
-			Debug.Log ("called");
-			stunned = true;
+			StunPlayer ();
 			playerAnim.SetBool ("DigDown", true);
 			tunnel = true;
-
+			player.Imortal = true;
 		}
 
 		if (tunnel)
@@ -232,8 +249,10 @@ public class PlayerController : MonoBehaviour
 
 			if (DeStunPlayerDelay (0.9f))
 			{
-				actionStates = ActionStates.idle;
+				canTunnel = false;
 				tunnel = false;
+				actionStates = ActionStates.idle;
+
 			}
 		}
 	}
@@ -346,13 +365,13 @@ public class PlayerController : MonoBehaviour
 
 		if (tpDelayTimer >= delay)
 		{
+			tpDelayTimer = 0f;
 			player.Pos = pos;
 			transform.position = (player.Pos);
 			playerAnim.SetBool ("FaceUp", true);
 			playerAnim.SetBool ("FaceLeft", false);
 			playerAnim.SetBool ("FaceDown", false);
 			playerAnim.SetBool ("FaceRight", false);
-			tpDelayTimer = 0f;
 			return true;
 		}
 		return false;
@@ -406,6 +425,7 @@ public class PlayerController : MonoBehaviour
 
 		if (stunTimer >= delay)
 		{
+			stunTimer = 0;
 			stunned = false;
 			return true;
 		}
