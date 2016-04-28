@@ -343,7 +343,6 @@ public class PlayerController : MonoBehaviour
 		return false;
 	}
 
-
 	void SetFaceDirection (Direction dir)
 	{
 		if (dir == Direction.up)
@@ -384,7 +383,7 @@ public class PlayerController : MonoBehaviour
 			{
 				actionStates = ActionStates.tunneling;
 			} else
-				Debug.Log ("you aint got no shovels to be shovveling no tunnel");
+				Debug.Log ("you aint got no shovels to be shovelin no tunnel");
 		}
 	}
 
@@ -413,7 +412,11 @@ public class PlayerController : MonoBehaviour
 		//transport player && removeshovels
 
 		if (canTunnel && Input.GetKeyDown (KeyCode.T))
+		{
 			tunnel = true;
+			playerAnim.SetBool ("DigDown", true);
+		}
+
 		
 		if (tunnel)
 		{
@@ -422,6 +425,7 @@ public class PlayerController : MonoBehaviour
 				
 				shovelCount = 0;
 				tunnel = false;
+				playerAnim.SetBool ("DigDown", false);
 				actionStates = ActionStates.idle;
 			}
 		}
