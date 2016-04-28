@@ -13,6 +13,7 @@ public class PlayerHudGizmos : MonoBehaviour
 	PlayerController playerControl;
 	int runs;
 	bool spawned;
+	public bool displayTunnelingHud;
 
 	void Start ()
 	{
@@ -42,12 +43,14 @@ public class PlayerHudGizmos : MonoBehaviour
 
 	void UpdateTunneling ()
 	{
+		
 		//draw the right sprite at an interval of 1 from the players positon +1
 		if (!spawned)
 		{
 			SpawnTunnelingHud ();
 			spawned = true;
 		}
+
 		//at the end draw the tip (5th, 10th, 15th osv)
 	}
 
@@ -55,46 +58,39 @@ public class PlayerHudGizmos : MonoBehaviour
 	{
 		runs = 0;
 
-		for (int i = 1; i < playerControl.shovelCount + 1; i++)
+
+		if (runs <= 6)
 		{
-			if (runs <= 6 * i)
+			for (int u = 1; u < playerControl.tunnelDistance + 1; u++)
 			{
-				for (int u = 1; u < 6 * i; u++)
+				if (u != playerControl.tunnelDistance)
 				{
-					if (u != 5)
+					Vector2 pos = new Vector2 (transform.position.x, transform.position.y + u);
+					GameObject hudObj = Instantiate (tunnelingHUD [0], pos, Quaternion.identity)as GameObject;
+					hudObj.name = ("Body: " + u);
+					hudObj.transform.parent = HudObjParent.transform;
+					
+				} else if (u == playerControl.tunnelDistance)
+				{
+					if (playerControl.canTunnel)
 					{
 						Vector2 pos = new Vector2 (transform.position.x, transform.position.y + u);
-						GameObject hudObj = Instantiate (tunnelingHUD [0], pos, Quaternion.identity)as GameObject;
-						hudObj.name = ("Body: " + u);
-						hudObj.transform.parent = HudObjParent.transform;
-					
-					} else if (u == 5)
-					{
-						if (playerControl.shovelCount == 1 && playerControl.canTunnel)
-						{
-							Vector2 pos = new Vector2 (transform.position.x, transform.position.y + u);
-							GameObject hudTipObj = Instantiate (tunnelingHUD [1], pos, Quaternion.identity)as GameObject;
-							hudTipObj.name = ("Tip: " + u);
-							hudTipObj.transform.parent = HudObjParent.transform;
+						GameObject hudTipObj = Instantiate (tunnelingHUD [1], pos, Quaternion.identity)as GameObject;
+						hudTipObj.name = ("Tip: " + u);
+						hudTipObj.transform.parent = HudObjParent.transform;
 
-						} else if (playerControl.shovelCount == 1 && !playerControl.canTunnel)
-						{
-							Vector2 pos = new Vector2 (transform.position.x, transform.position.y + u);
-							GameObject hudTipObj = Instantiate (tunnelingHUD [2], pos, Quaternion.identity)as GameObject;
-							hudTipObj.name = ("Tip: " + u);
-							hudTipObj.transform.parent = HudObjParent.transform;
+					} else if (!playerControl.canTunnel)
+					{
+						Vector2 pos = new Vector2 (transform.position.x, transform.position.y + u);
+						GameObject hudTipObj = Instantiate (tunnelingHUD [2], pos, Quaternion.identity)as GameObject;
+						hudTipObj.name = ("Tip: " + u);
+						hudTipObj.transform.parent = HudObjParent.transform;
 							
-						} else
-						{
-							Vector2 pos = new Vector2 (transform.position.x, transform.position.y + u);
-							GameObject hudObj = Instantiate (tunnelingHUD [0], pos, Quaternion.identity)as GameObject;
-							hudObj.name = ("Body: " + u);
-							hudObj.transform.parent = HudObjParent.transform;
-						}
 					}
-					runs++;
 				}
+				runs++;
 			}
+
 		}
 	}
 
@@ -108,7 +104,7 @@ public class PlayerHudGizmos : MonoBehaviour
 		}
 	}
 
-	void ClearHUD ()
+	public void ClearHUD ()
 	{
 		DestroyImmediate (HudObjParent);
 		HudObjParent = Instantiate (HudObjParentPrefab, Vector2.zero, Quaternion.identity) as GameObject;

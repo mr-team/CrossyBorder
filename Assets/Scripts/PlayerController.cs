@@ -42,17 +42,20 @@ public class PlayerController : MonoBehaviour
 	int startX = 5;
 	int startY = 1;
 
+	public int tunnelDistance;
 	public int shovelCount;
 
 	float timer;
 	float timer2;
-	float tpDelayTimer;
+	private float tpDelayTimer;
+	private float stunTimer;
 	float getOutOfHoleTimer;
 	float waitBeforeRun = 0.5f;
 
 
 	bool moving;
 	bool tunnel;
+
 	public bool canTunnel;
 	public bool stunned;
 	public Vector2 startPos;
@@ -165,6 +168,72 @@ public class PlayerController : MonoBehaviour
 	}
 
 
+	//Action States handlers
+	void UpdateIdle ()
+	{
+		if (Input.GetKeyDown (KeyCode.T))
+		{
+			if (shovelCount > 0)
+			{
+
+				actionStates = ActionStates.tunneling;
+			} else
+				Debug.Log ("you aint got no shovels to be shovelin no tunnel");
+		}
+	}
+
+	void UpdateTunneling ()
+	{
+
+		//get the end tile based on hov many shovels the player is carrying
+		int travelTilesAmount;
+		travelTilesAmount = tunnelDistance;
+		IntPosition2D endPos = new IntPosition2D (player.IntPos.X, player.IntPos.Y + travelTilesAmount);
+
+		//check if end tile is walkable
+		if (GM.World.Tiles [endPos.X, endPos.Y].Walkable == true)
+		{
+			Debug.Log ("i can tunnel to the end!");
+			canTunnel = true;
+
+		} else
+		{
+			Debug.Log ("i Can't tunnel to the end");
+
+			canTunnel = false;
+		}
+
+		//transport player && removeshovels
+
+		if (canTunnel && Input.GetKeyDown (KeyCode.T))
+		{
+			GetComponent<PlayerHudGizmos> ().ClearHUD ();
+			Debug.Log ("called");
+			stunned = true;
+			playerAnim.SetBool ("DigDown", true);
+			tunnel = true;
+
+		}
+
+		if (tunnel)
+		{
+
+			if (tpPlayer (new Vector2 (endPos.X, endPos.Y), 0.5f))
+			{
+				shovelCount--;
+				playerAnim.SetBool ("DigDown", false);
+
+			}
+
+			if (DeStunPlayerDelay (0.9f))
+			{
+				actionStates = ActionStates.idle;
+				tunnel = false;
+			}
+		}
+	}
+
+
 	//functions
 	void MovePlayer ()
 	{
@@ -175,28 +244,28 @@ public class PlayerController : MonoBehaviour
 				player.MoveUp ();
 				SetFaceDirection (Direction.up);
 				moving = true;
-				onPlayerChangePos ();
+
 			}
 			if (Input.GetKeyDown (KeyCode.A) && !moving || Input.GetKeyDown (KeyCode.LeftArrow) && !moving)
 			{
 				player.MoveLeft ();
 				SetFaceDirection (Direction.left);
 				moving = true;
-				onPlayerChangePos ();
+
 			}
 			if (Input.GetKeyDown (KeyCode.S) && !moving || Input.GetKeyDown (KeyCode.DownArrow) && !moving)
 			{
 				player.MoveDown ();
 				SetFaceDirection (Direction.down);
 				moving = true;
-				onPlayerChangePos ();
+
 			}
 			if (Input.GetKeyDown (KeyCode.D) && !moving || Input.GetKeyDown (KeyCode.RightArrow) && !moving)
 			{
 				player.MoveRight ();
 				SetFaceDirection (Direction.right);
 				moving = true;
-				onPlayerChangePos ();
+
 			}
 		}
 	
@@ -375,59 +444,28 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-	void UpdateIdle ()
+	void StunPlayer ()
 	{
-		if (Input.GetKeyDown (KeyCode.T))
-		{
-			if (shovelCount > 0)
-			{
-				actionStates = ActionStates.tunneling;
-			} else
-				Debug.Log ("you aint got no shovels to be shovelin no tunnel");
-		}
+		stunned = true;
 	}
 
-	void UpdateTunneling ()
+	void DeStunPlayer ()
 	{
-		
-
-		//get the end tile based on hov many shovels the player is carrying
-		int travelTilesAmount;
-		travelTilesAmount = 5 * shovelCount;
-		IntPosition2D endPos = new IntPosition2D (player.IntPos.X, player.IntPos.Y + travelTilesAmount);
-
-		//check if end tile is walkable
-		if (GM.World.Tiles [endPos.X, endPos.Y].Walkable == true)
-		{
-			Debug.Log ("i can tunnel to the end!");
-			canTunnel = true;
-
-		} else
-		{
-			Debug.Log ("i Can't tunnel to the end");
-
-			canTunnel = false;
-		}
-
-		//transport player && removeshovels
-
-		if (canTunnel && Input.GetKeyDown (KeyCode.T))
-		{
-			tunnel = true;
-			playerAnim.SetBool ("DigDown", true);
-		}
-
-		
-		if (tunnel)
-		{
-			if (tpPlayer (new Vector2 (endPos.X, endPos.Y), 1f))
-			{
-				
-				shovelCount = 0;
-				tunnel = false;
-				playerAnim.SetBool ("DigDown", false);
-				actionStates = ActionStates.idle;
-			}
-		}
+		stunned = false;
 	}
+
+	bool DeStunPlayerDelay (float delay)
+	{
+		stunTimer += Time.deltaTime;
+
+		if (stunTimer >= delay)
+		{
+			stunned = false;
+			return true;
+		}
+
+		return false;
+	}
+
+
 }
