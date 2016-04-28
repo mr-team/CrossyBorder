@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
 
 	public OnPlayerChangePos onPlayerChangePos;
 	GameMaster GM;
+	PlayerHudGizmos hudGizmos;
 	SpriteRenderer playerRenderer;
 	Animator playerAnim;
 	Player player;
@@ -73,6 +74,7 @@ public class PlayerController : MonoBehaviour
 		GM = GameObject.Find ("GameMaster").GetComponent<GameMaster> ();
 		GM.onNextRound = ResetPlayer;
 		player = GM.Player;
+		hudGizmos = GetComponent<PlayerHudGizmos> ();
 		startPos = new Vector2 (5, 1);
 		playerStates = States.playerAlive;
 		player.OnLoseLife += TransToLostLife;
@@ -171,7 +173,8 @@ public class PlayerController : MonoBehaviour
 	//Action States handlers
 	void UpdateIdle ()
 	{
-		if (Input.GetKeyDown (KeyCode.T))
+		hudGizmos.clearHUD = false;
+		if (Input.GetKeyDown (KeyCode.Alpha1))
 		{
 			if (shovelCount > 0)
 			{
@@ -199,15 +202,17 @@ public class PlayerController : MonoBehaviour
 		} else
 		{
 			Debug.Log ("i Can't tunnel to the end");
-
 			canTunnel = false;
 		}
 
-		//transport player && removeshovels
-
-		if (canTunnel && Input.GetKeyDown (KeyCode.T))
+		//transport player && remove shovels
+		if (Input.GetKeyDown (KeyCode.Q))
 		{
-			GetComponent<PlayerHudGizmos> ().ClearHUD ();
+			
+		}
+		if (canTunnel && Input.GetKeyDown (KeyCode.Alpha1))
+		{
+			hudGizmos.clearHUD = true;
 			Debug.Log ("called");
 			stunned = true;
 			playerAnim.SetBool ("DigDown", true);
@@ -269,65 +274,6 @@ public class PlayerController : MonoBehaviour
 			}
 		}
 	
-		/*if (Input.GetKey (KeyCode.W) || Input.GetKey (KeyCode.A) || Input.GetKey (KeyCode.S) || Input.GetKey (KeyCode.D))
-		{
-			timer += Time.deltaTime;
-
-			if (Input.GetKey (KeyCode.W) && timer > waitBeforeRun)
-			{
-
-				timer2 += Time.deltaTime;
-
-				if (timer2 > 0.34f)
-				{
-					player.MoveUp ();
-					moving = true;
-					timer2 = 0;
-				}
-			}
-			if (Input.GetKey (KeyCode.A) && timer > waitBeforeRun)
-			{
-
-				timer2 += Time.deltaTime;
-
-				if (timer2 > 0.34f)
-				{
-					player.MoveLeft ();
-					moving = true;
-					timer2 = 0;
-				}
-			}
-			if (Input.GetKey (KeyCode.S) && timer > waitBeforeRun)
-			{
-
-				timer2 += Time.deltaTime;
-
-				if (timer2 > 0.34f)
-				{
-					player.MoveDown ();
-					moving = true;
-					timer2 = 0;
-				}
-			}
-			if (Input.GetKey (KeyCode.D) && timer > waitBeforeRun)
-			{
-
-				timer2 += Time.deltaTime;
-
-				if (timer2 > 0.34f)
-				{
-					player.MoveRight ();
-					moving = true;
-					timer2 = 0;
-				}
-			}
-
-		}
-		if (Input.GetKeyUp (KeyCode.W) || Input.GetKeyUp (KeyCode.A) || Input.GetKeyUp (KeyCode.S) || Input.GetKeyUp (KeyCode.D))
-		{
-			timer = 0;
-		}*/
-
 		MovePlayerSmoth (player.Pos);
 	}
 
@@ -466,6 +412,4 @@ public class PlayerController : MonoBehaviour
 
 		return false;
 	}
-
-
 }

@@ -13,7 +13,8 @@ public class PlayerHudGizmos : MonoBehaviour
 	PlayerController playerControl;
 	int runs;
 	bool spawned;
-	public bool displayTunnelingHud;
+	public bool clearHUD;
+
 
 	void Start ()
 	{
@@ -49,6 +50,10 @@ public class PlayerHudGizmos : MonoBehaviour
 		{
 			SpawnTunnelingHud ();
 			spawned = true;
+		}
+		if (clearHUD)
+		{
+			ClearHUD ();
 		}
 
 		//at the end draw the tip (5th, 10th, 15th osv)
