@@ -22,7 +22,6 @@ public class PlayerController : MonoBehaviour
 
 	public enum ActionStates
 	{
-
 		idle,
 		tunneling,
 		catapulting,
@@ -49,14 +48,15 @@ public class PlayerController : MonoBehaviour
 
 	float timer;
 	float timer2;
+	float flashTimer;
 	public float tpDelayTimer;
 	public float stunTimer;
 	float getOutOfHoleTimer;
 	float waitBeforeRun = 0.5f;
 
-
 	bool moving;
 	bool tunnel;
+	bool flashSprites;
 
 	public bool canTunnel;
 	public bool stunned;
@@ -79,16 +79,20 @@ public class PlayerController : MonoBehaviour
 
 	void Start ()
 	{
-		
+		//Assignments
 		GM = GameObject.Find ("GameMaster").GetComponent<GameMaster> ();
-		GM.onNextRound = ResetPlayer;
 		player = GM.Player;
 		hudGizmos = GetComponent<PlayerHudGizmos> ();
-		startPos = new Vector2 (5, 1);
-		playerStates = States.playerAlive;
-		player.OnLoseLife += TransToLostLife;
 		playerRenderer = GetComponent<SpriteRenderer> ();
 		playerAnim = GetComponent<Animator> ();
+		playerStates = States.playerAlive;
+
+		//CallBacks
+		player.OnLoseLife += TransToLostLife;
+		GM.onNextRound += ResetPlayer;
+
+		//variables
+		startPos = new Vector2 (startX, startY);
 		player.Pos = new Vector2 (startX, startY);
 		transform.position = player.Pos;
 		playerRenderer.enabled = false;
@@ -113,7 +117,6 @@ public class PlayerController : MonoBehaviour
 			case States.playerDead:
 				UpdatePlayerDead ();
 				break;
-
 		}
 	}
 
@@ -131,6 +134,8 @@ public class PlayerController : MonoBehaviour
 		
 		if (!GM.gamePaused)
 		{
+			if (flashSprites)
+				FlashSprite (30);
 
 			switch (actionStates)
 			{
@@ -164,17 +169,11 @@ public class PlayerController : MonoBehaviour
 		if (player.Lives > 0)
 		{
 			DeStunPlayer ();
+			flashSprites = true;
+
 			playerAnim.SetBool ("DigDown", false);
 			canTunnel = false;
 			tunnel = false;
-			player.Pos = startPos;
-			transform.position = (player.Pos);
-
-			playerAnim.SetBool ("FaceUp", true);
-			playerAnim.SetBool ("FaceLeft", false);
-			playerAnim.SetBool ("FaceDown", false);
-			playerAnim.SetBool ("FaceRight", false);
-
 		}
 			
 		actionStates = ActionStates.idle;
@@ -321,6 +320,7 @@ public class PlayerController : MonoBehaviour
 		if (transform.position == targetPos)
 			moving = false;
 
+
 		onPlayerChangePos ();
 	}
 
@@ -336,7 +336,6 @@ public class PlayerController : MonoBehaviour
 
 	void TransToLostLife ()
 	{
-		
 		playerStates = States.PlayerLostLife;
 	}
 
@@ -349,10 +348,53 @@ public class PlayerController : MonoBehaviour
 	{
 		player.Pos = startPos;
 		transform.position = (player.Pos);
+		player.Imortal = true;
 		playerAnim.SetBool ("FaceUp", true);
 		playerAnim.SetBool ("FaceLeft", false);
 		playerAnim.SetBool ("FaceDown", false);
 		playerAnim.SetBool ("FaceRight", false);
+	}
+
+	public void FlashSprite (int amount)
+	{
+		flashTimer += Time.deltaTime;
+		float basef = 0.2f;
+		if (flashTimer <= basef)
+		{
+			GetComponent<SpriteRenderer> ().enabled = false;
+		}
+		if (flashTimer <= basef + 0.2f && flashTimer > basef)
+		{
+			GetComponent<SpriteRenderer> ().enabled = true;
+		}
+		if (flashTimer <= basef + 0.4f && flashTimer > basef + 0.2f)
+		{
+			GetComponent<SpriteRenderer> ().enabled = false;
+		}
+		if (flashTimer <= basef + 0.6f && flashTimer > basef + 0.4f)
+		{
+			GetComponent<SpriteRenderer> ().enabled = true;
+		}
+		if (flashTimer <= basef + 0.8f && flashTimer > basef + 0.6)
+		{
+			GetComponent<SpriteRenderer> ().enabled = false;
+		}
+		if (flashTimer <= basef + 1 && flashTimer > basef + 0.8f)
+		{
+			GetComponent<SpriteRenderer> ().enabled = true;
+		}
+		if (flashTimer <= basef + 1.2f && flashTimer > basef + 1f)
+		{
+			GetComponent<SpriteRenderer> ().enabled = false;
+		}
+		if (flashTimer <= basef + 1.4f && flashTimer > basef + 1.2f)
+		{
+			GetComponent<SpriteRenderer> ().enabled = true;
+			flashTimer = 0;
+			player.Imortal = false;
+			flashSprites = false;
+		
+		}
 	}
 
 	/// <summary>
@@ -449,4 +491,6 @@ public class PlayerController : MonoBehaviour
 
 		return false;
 	}
+
+
 }

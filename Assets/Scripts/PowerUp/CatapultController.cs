@@ -24,11 +24,15 @@ public class CatapultController : MonoBehaviour
 	void Update ()
 	{
 		if (playerByCatapult && Input.GetKeyDown (KeyCode.E))
+		{
+			playerControl.Player.Imortal = true;
 			activated = true;
+		}
+			
 		
 		if (activated)
 		{
-			playerControl.Player.Imortal = true;
+			
 			playerControl.StunPlayer ();
 			//chose a tile
 			ChooseTile ();
@@ -44,6 +48,8 @@ public class CatapultController : MonoBehaviour
 				playerControl.tpDelayTimer = 0;
 				if (playerControl.DeStunPlayerDelay (0.5f))
 				{
+					playerControl.Player.Imortal = false;
+
 					playerControl.stunTimer = 0;
 					deStun = false;
 					activated = false;
