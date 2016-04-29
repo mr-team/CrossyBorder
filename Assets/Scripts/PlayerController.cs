@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
 
 		idle,
 		tunneling,
+		catapulting,
 	}
 
 	public ActionStates actionStates;
@@ -48,8 +49,8 @@ public class PlayerController : MonoBehaviour
 
 	float timer;
 	float timer2;
-	private float tpDelayTimer;
-	private float stunTimer;
+	public float tpDelayTimer;
+	public float stunTimer;
 	float getOutOfHoleTimer;
 	float waitBeforeRun = 0.5f;
 
@@ -140,6 +141,10 @@ public class PlayerController : MonoBehaviour
 				case ActionStates.tunneling:
 					UpdateTunneling ();
 					break;
+
+				case ActionStates.catapulting:
+					UpdateCatapulting ();
+					break;
 			}
 
 			MovePlayer ();
@@ -186,9 +191,7 @@ public class PlayerController : MonoBehaviour
 	//Action States handlers
 	void UpdateIdle ()
 	{
-		player.Imortal = false;
-		tpDelayTimer = 0f;
-		hudGizmos.clearHUD = false;
+		
 		if (Input.GetKeyDown (KeyCode.Alpha1))
 		{
 			if (shovelCount > 0)
@@ -258,12 +261,19 @@ public class PlayerController : MonoBehaviour
 			{
 				canTunnel = false;
 				tunnel = false;
+				player.Imortal = false;
+				tpDelayTimer = 0f;
+				hudGizmos.clearHUD = false;
 				actionStates = ActionStates.idle;
 
 			}
 		}
 	}
 
+	void UpdateCatapulting ()
+	{
+		
+	}
 
 	//functions
 	void MovePlayer ()
@@ -416,20 +426,20 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-	void StunPlayer ()
+	public void StunPlayer ()
 	{
 		stunned = true;
 	}
 
-	void DeStunPlayer ()
+	public void DeStunPlayer ()
 	{
 		stunned = false;
 	}
 
-	bool DeStunPlayerDelay (float delay)
+	public bool DeStunPlayerDelay (float delay)
 	{
 		stunTimer += Time.deltaTime;
-
+		Debug.Log (stunTimer);
 		if (stunTimer >= delay)
 		{
 			stunTimer = 0;
