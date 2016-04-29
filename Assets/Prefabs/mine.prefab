@@ -57,7 +57,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explotion: {fileID: 183612, guid: 139fa43a46ce3e64aa1ddcd355188f26, type: 2}
   shovelPrefab: {fileID: 159022, guid: bb60c1d15b7b4a34c8d8bc06d74c5d1c, type: 2}
-  stopWatchPrefab: {fileID: 142830, guid: 89dd548dc8c096d4fb95a07d34c3756b, type: 2}
 --- !u!212 &21277796
 SpriteRenderer:
   m_ObjectHideFlags: 1
