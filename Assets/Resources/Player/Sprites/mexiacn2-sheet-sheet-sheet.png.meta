@@ -1,15 +1,15 @@
 fileFormatVersion: 2
-guid: ac52654738e4a394fba16dd42ae8a0c4
-timeCreated: 1461831434
+guid: ea1d2e1c37486194eb86e3043c929c23
+timeCreated: 1461835686
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: mexiacn2-sheet-sheet_0
-    21300002: mexiacn2-sheet-sheet_1
-    21300004: mexiacn2-sheet-sheet_2
-    21300006: mexiacn2-sheet-sheet_3
-    21300008: mexiacn2-sheet-sheet_4
-    21300010: mexiacn2-sheet-sheet_5
+    21300000: mexiacn2-sheet-sheet-sheet_0
+    21300002: mexiacn2-sheet-sheet-sheet_1
+    21300004: mexiacn2-sheet-sheet-sheet_2
+    21300006: mexiacn2-sheet-sheet-sheet_3
+    21300008: mexiacn2-sheet-sheet-sheet_4
+    21300010: mexiacn2-sheet-sheet-sheet_5
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -56,7 +56,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: mexiacn2-sheet-sheet_0
+    - name: mexiacn2-sheet-sheet-sheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -75,7 +75,7 @@ TextureImporter:
         - {x: 10, y: -12}
         - {x: 13, y: -8}
         - {x: 13, y: 11}
-    - name: mexiacn2-sheet-sheet_1
+    - name: mexiacn2-sheet-sheet-sheet_1
       rect:
         serializedVersion: 2
         x: 32
@@ -86,15 +86,15 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -11, y: -9}
-        - {x: -10, y: -12}
-        - {x: 7, y: -12}
-        - {x: 10, y: -11}
-        - {x: 10, y: 7}
-        - {x: 7, y: 13}
-        - {x: -4, y: 13}
-        - {x: -11, y: 10}
-    - name: mexiacn2-sheet-sheet_2
+      - - {x: -10, y: -10}
+        - {x: -9, y: -13}
+        - {x: 8, y: -13}
+        - {x: 11, y: -12}
+        - {x: 11, y: 6}
+        - {x: 8, y: 12}
+        - {x: -3, y: 12}
+        - {x: -10, y: 9}
+    - name: mexiacn2-sheet-sheet-sheet_2
       rect:
         serializedVersion: 2
         x: 64
@@ -105,14 +105,14 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -13, y: -10}
-        - {x: -11, y: -12}
-        - {x: 10, y: -12}
-        - {x: 10, y: 7}
-        - {x: 7, y: 13}
-        - {x: -5, y: 13}
-        - {x: -13, y: 10}
-    - name: mexiacn2-sheet-sheet_3
+      - - {x: -12, y: -13}
+        - {x: -10, y: -15}
+        - {x: 11, y: -15}
+        - {x: 11, y: 4}
+        - {x: 8, y: 10}
+        - {x: -4, y: 10}
+        - {x: -12, y: 7}
+    - name: mexiacn2-sheet-sheet-sheet_3
       rect:
         serializedVersion: 2
         x: 96
@@ -123,15 +123,15 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -6, y: 12}
-        - {x: -15, y: 8}
-        - {x: -15, y: -7}
-        - {x: -10, y: -12}
-        - {x: 8, y: -12}
-        - {x: 11, y: -11}
-        - {x: 11, y: 9}
-        - {x: 8, y: 12}
-    - name: mexiacn2-sheet-sheet_4
+      - - {x: -8, y: 6}
+        - {x: -14, y: -2}
+        - {x: -14, y: -11}
+        - {x: -13, y: -12}
+        - {x: -10, y: -16}
+        - {x: 12, y: -16}
+        - {x: 12, y: 3}
+        - {x: 6, y: 6}
+    - name: mexiacn2-sheet-sheet-sheet_4
       rect:
         serializedVersion: 2
         x: 128
@@ -142,12 +142,13 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -16, y: 13}
-        - {x: -16, y: -12}
-        - {x: 12, y: -12}
-        - {x: 12, y: 4}
-        - {x: 7, y: 13}
-    - name: mexiacn2-sheet-sheet_5
+      - - {x: -16, y: 3}
+        - {x: -16, y: -14}
+        - {x: -13, y: -16}
+        - {x: 13, y: -16}
+        - {x: 13, y: 1}
+        - {x: 8, y: 3}
+    - name: mexiacn2-sheet-sheet-sheet_5
       rect:
         serializedVersion: 2
         x: 160
@@ -158,16 +159,14 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: 9, y: 12}
-        - {x: -9, y: 12}
-        - {x: -16, y: 9}
-        - {x: -16, y: -5}
-        - {x: -14, y: -9}
-        - {x: -13, y: -12}
-        - {x: 9, y: -12}
-        - {x: 11, y: -11}
-        - {x: 13, y: -2}
-        - {x: 13, y: 8}
+      - - {x: -10, y: 0}
+        - {x: -14, y: -4}
+        - {x: -14, y: -13}
+        - {x: -13, y: -16}
+        - {x: 14, y: -16}
+        - {x: 15, y: -14}
+        - {x: 15, y: -3}
+        - {x: 8, y: 0}
     outline: []
   spritePackingTag: 
   userData: 

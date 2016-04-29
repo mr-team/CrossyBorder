@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
 
 	public OnPlayerChangePos onPlayerChangePos;
 	GameMaster GM;
+	PlayerHudGizmos hudGizmos;
 	SpriteRenderer playerRenderer;
 	Animator playerAnim;
 	Player player;
@@ -42,20 +43,31 @@ public class PlayerController : MonoBehaviour
 	int startX = 5;
 	int startY = 1;
 
+	int tunnelDistance = 6;
 	public int shovelCount;
 
 	float timer;
 	float timer2;
-	float tpDelayTimer;
+	private float tpDelayTimer;
+	private float stunTimer;
 	float getOutOfHoleTimer;
 	float waitBeforeRun = 0.5f;
 
 
 	bool moving;
 	bool tunnel;
+
 	public bool canTunnel;
 	public bool stunned;
+
 	public Vector2 startPos;
+
+	public int TunnelDistance {
+		get
+		{
+			return tunnelDistance;
+		}
+	}
 
 	public Player Player {
 		get
@@ -70,6 +82,7 @@ public class PlayerController : MonoBehaviour
 		GM = GameObject.Find ("GameMaster").GetComponent<GameMaster> ();
 		GM.onNextRound = ResetPlayer;
 		player = GM.Player;
+		hudGizmos = GetComponent<PlayerHudGizmos> ();
 		startPos = new Vector2 (5, 1);
 		playerStates = States.playerAlive;
 		player.OnLoseLife += TransToLostLife;
@@ -145,6 +158,10 @@ public class PlayerController : MonoBehaviour
 	{
 		if (player.Lives > 0)
 		{
+			DeStunPlayer ();
+			playerAnim.SetBool ("DigDown", false);
+			canTunnel = false;
+			tunnel = false;
 			player.Pos = startPos;
 			transform.position = (player.Pos);
 
@@ -154,6 +171,7 @@ public class PlayerController : MonoBehaviour
 			playerAnim.SetBool ("FaceRight", false);
 
 		}
+			
 		actionStates = ActionStates.idle;
 		playerStates = States.playerAlive;
 	}
@@ -162,6 +180,88 @@ public class PlayerController : MonoBehaviour
 	{
 		playerAnim.SetBool ("Dead", true);
 		player.Alive = false;
+	}
+
+
+	//Action States handlers
+	void UpdateIdle ()
+	{
+		player.Imortal = false;
+		tpDelayTimer = 0f;
+		hudGizmos.clearHUD = false;
+		if (Input.GetKeyDown (KeyCode.Alpha1))
+		{
+			if (shovelCount > 0)
+			{
+
+				actionStates = ActionStates.tunneling;
+			} else
+				Debug.Log ("you aint got no shovels to be shovelin no tunnel");
+		}
+	}
+
+	void UpdateTunneling ()
+	{
+
+		//get the end tile based on hov many shovels the player is carrying
+		int travelTilesAmount;
+		travelTilesAmount = tunnelDistance;
+		IntPosition2D endPos = new IntPosition2D (player.IntPos.X, player.IntPos.Y + travelTilesAmount);
+
+		//check if end tile is walkable
+
+		try
+		{
+			if (GM.World.Tiles [endPos.X, endPos.Y].Walkable == true)
+			{
+				Debug.Log ("i can tunnel to the end!");
+				canTunnel = true;
+
+			} else
+			{
+				Debug.Log ("i Can't tunnel to the end");
+				canTunnel = false;
+			}
+		} catch
+		{
+			canTunnel = false;
+		}
+
+
+		//transport player && remove shovels
+		if (Input.GetKeyDown (KeyCode.Q))
+		{
+			actionStates = ActionStates.idle;
+			canTunnel = false;
+			tunnel = false;
+		}
+		if (canTunnel && !tunnel && Input.GetKeyDown (KeyCode.Alpha1))
+		{
+			hudGizmos.clearHUD = true;
+			StunPlayer ();
+			playerAnim.SetBool ("DigDown", true);
+			tunnel = true;
+			player.Imortal = true;
+		}
+
+		if (tunnel)
+		{
+
+			if (tpPlayer (new Vector2 (endPos.X, endPos.Y), 0.5f))
+			{
+				shovelCount--;
+				playerAnim.SetBool ("DigDown", false);
+
+			}
+
+			if (DeStunPlayerDelay (0.9f))
+			{
+				canTunnel = false;
+				tunnel = false;
+				actionStates = ActionStates.idle;
+
+			}
+		}
 	}
 
 
@@ -175,90 +275,31 @@ public class PlayerController : MonoBehaviour
 				player.MoveUp ();
 				SetFaceDirection (Direction.up);
 				moving = true;
-				onPlayerChangePos ();
+
 			}
 			if (Input.GetKeyDown (KeyCode.A) && !moving || Input.GetKeyDown (KeyCode.LeftArrow) && !moving)
 			{
 				player.MoveLeft ();
 				SetFaceDirection (Direction.left);
 				moving = true;
-				onPlayerChangePos ();
+
 			}
 			if (Input.GetKeyDown (KeyCode.S) && !moving || Input.GetKeyDown (KeyCode.DownArrow) && !moving)
 			{
 				player.MoveDown ();
 				SetFaceDirection (Direction.down);
 				moving = true;
-				onPlayerChangePos ();
+
 			}
 			if (Input.GetKeyDown (KeyCode.D) && !moving || Input.GetKeyDown (KeyCode.RightArrow) && !moving)
 			{
 				player.MoveRight ();
 				SetFaceDirection (Direction.right);
 				moving = true;
-				onPlayerChangePos ();
+
 			}
 		}
 	
-		/*if (Input.GetKey (KeyCode.W) || Input.GetKey (KeyCode.A) || Input.GetKey (KeyCode.S) || Input.GetKey (KeyCode.D))
-		{
-			timer += Time.deltaTime;
-
-			if (Input.GetKey (KeyCode.W) && timer > waitBeforeRun)
-			{
-
-				timer2 += Time.deltaTime;
-
-				if (timer2 > 0.34f)
-				{
-					player.MoveUp ();
-					moving = true;
-					timer2 = 0;
-				}
-			}
-			if (Input.GetKey (KeyCode.A) && timer > waitBeforeRun)
-			{
-
-				timer2 += Time.deltaTime;
-
-				if (timer2 > 0.34f)
-				{
-					player.MoveLeft ();
-					moving = true;
-					timer2 = 0;
-				}
-			}
-			if (Input.GetKey (KeyCode.S) && timer > waitBeforeRun)
-			{
-
-				timer2 += Time.deltaTime;
-
-				if (timer2 > 0.34f)
-				{
-					player.MoveDown ();
-					moving = true;
-					timer2 = 0;
-				}
-			}
-			if (Input.GetKey (KeyCode.D) && timer > waitBeforeRun)
-			{
-
-				timer2 += Time.deltaTime;
-
-				if (timer2 > 0.34f)
-				{
-					player.MoveRight ();
-					moving = true;
-					timer2 = 0;
-				}
-			}
-
-		}
-		if (Input.GetKeyUp (KeyCode.W) || Input.GetKeyUp (KeyCode.A) || Input.GetKeyUp (KeyCode.S) || Input.GetKeyUp (KeyCode.D))
-		{
-			timer = 0;
-		}*/
-
 		MovePlayerSmoth (player.Pos);
 	}
 
@@ -331,13 +372,13 @@ public class PlayerController : MonoBehaviour
 
 		if (tpDelayTimer >= delay)
 		{
+			tpDelayTimer = 0f;
 			player.Pos = pos;
 			transform.position = (player.Pos);
 			playerAnim.SetBool ("FaceUp", true);
 			playerAnim.SetBool ("FaceLeft", false);
 			playerAnim.SetBool ("FaceDown", false);
 			playerAnim.SetBool ("FaceRight", false);
-			tpDelayTimer = 0f;
 			return true;
 		}
 		return false;
@@ -375,59 +416,27 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-	void UpdateIdle ()
+	void StunPlayer ()
 	{
-		if (Input.GetKeyDown (KeyCode.T))
-		{
-			if (shovelCount > 0)
-			{
-				actionStates = ActionStates.tunneling;
-			} else
-				Debug.Log ("you aint got no shovels to be shovelin no tunnel");
-		}
+		stunned = true;
 	}
 
-	void UpdateTunneling ()
+	void DeStunPlayer ()
 	{
-		
+		stunned = false;
+	}
 
-		//get the end tile based on hov many shovels the player is carrying
-		int travelTilesAmount;
-		travelTilesAmount = 5 * shovelCount;
-		IntPosition2D endPos = new IntPosition2D (player.IntPos.X, player.IntPos.Y + travelTilesAmount);
+	bool DeStunPlayerDelay (float delay)
+	{
+		stunTimer += Time.deltaTime;
 
-		//check if end tile is walkable
-		if (GM.World.Tiles [endPos.X, endPos.Y].Walkable == true)
+		if (stunTimer >= delay)
 		{
-			Debug.Log ("i can tunnel to the end!");
-			canTunnel = true;
-
-		} else
-		{
-			Debug.Log ("i Can't tunnel to the end");
-
-			canTunnel = false;
+			stunTimer = 0;
+			stunned = false;
+			return true;
 		}
 
-		//transport player && removeshovels
-
-		if (canTunnel && Input.GetKeyDown (KeyCode.T))
-		{
-			tunnel = true;
-			playerAnim.SetBool ("DigDown", true);
-		}
-
-		
-		if (tunnel)
-		{
-			if (tpPlayer (new Vector2 (endPos.X, endPos.Y), 1f))
-			{
-				
-				shovelCount = 0;
-				tunnel = false;
-				playerAnim.SetBool ("DigDown", false);
-				actionStates = ActionStates.idle;
-			}
-		}
+		return false;
 	}
 }
