@@ -4,7 +4,7 @@ using System.Collections;
 public class CarController : MonoBehaviour
 {
 	GameMaster GM;
-	float moveSpeed = 6f;
+	public float moveSpeed = 6f;
 	bool moveLeft;
 
 	void Start ()

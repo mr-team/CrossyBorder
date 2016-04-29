@@ -63,6 +63,10 @@ public class CarSpawner : MonoBehaviour
 		GameObject spawnedCar = Instantiate (car, transform.position, Quaternion.identity) as GameObject;
 		CarController carControl = spawnedCar.GetComponent<CarController> ();
 		spawnedCar.transform.parent = carParent;
+
+        if(GM.fbiTroops)
+            carControl.moveSpeed = 9;
+
 		if (SpawnDir == directions.left)
 		{
 			if (GM.fbiTroops)
