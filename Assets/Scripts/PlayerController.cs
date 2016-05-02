@@ -347,8 +347,9 @@ public class PlayerController : MonoBehaviour
 	public void ResetPlayer ()
 	{
 		player.Pos = startPos;
+		player.Imortal = false;
 		transform.position = (player.Pos);
-		player.Imortal = true;
+
 		playerAnim.SetBool ("FaceUp", true);
 		playerAnim.SetBool ("FaceLeft", false);
 		playerAnim.SetBool ("FaceDown", false);
