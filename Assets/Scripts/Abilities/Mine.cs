@@ -7,8 +7,9 @@ public class Mine : MonoBehaviour
 	Animator anim;
 	public GameObject explotion;
 	public GameObject shovelPrefab;
+	public GameObject stopWatchPrefab;
 	float timer;
-	float fuseTime = 1.5f;
+	float fuseTime = 1f;
 
 	bool Sprung;
 	bool playerInRange;
@@ -16,6 +17,7 @@ public class Mine : MonoBehaviour
 
 	bool explode;
 	bool hit;
+	bool watch;
 
 	void Start ()
 	{
@@ -28,6 +30,14 @@ public class Mine : MonoBehaviour
 		if (GM.gameLoopActive && Sprung)
 		{
 			timer += Time.deltaTime;
+
+			if (!watch)
+			{
+				GameObject stopWatch = Instantiate (stopWatchPrefab, transform.position, Quaternion.identity) as GameObject;
+				stopWatch.GetComponent<FeedBack_StopWatch> ().oneSec = true;
+				watch = true;
+
+			}
 
 			if (timer > fuseTime)
 			{
