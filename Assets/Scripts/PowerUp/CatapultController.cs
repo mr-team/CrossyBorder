@@ -6,7 +6,7 @@ public class CatapultController : MonoBehaviour
 	
 	GameMaster GM;
 	PlayerController playerControl;
-
+	Animator catapultAnim;
 	IntPosition2D targetIntPos;
 	IntPosition2D intPos;
 
@@ -18,6 +18,7 @@ public class CatapultController : MonoBehaviour
 	void Start ()
 	{
 		GM = GameObject.Find ("GameMaster").GetComponent<GameMaster> ();
+		catapultAnim = GetComponent<Animator> ();
 		intPos = IntPosition2D.Vector2ToIntPos2D (transform.position);
 	}
 
@@ -25,6 +26,7 @@ public class CatapultController : MonoBehaviour
 	{
 		if (playerByCatapult && Input.GetKeyDown (KeyCode.E))
 		{
+			catapultAnim.SetBool ("Load", true);
 			playerControl.Player.Imortal = true;
 			activated = true;
 		}
@@ -40,6 +42,8 @@ public class CatapultController : MonoBehaviour
 			//delay tp the player to the tile
 			if (playerControl.tpPlayer (new Vector2 (targetIntPos.X, targetIntPos.Y), 1.5f))
 			{
+				catapultAnim.SetBool ("Fire", true);
+				catapultAnim.SetBool ("Load", false);
 				deStun = true;
 			}
 
@@ -49,7 +53,7 @@ public class CatapultController : MonoBehaviour
 				if (playerControl.DeStunPlayerDelay (0.5f))
 				{
 					playerControl.Player.Imortal = false;
-
+					catapultAnim.SetBool ("Fire", false);
 					playerControl.stunTimer = 0;
 					deStun = false;
 					activated = false;
