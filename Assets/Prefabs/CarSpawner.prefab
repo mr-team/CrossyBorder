@@ -53,6 +53,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ba55eb69a46993548aa865e3e16407f3, type: 3}
   - {fileID: 21300000, guid: ba55eb69a46993548aa865e3e16407f3, type: 3}
   - {fileID: 21300000, guid: 412535e272e480c4088682d04a9c09da, type: 3}
+  roadLength: 30
   carParent: {fileID: 0}
   SpawnDir: 1
 --- !u!1001 &100100000
@@ -61,7 +62,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: roadLength
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 118070}
