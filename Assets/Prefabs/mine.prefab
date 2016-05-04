@@ -11,6 +11,7 @@ GameObject:
   - 212: {fileID: 21277796}
   - 114: {fileID: 11472092}
   - 61: {fileID: 6183112}
+  - 114: {fileID: 11425182}
   m_Layer: 0
   m_Name: mine
   m_TagString: Untagged
@@ -44,6 +45,21 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 1.8, y: 1.8}
+--- !u!114 &11425182
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 120566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafe42a581b0b6c419e68b328bddb23a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioType: 1
+  clip: {fileID: 8300000, guid: 8c625cb7fed09f643af07d281c5cebe0, type: 3}
+  loop: 0
+  playOnWake: 0
 --- !u!114 &11472092
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -94,7 +110,27 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: lyder.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: audioType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 8c625cb7fed09f643af07d281c5cebe0, type: 3}
+    - target: {fileID: 0}
+      propertyPath: lyder.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 8c625cb7fed09f643af07d281c5cebe0, type: 3}
+    - target: {fileID: 0}
+      propertyPath: lyder.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 6118e832ee3412148812568ee04e4afa, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 120566}
