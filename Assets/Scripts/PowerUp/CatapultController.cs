@@ -6,6 +6,7 @@ public class CatapultController : MonoBehaviour
 	
 	GameMaster GM;
 	PlayerController playerControl;
+	Animator catapultAnim;
 
 	IntPosition2D targetIntPos;
 	IntPosition2D intPos;
@@ -19,6 +20,7 @@ public class CatapultController : MonoBehaviour
 	{
 		GM = GameObject.Find ("GameMaster").GetComponent<GameMaster> ();
 		intPos = IntPosition2D.Vector2ToIntPos2D (transform.position);
+		catapultAnim = GetComponent<Animator> ();
 	}
 
 	void Update ()
@@ -27,6 +29,7 @@ public class CatapultController : MonoBehaviour
 		{
 			playerControl.Player.Imortal = true;
 			activated = true;
+			catapultAnim.SetBool ("Load", true);
 		}
 			
 		
@@ -36,10 +39,13 @@ public class CatapultController : MonoBehaviour
 			playerControl.StunPlayer ();
 			//chose a tile
 			ChooseTile ();
-
+			catapultAnim.SetBool ("Fire", true);
 			//delay tp the player to the tile
-			if (playerControl.tpPlayer (new Vector2 (targetIntPos.X, targetIntPos.Y), 1.5f))
+			if (playerControl.tpPlayer (new Vector2 (targetIntPos.X, targetIntPos.Y), 1.3f))
 			{
+				catapultAnim.SetBool ("Load", false);
+
+
 				deStun = true;
 			}
 
@@ -49,7 +55,7 @@ public class CatapultController : MonoBehaviour
 				if (playerControl.DeStunPlayerDelay (0.5f))
 				{
 					playerControl.Player.Imortal = false;
-
+					catapultAnim.SetBool ("Fire", false);
 					playerControl.stunTimer = 0;
 					deStun = false;
 					activated = false;
