@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class Mine : MonoBehaviour
-{
+{	
+
 	GameMaster GM;
 	Animator anim;
 	public GameObject explotion;
@@ -57,7 +58,7 @@ public class Mine : MonoBehaviour
 	{
 		if (other.tag == "Player")
 		{
-			
+			GetComponent<CustomAudioSource> ().Play ();
 			Sprung = true;
 			playerInRange = true;
 		}

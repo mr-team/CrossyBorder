@@ -9,7 +9,7 @@ public class CustomAudioSource : MonoBehaviour {
     public bool playOnWake = false;
 
     private AudioSource source;
-    private string[] typeText = { "musicVolume", "musicVolume" };
+    private string[] typeText = { "musicVolume", "soundVolume" };
     private string currentType;
      
 	void Start() {
