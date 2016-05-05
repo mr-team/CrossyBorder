@@ -15,6 +15,8 @@ public class B52Bomber : MonoBehaviour
 	IntPosition2D intPos;
 	IntPosition2D lastIntPos;
 
+    GameObject endGame;
+
 	public VerticalLanesController LaneControl {
 		get
 		{
@@ -29,6 +31,7 @@ public class B52Bomber : MonoBehaviour
 	void Start ()
 	{
 		lastIntPos = new IntPosition2D (0, 0);
+        endGame = GameObject.Find("EndGame");
 	}
 
 	void Update ()
@@ -38,12 +41,12 @@ public class B52Bomber : MonoBehaviour
 		intPos = IntPosition2D.Vector2ToIntPos2D (transform.position);
 
 
-		//makes sure a bomb is dropped in every tile
+        //makes sure a bomb is dropped in every tile
 
-		if (intPos != lastIntPos)
+        if (intPos != lastIntPos)
 			bombDroped = false;
 
-		if (intPos.Y == 23)
+		if (intPos.Y == 23 + (endGame.transform.position.y))
 		{
 			lastIntPos = intPos;
 		}
