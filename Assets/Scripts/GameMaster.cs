@@ -32,6 +32,7 @@ public class GameMaster : MonoBehaviour
 	public int worldHeigth;
     public GameObject EndWall;
     public GameObject carSpawner;
+    public GameObject catapultPrefab;
     public int ladderCount;
 	public int maxLadder;
 	public float noiseScale;
@@ -56,6 +57,7 @@ public class GameMaster : MonoBehaviour
 	public bool fbiTroops;
 	public bool bearTraps;
 	public bool mines;
+    public bool catapult;
 
 	public Player Player {
 		get

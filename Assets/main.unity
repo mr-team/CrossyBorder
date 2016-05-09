@@ -2363,7 +2363,7 @@ Prefab:
       objectReference: {fileID: 446213907}
     - target: {fileID: 11426734, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
       propertyPath: mines
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11426734, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
       propertyPath: worldHeigth
@@ -2379,11 +2379,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11426734, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
       propertyPath: bearTraps
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11426734, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
       propertyPath: CarpetBombing
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11494804, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
       propertyPath: ladderCounter
@@ -2393,6 +2393,14 @@ Prefab:
       propertyPath: spadeCounter
       value: 
       objectReference: {fileID: 918022033}
+    - target: {fileID: 11426734, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
+      propertyPath: catapultPrefab
+      value: 
+      objectReference: {fileID: 170050, guid: 6e7bf30d54f90b24e9de6bcef8201f8c, type: 2}
+    - target: {fileID: 11426734, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
+      propertyPath: catapult
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
   m_IsPrefabParent: 0
