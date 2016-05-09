@@ -7,6 +7,7 @@ public class CountDown : MonoBehaviour
 	GameMaster GM;
 	public Text timeText;
 	public Text livesLeft;
+	public Text ladderCounter;
 
 	float timeLeft;
 	float timeLimit = 200;
@@ -26,12 +27,13 @@ public class CountDown : MonoBehaviour
 		{
 			timeText.text = ("Time left: " + ParseSeconds (timeLimit - timeLeft));
 			livesLeft.text = ("Lives left: " + GM.Player.Lives);
+			ladderCounter.text = ("Ladders: " + GM.ladderCount + " / " + GM.maxLadder);
 		}
 
 		if (GM.gameLoopActive && !GM.gamePaused && !debugStopCount)
 		{
-            //timeLeft += Time.deltaTime * timeDelta;
-            timeLeft = 0f;
+			//timeLeft += Time.deltaTime * timeDelta;
+			timeLeft = 0f;
 			if (timeLeft >= timeLimit)
 			{
 				GM.Player.LoseLife ();
