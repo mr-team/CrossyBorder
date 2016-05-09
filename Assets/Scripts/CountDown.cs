@@ -5,11 +5,13 @@ using UnityEngine.UI;
 public class CountDown : MonoBehaviour
 {
 	GameMaster GM;
+    PlayerController PC;
 	public Text timeText;
 	public Text livesLeft;
 	public Text ladderCounter;
+    public Text spadeCounter;
 
-	float timeLeft;
+    float timeLeft;
 	float timeLimit = 200;
 	float timeDelta = 10;
 
@@ -18,7 +20,8 @@ public class CountDown : MonoBehaviour
 	void Start ()
 	{
 		GM = GameObject.Find ("GameMaster").GetComponent<GameMaster> ();
-	}
+        PC = GameObject.Find("Player").GetComponent<PlayerController>();
+    }
 
 	void Update ()
 	{
@@ -28,7 +31,9 @@ public class CountDown : MonoBehaviour
 			timeText.text = ("Time left: " + ParseSeconds (timeLimit - timeLeft));
 			livesLeft.text = ("Lives left: " + GM.Player.Lives);
 			ladderCounter.text = ("Ladders: " + GM.ladderCount + " / " + GM.maxLadder);
-		}
+            spadeCounter.text = "Spades: " + PC.shovelCount;
+
+        }
 
 		if (GM.gameLoopActive && !GM.gamePaused && !debugStopCount)
 		{
