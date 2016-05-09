@@ -28,6 +28,7 @@ public class WorldGenerator : MonoBehaviour
 
 	void DrawWorld ()
 	{
+        bool spawnedCatapult = false;
 		for (int i = 0; i < GM.World.Tiles.GetLength (0); i++)
 		{
 			for (int u = 0; u < GM.World.Tiles.GetLength (1); u++)
@@ -38,8 +39,9 @@ public class WorldGenerator : MonoBehaviour
 				float ladder = rand.Next () / 100000000f;
 				float mineRan = rand.Next () / 100000000f;
 				float BTrand = rand.Next () / 100000000f;
+                float catapultRand = rand.Next() / 100000000f;
 
-				if (!GM.World.Tiles [i, u].Walkable && u == 0)
+                if (!GM.World.Tiles [i, u].Walkable && u == 0)
 				{
 					GameObject rock = Instantiate (tileGraphic [0], new Vector3 (GM.World.GetTilePos (i, u).x, GM.World.GetTilePos (i, u).y, -0.1f), Quaternion.identity) as GameObject;
 					rock.name = ("Rock");
@@ -58,7 +60,16 @@ public class WorldGenerator : MonoBehaviour
                     if(rand.Next(0, 100) <= 30 /* % */) //Percentage needed to complete the level
 					    GM.maxLadder++;
 					laddr.transform.parent = tileObj.transform;
-				} else if (GM.mines && mineRan >= 2f && mineRan <= 3f)
+				} else if(GM.catapult && catapultRand >= 2f && catapultRand <= 3f && !spawnedCatapult) {
+                    if(u <= 4)
+                        continue;
+                    GameObject catapult = Instantiate(GM.catapultPrefab, new Vector3(GM.World.GetTilePos(i, u).x, GM.World.GetTilePos(i, u).y, -0.1f), Quaternion.identity) as GameObject;
+                    catapult.name = ("Catapult");
+                    catapult.transform.parent = tileObj.transform;
+                    spawnedCatapult = true;
+                    GM.World.Tiles[i, u].Walkable = false;
+
+                } else if(GM.mines && mineRan >= 2f && mineRan <= 3f)
 				{
                     if(u <= 2)
                         continue;
