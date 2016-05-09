@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class Mine : MonoBehaviour
-{
+{	
+
 	GameMaster GM;
 	Animator anim;
 	public GameObject explotion;
@@ -57,10 +58,15 @@ public class Mine : MonoBehaviour
 	{
 		if (other.tag == "Player")
 		{
-			
+			GetComponent<CustomAudioSource> ().Play ();
 			Sprung = true;
 			playerInRange = true;
 		}
+        if(other.tag == "Boom") {
+            Sprung = true;
+            timer = fuseTime;
+            watch = true;
+        }
 	}
 
 	void OnTriggerExit2D (Collider2D other)
@@ -83,7 +89,9 @@ public class Mine : MonoBehaviour
 					int ran = Random.Range (0, 900);
 
 					Vector2 pos = new Vector2 (transform.position.x + i, transform.position.y + o);
-					Instantiate (explotion, pos, Quaternion.identity);
+					GameObject exp = Instantiate (explotion, pos, Quaternion.identity) as GameObject;
+                    exp.tag = "Boom";
+                    exp.AddComponent<Rigidbody2D>().isKinematic = true;
 					numExplotions++;
 					//Debug.Log (ran);
 					if (ran > 0 && ran <= 3)

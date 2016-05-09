@@ -58,6 +58,14 @@ public class BearTrap : MonoBehaviour
 		}
 	}
 
+	void OnTriggerEnter2D (Collider2D other)
+	{
+		if (other.tag == "Player") 
+		{
+			GetComponent<CustomAudioSource> ().Play ();
+		}
+	}
+
 	void OnTriggerStay2D (Collider2D other)
 	{
 		if (other.tag == "Player")
