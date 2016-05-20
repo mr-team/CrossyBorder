@@ -30,15 +30,15 @@ public class GameMaster : MonoBehaviour
 	//world settings
 	public int worldWidth;
 	public int worldHeigth;
-    public GameObject EndWall;
-    public GameObject carSpawner;
-    public GameObject catapultPrefab;
-    public int ladderCount;
+	public GameObject EndWall;
+	public GameObject carSpawner;
+	public GameObject catapultPrefab;
+	public int ladderCount;
 	public int maxLadder;
 	public float noiseScale;
 	public string seed;
-    [HideInInspector]
-    public List<int> carLanes = new List<int>();
+	[HideInInspector]
+	public List<int> carLanes = new List<int> ();
 
 	//game state stuff
 	public bool gameLoopActive;
@@ -57,7 +57,7 @@ public class GameMaster : MonoBehaviour
 	public bool fbiTroops;
 	public bool bearTraps;
 	public bool mines;
-    public bool catapult;
+	public bool catapult;
 
 	public Player Player {
 		get
@@ -75,51 +75,57 @@ public class GameMaster : MonoBehaviour
 
 	void Awake ()
 	{
-        List<int> roads = CalculateRoadLocations(CalculateRoadAmount(worldHeigth), worldHeigth);
-        PlaceRoads(roads);
-        world = new World (worldWidth, worldHeigth, noiseScale);
+		List<int> roads = CalculateRoadLocations (CalculateRoadAmount (worldHeigth), worldHeigth);
+		PlaceRoads (roads);
+		world = new World (worldWidth, worldHeigth, noiseScale);
 		world.GenerateWorld (seed);
-        player = new Player (world);
+		player = new Player (world);
 		player.OnLoseLife += RestartCounter;
 		prevlife = player.Lives;
 		gameState = States.gameDeActive;
-        EndWall.transform.position = new Vector3(EndWall.transform.position.x, (worldHeigth - 24), EndWall.transform.position.z);
-    }
+		EndWall.transform.position = new Vector3 (EndWall.transform.position.x, (worldHeigth - 24), EndWall.transform.position.z);
+	}
 
-    public int CalculateRoadAmount(int mapHeight) {
-        return Mathf.RoundToInt(mapHeight / 10);
-    }
+	public int CalculateRoadAmount (int mapHeight)
+	{
+		return Mathf.RoundToInt (mapHeight / 10);
+	}
 
-    public List<int> CalculateRoadLocations(int amount, int mapHeight) {
-        int left = amount;
-        List<int> result = new List<int>();
-        System.Random rand = new System.Random(seed.GetHashCode());
-        for(int i = 0; i < mapHeight; i++) {
-            if(i <= 3)
-                continue;
-            if(left == 0)
-                break;
-            int percentage = (100 / mapHeight) * rand.Next(i, mapHeight);
-            if(percentage >= 50) {
-                result.Add(i);
-                left--;
-                i += rand.Next(1, mapHeight / 5);
-            }
-        }
-        return result;
-    }
+	public List<int> CalculateRoadLocations (int amount, int mapHeight)
+	{
+		int left = amount;
+		List<int> result = new List<int> ();
+		System.Random rand = new System.Random (seed.GetHashCode ());
+		for (int i = 0; i < mapHeight; i++)
+		{
+			if (i <= 3)
+				continue;
+			if (left == 0)
+				break;
+			int percentage = (100 / mapHeight) * rand.Next (i, mapHeight);
+			if (percentage >= 50)
+			{
+				result.Add (i);
+				left--;
+				i += rand.Next (1, mapHeight / 5);
+			}
+		}
+		return result;
+	}
 
-    public void PlaceRoads(List<int> r) {
-        System.Random rand = new System.Random(seed.GetHashCode());
-        for(int i = 0; i < r.Count; i++) {
-            if(r[i] == 0)
-                continue;
-            float x = rand.Next(0, 100) <= 50 ? -8 : 17.25f;
-            GameObject road = Instantiate(carSpawner, new Vector3(x, r[i] + .4f, -0.0859375f), Quaternion.identity) as GameObject;
-            road.GetComponent<CarSpawner>().SpawnDir = (x == -8) ? CarSpawner.directions.left : CarSpawner.directions.right;
-            road.name = "Car & Road Spawner " + r[i];
-        }
-    }
+	public void PlaceRoads (List<int> r)
+	{
+		System.Random rand = new System.Random (seed.GetHashCode ());
+		for (int i = 0; i < r.Count; i++)
+		{
+			if (r [i] == 0)
+				continue;
+			float x = rand.Next (0, 100) <= 50 ? -8 : 17.25f;
+			GameObject road = Instantiate (carSpawner, new Vector3 (x, r [i] + .4f, -0.0859375f), Quaternion.identity) as GameObject;
+			road.GetComponent<CarSpawner> ().SpawnDir = (x == -8) ? CarSpawner.directions.left : CarSpawner.directions.right;
+			road.name = "Car & Road Spawner " + r [i];
+		}
+	}
 
 	void Update ()
 	{
@@ -253,6 +259,7 @@ public class GameMaster : MonoBehaviour
 		
 		world.GenerateWorld (seed);
 		onNextRound ();
+		ladderCount = 0;
 		RestartCounter ();
 		roundWon = false;
 		gameTransition = false;

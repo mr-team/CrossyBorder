@@ -4,14 +4,16 @@ using UnityEngine.UI;
 
 public class CountDown : MonoBehaviour
 {
+	public GameObject[] ShovelGraphics = new GameObject[3];
+	public GameObject[] livesGraphics = new GameObject[5];
 	GameMaster GM;
-    PlayerController PC;
+	PlayerController PC;
 	public Text timeText;
 	public Text livesLeft;
 	public Text ladderCounter;
-    public Text spadeCounter;
+	public Text spadeCounter;
 
-    float timeLeft;
+	float timeLeft;
 	float timeLimit = 200;
 	float timeDelta = 10;
 
@@ -20,8 +22,8 @@ public class CountDown : MonoBehaviour
 	void Start ()
 	{
 		GM = GameObject.Find ("GameMaster").GetComponent<GameMaster> ();
-        PC = GameObject.Find("Player").GetComponent<PlayerController>();
-    }
+		PC = GameObject.Find ("Player").GetComponent<PlayerController> ();
+	}
 
 	void Update ()
 	{
@@ -30,10 +32,32 @@ public class CountDown : MonoBehaviour
 		{
 			timeText.text = ("Time left: " + ParseSeconds (timeLimit - timeLeft));
 			livesLeft.text = ("Lives left: " + GM.Player.Lives);
-			ladderCounter.text = ("Ladders: " + GM.ladderCount + " / " + GM.maxLadder);
-            spadeCounter.text = "Spades: " + PC.shovelCount;
+			ladderCounter.text = (GM.ladderCount + " / " + GM.maxLadder);
 
-        }
+
+			if (PC.shovelCount == 0)
+			{
+				ShovelGraphics [0].SetActive (false);
+				ShovelGraphics [1].SetActive (false);
+				ShovelGraphics [2].SetActive (false);
+			} else if (PC.shovelCount == 1)
+			{
+				ShovelGraphics [0].SetActive (true);
+				ShovelGraphics [1].SetActive (false);
+				ShovelGraphics [2].SetActive (false);
+			} else if (PC.shovelCount == 2)
+			{
+				ShovelGraphics [0].SetActive (true);
+				ShovelGraphics [1].SetActive (true);
+				ShovelGraphics [2].SetActive (false);
+			} else if (PC.shovelCount == 3)
+			{
+				ShovelGraphics [0].SetActive (true);
+				ShovelGraphics [1].SetActive (true);
+				ShovelGraphics [2].SetActive (true);
+			}
+				
+		}
 
 		if (GM.gameLoopActive && !GM.gamePaused && !debugStopCount)
 		{
@@ -45,7 +69,6 @@ public class CountDown : MonoBehaviour
 				timeLeft = 0;
 			}
 		}
-
 	}
 
 	public string ParseSeconds (float time)
