@@ -97,7 +97,7 @@ public class WorldGenerator : MonoBehaviour
         if(GM.seed.Length >= 10)
             GM.seed = GM.seed.Remove(10, GM.seed.Length - 10);
         GM.seed = GM.seed + rand.Next();
-        //Reset ladder spawning, maybe
+        GM.maxLadder = 0;
         rand = new System.Random(GM.seed.GetHashCode());
         
 
