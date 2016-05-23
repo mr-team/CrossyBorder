@@ -21,6 +21,14 @@ public class OutsideGenerator : MonoBehaviour {
         rand = new System.Random(GM.seed.GetHashCode());
         GenerateOutside();
     }
+
+    void Update() {
+        if(GM.worldHeigth != height) {
+            height = GM.worldHeigth;
+            rand = new System.Random(GM.seed.GetHashCode());
+            GenerateOutside();
+        }
+    }
 	
 	public void GenerateOutside() {
         DeleteOutside();
@@ -65,8 +73,6 @@ public class OutsideGenerator : MonoBehaviour {
     }
 
     public void DeleteOutside() {
-        for(int i = 0; i < transform.childCount; i++) {
-            Destroy(transform.GetChild(i));
-        }
+        
     }
 }
