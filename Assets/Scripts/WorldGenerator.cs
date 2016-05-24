@@ -21,6 +21,7 @@ public class WorldGenerator : MonoBehaviour
 	void Start()
 	{
 		GM.onNextRound += ClearWorld;
+        GM.onNextRound += GM.ReAwake;
 		GM.onNextRound += DrawWorld;
         rand = new System.Random(GM.seed.GetHashCode());
         DrawWorld ();
@@ -99,11 +100,17 @@ public class WorldGenerator : MonoBehaviour
         GM.seed = GM.seed + rand.Next();
         GM.maxLadder = 0;
         rand = new System.Random(GM.seed.GetHashCode());
-        
+
+        GM.worldHeigth += rand.Next(5, 15);
 
         foreach (Transform child in tileParent)
 		{
 			GameObject.Destroy (child.gameObject);
 		}
+
+        foreach(GameObject obj in GM.carLaneObjects) {
+            Destroy(obj);
+        }
+        GM.carLaneObjects.Clear();
 	}
 }
