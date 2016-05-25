@@ -29,6 +29,10 @@ public class LivesCounter : MonoBehaviour
 				for (int i = 0; i < lifeHats.Length; i++)
 				{
 					lifeHats [4].SetActive (false);
+					lifeHats [3].SetActive (true);
+					lifeHats [2].SetActive (true);
+					lifeHats [1].SetActive (true);
+					lifeHats [0].SetActive (true);
 				}
 				break;
 
@@ -36,6 +40,9 @@ public class LivesCounter : MonoBehaviour
 				for (int i = 0; i < lifeHats.Length; i++)
 				{
 					lifeHats [3].SetActive (false);
+					lifeHats [2].SetActive (true);
+					lifeHats [1].SetActive (true);
+					lifeHats [0].SetActive (true);
 				}
 				break;
 
@@ -44,6 +51,9 @@ public class LivesCounter : MonoBehaviour
 				{
 					
 					lifeHats [2].SetActive (false);
+					lifeHats [1].SetActive (true);
+					lifeHats [0].SetActive (true);
+
 				}
 				break;
 
@@ -51,6 +61,7 @@ public class LivesCounter : MonoBehaviour
 				for (int i = 0; i < lifeHats.Length; i++)
 				{
 					lifeHats [1].SetActive (false);
+					lifeHats [0].SetActive (true);
 				}
 				break;
 

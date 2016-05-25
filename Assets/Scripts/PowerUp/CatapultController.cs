@@ -45,7 +45,6 @@ public class CatapultController : MonoBehaviour
 			{
 				catapultAnim.SetBool ("Load", false);
 
-
 				deStun = true;
 			}
 
@@ -62,7 +61,6 @@ public class CatapultController : MonoBehaviour
 
 				}
 			}
-
 			//handle animations
 		}
 	}
