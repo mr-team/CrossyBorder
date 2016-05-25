@@ -21,6 +21,7 @@ public class WorldGenerator : MonoBehaviour
 	void Start()
 	{
 		GM.onNextRound += ClearWorld;
+        GM.onNextRound += GM.ReAwake;
 		GM.onNextRound += DrawWorld;
         rand = new System.Random(GM.seed.GetHashCode());
         DrawWorld ();
@@ -57,7 +58,7 @@ public class WorldGenerator : MonoBehaviour
                         continue;
                     GameObject laddr = Instantiate (ladderPrefab, new Vector3 (GM.World.GetTilePos (i, u).x, GM.World.GetTilePos (i, u).y, -0.1f), Quaternion.identity) as GameObject;
 					laddr.name = ("Ladder");
-                    if(rand.Next(0, 100) <= 30 /* % */) //Percentage needed to complete the level
+                    if(rand.Next(0, 100) <= 50 /* % */) //Percentage needed to complete the level
 					    GM.maxLadder++;
 					laddr.transform.parent = tileObj.transform;
 				} else if(GM.catapult && catapultRand >= 2f && catapultRand <= 3f && !spawnedCatapult) {
@@ -97,13 +98,19 @@ public class WorldGenerator : MonoBehaviour
         if(GM.seed.Length >= 10)
             GM.seed = GM.seed.Remove(10, GM.seed.Length - 10);
         GM.seed = GM.seed + rand.Next();
-        //Reset ladder spawning, maybe
+        GM.maxLadder = 0;
         rand = new System.Random(GM.seed.GetHashCode());
-        
+
+        GM.worldHeigth += rand.Next(5, 15);
 
         foreach (Transform child in tileParent)
 		{
 			GameObject.Destroy (child.gameObject);
 		}
+
+        foreach(GameObject obj in GM.carLaneObjects) {
+            Destroy(obj);
+        }
+        GM.carLaneObjects.Clear();
 	}
 }

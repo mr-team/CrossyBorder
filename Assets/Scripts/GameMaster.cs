@@ -39,6 +39,8 @@ public class GameMaster : MonoBehaviour
 	public string seed;
 	[HideInInspector]
 	public List<int> carLanes = new List<int> ();
+    [HideInInspector]
+    public List<GameObject> carLaneObjects;
 
 	//game state stuff
 	public bool gameLoopActive;
@@ -72,6 +74,17 @@ public class GameMaster : MonoBehaviour
 			return world;
 		}
 	}
+
+    public void ReAwake() {
+        List<int> roads = CalculateRoadLocations(CalculateRoadAmount(worldHeigth), worldHeigth);
+        PlaceRoads(roads);
+        world = new World(worldWidth, worldHeigth, noiseScale);
+        world.GenerateWorld(seed);
+        player.world = world;
+        player.OnLoseLife += RestartCounter;
+        prevlife = player.Lives;
+        EndWall.transform.position = new Vector3(EndWall.transform.position.x, (worldHeigth - 24), EndWall.transform.position.z);
+    }
 
 	void Awake ()
 	{
@@ -124,7 +137,8 @@ public class GameMaster : MonoBehaviour
 			GameObject road = Instantiate (carSpawner, new Vector3 (x, r [i] + .4f, -0.0859375f), Quaternion.identity) as GameObject;
 			road.GetComponent<CarSpawner> ().SpawnDir = (x == -8) ? CarSpawner.directions.left : CarSpawner.directions.right;
 			road.name = "Car & Road Spawner " + r [i];
-		}
+            carLaneObjects.Add(road);
+        }
 	}
 
 	void Update ()
@@ -257,9 +271,9 @@ public class GameMaster : MonoBehaviour
 	public void NextRound ()
 	{	
 		
-		world.GenerateWorld (seed);
+		//world.GenerateWorld (seed);
 		onNextRound ();
-		ladderCount = 0;
+        ladderCount = 0;
 		RestartCounter ();
 		roundWon = false;
 		gameTransition = false;

@@ -7,7 +7,7 @@ public class Player
 
 	LoseLifeCB onLoseLife;
 
-	World world;
+	public World world;
 	IntPosition2D intPos;
 	Vector2 pos;
 	bool alive = true;

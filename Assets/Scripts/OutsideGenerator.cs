@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class OutsideGenerator : MonoBehaviour {
     public Sprite border;
@@ -12,14 +13,24 @@ public class OutsideGenerator : MonoBehaviour {
     private GameMaster GM;
     private int height = 100;
     private System.Random rand;
+    private List<GameObject> outside;
 
     void Start() {
         if(leftSide)
             dist = -1f;
         GM = GameObject.Find("GameMaster").GetComponent<GameMaster>();
         height = GM.worldHeigth;
+        outside = new List<GameObject>();
         rand = new System.Random(GM.seed.GetHashCode());
         GenerateOutside();
+    }
+
+    void Update() {
+        if(GM.worldHeigth != height) {
+            height = GM.worldHeigth;
+            rand = new System.Random(GM.seed.GetHashCode());
+            GenerateOutside();
+        }
     }
 	
 	public void GenerateOutside() {
@@ -51,22 +62,30 @@ public class OutsideGenerator : MonoBehaviour {
                     kant.AddComponent<SpriteRenderer>().sprite = border;
                     if(leftSide)
                         kant.transform.Rotate(new Vector3(0f, 0f, 180f));
+                    outside.Add(kant);
                 } else {
                     int percentage = rand.Next(0, 100);
                     if(percentage <= 15) {
                         GameObject decor = Instantiate(decoration[rand.Next(0, decoration.Length)], Vector3.zero, Quaternion.identity) as GameObject;
                         decor.transform.parent = decorParent.transform;
                         decor.transform.localPosition = new Vector3(x * dist, y);
+                        outside.Add(decor);
                     }
                 }
+                outside.Add(snd);
             }
         }
-
+        outside.Add(sandParent);
+        outside.Add(borderParent);
+        outside.Add(decorParent);
     }
 
-    public void DeleteOutside() {
-        for(int i = 0; i < transform.childCount; i++) {
-            Destroy(transform.GetChild(i));
+    void DeleteOutside() {
+        if(outside.Count == 0)
+            return;
+        foreach(GameObject gm in outside) {
+            Destroy(gm);
         }
+        outside.Clear();
     }
 }
