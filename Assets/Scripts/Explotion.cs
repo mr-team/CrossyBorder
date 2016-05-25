@@ -14,7 +14,7 @@ public class Explotion : MonoBehaviour
 	{
 		if (other.transform.tag == "Car")
 		{
-			Destroy (other.gameObject);
+			other.gameObject.GetComponent<CarController> ().DestroyCar ();
 		}
 	}
 
@@ -22,7 +22,7 @@ public class Explotion : MonoBehaviour
 	{
 		if (other.transform.tag == "Car")
 		{
-			Destroy (other.gameObject);
+			other.gameObject.GetComponent<CarController> ().DestroyCar ();
 		}
 	}
 }

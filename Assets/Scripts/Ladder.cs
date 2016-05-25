@@ -4,7 +4,7 @@ using System.Collections;
 public class Ladder : MonoBehaviour
 {
 	GameMaster GM;
-    private bool CHECKED = false;
+	private bool CHECKED = false;
 
 	void Start ()
 	{
@@ -16,13 +16,25 @@ public class Ladder : MonoBehaviour
 	{
 		if (other.transform.tag == "Player")
 		{
-            if(!CHECKED) {
-                CHECKED = true;
-                GM.ladderCount++;
-                GetComponent<CustomAudioSource>().PlayOnce();
-                GetComponent<SpriteRenderer>().enabled = false;
-			    Destroy (this.gameObject, 0.204f);
-            }
+			if (!CHECKED)
+			{
+				CHECKED = true;
+				if (GM.ladderCount < GM.maxLadder)
+				{
+					GM.ladderCount++;
+					GetComponent<CustomAudioSource> ().PlayOnce ();
+					GetComponent<SpriteRenderer> ().enabled = false;
+					Destroy (this.gameObject, 0.204f);
+
+				} else if (GM.ladderCount >= GM.maxLadder)
+				{
+					GM.AddScore (10);
+					GetComponent<CustomAudioSource> ().PlayOnce ();
+					GetComponent<SpriteRenderer> ().enabled = false;
+					Destroy (this.gameObject, 0.204f);
+				}
+
+			}
             
 		}
 	}

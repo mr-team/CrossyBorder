@@ -12,6 +12,7 @@ public class CountDown : MonoBehaviour
 	public Text livesLeft;
 	public Text ladderCounter;
 	public Text spadeCounter;
+	public Text scoreText;
 
 	float timeLeft;
 	float timeLimit = 200;
@@ -33,8 +34,7 @@ public class CountDown : MonoBehaviour
 			timeText.text = ("Time left: " + ParseSeconds (timeLimit - timeLeft));
 			livesLeft.text = ("Lives left: " + GM.Player.Lives);
 			ladderCounter.text = (GM.ladderCount + " / " + GM.maxLadder);
-
-
+			scoreText.text = ("" + GM.score);
 			if (PC.shovelCount == 0)
 			{
 				ShovelGraphics [0].SetActive (false);
@@ -55,8 +55,7 @@ public class CountDown : MonoBehaviour
 				ShovelGraphics [0].SetActive (true);
 				ShovelGraphics [1].SetActive (true);
 				ShovelGraphics [2].SetActive (true);
-			}
-				
+			}	
 		}
 
 		if (GM.gameLoopActive && !GM.gamePaused && !debugStopCount)
