@@ -16,6 +16,8 @@ public class PlayerClimbLadder : MonoBehaviour
 	public GameObject[] panPoints = new GameObject[5];
 	public GameObject[] playerPanPoints = new GameObject[5];
 
+	Animator playerAnim;
+
 	public bool active;
 
 	void Start ()
@@ -24,6 +26,8 @@ public class PlayerClimbLadder : MonoBehaviour
 		player.transform.position = playerPanPoints [0].transform.position;
 		cutSceneCamera.cullingMask = -1;
 		cutSceneCamera.enabled = false;
+		playerAnim = player.GetComponent<Animator> ();
+		playerAnim.SetBool ("Climbing", true);
 	}
 
 	void Update ()
@@ -78,6 +82,7 @@ public class PlayerClimbLadder : MonoBehaviour
 		//cutSceneCamera.cullingMask = 0;
 		cutSceneCamera.transform.position = panPoints [2].transform.position;
 		cutSceneCamera.orthographicSize = 9;
+		playerAnim.SetBool ("Climbing", false);
 		//cutSceneCamera.cullingMask = -1;
 
 		cuts = Cuts.secondCut;
@@ -102,6 +107,7 @@ public class PlayerClimbLadder : MonoBehaviour
 		player.transform.position = playerPanPoints [0].transform.position;
 		cuts = Cuts.firstCut;
 		cutSceneCamera.orthographicSize = 5;
+		playerAnim.SetBool ("Climbing", true);
 		cutSceneCamera.enabled = false;
 	}
 }
