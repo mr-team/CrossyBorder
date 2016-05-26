@@ -28,8 +28,11 @@ public class GetTextCutScene : MonoBehaviour
 	void Update ()
 	{
 		if (Input.GetKeyDown (KeyCode.T))
+		{
 			active = true;
-		
+			cuts = Cuts.cutOne;
+		}
+			
 		if (active)
 		{
 			switch (cuts)
@@ -56,8 +59,10 @@ public class GetTextCutScene : MonoBehaviour
 
 	void CutOne ()
 	{
-		
-		StartCoroutine ("MovePhoneUp");
+		if (!exitPhone)
+			StartCoroutine (MovePhoneUp (1));
+		if (exitPhone)
+			StartCoroutine (MovePhoneUp (2));
 	}
 
 	void CutTwo ()
@@ -70,32 +75,37 @@ public class GetTextCutScene : MonoBehaviour
 		
 	}
 
-	void reset ()
-	{
-		mobile.transform.position = movePoints [0].position;
-	}
 
-	IEnumerator MovePhoneUp ()
+	IEnumerator MovePhoneUp (float id)
 	{
-		if (!exitPhone)
+		if (id == 1)
 		{
 			mobile.transform.position = Vector3.MoveTowards (mobile.transform.position, movePoints [1].position, 3.2f);
+
 			yield return new WaitUntil (() => mobile.transform.position == movePoints [1].position);
 			yield return new WaitForSeconds (1f);
-			textScreen.SetActive (true);
-			Debug.Log ("outside loop");
 
-		} else if (exitPhone)
+			textScreen.SetActive (true);
+
+		}
+
+		if (id == 2)
 		{
-			Debug.Log ("inside loop");
+			
 			textScreen.SetActive (false);
 			yield return new WaitForSeconds (0.5f);
 			mobile.transform.position = Vector3.MoveTowards (mobile.transform.position, movePoints [0].position, 3.2f);
 			yield return new WaitUntil (() => mobile.transform.position == movePoints [0].position);
 			active = false;
-			exitPhone = false;
 		}
+	}
 
+	void reset ()
+	{
+		textScreen.SetActive (false);
+		cuts = Cuts.end;
+		mobile.transform.position = movePoints [0].position;
+		exitPhone = false;
 	}
 
 	public void CloseText ()
