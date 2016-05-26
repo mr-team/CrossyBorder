@@ -30,8 +30,11 @@ public class CanvasHandler : MonoBehaviour
 
 		//death screen handler
 		if (!GM.Player.Alive)
+		{
 			deathScreen.enabled = true;
-		else
+			ui.enabled = false;
+
+		} else
 			deathScreen.enabled = false;
 
 		//pasue menu handler

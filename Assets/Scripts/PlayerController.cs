@@ -482,7 +482,7 @@ public class PlayerController : MonoBehaviour
 	public bool DeStunPlayerDelay (float delay)
 	{
 		stunTimer += Time.deltaTime;
-		Debug.Log (stunTimer);
+		//Debug.Log (stunTimer);
 		if (stunTimer >= delay)
 		{
 			stunTimer = 0;
