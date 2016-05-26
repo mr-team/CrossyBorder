@@ -5,12 +5,13 @@ public class EndZone : MonoBehaviour
 {
 
 	GameMaster GM;
+
 	bool playerInEndzone;
 
 	void Start ()
 	{
 		GM = GameObject.Find ("GameMaster").GetComponent<GameMaster> ();
-
+	
 	}
 
 	void Update ()

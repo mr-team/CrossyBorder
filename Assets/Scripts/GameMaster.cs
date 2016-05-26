@@ -24,6 +24,7 @@ public class GameMaster : MonoBehaviour
 
 	public OnNextRoun onNextRound;
 	public OnPlayerLostLife onPlayerLostLife;
+	public PlayerClimbLadder climbCutScene;
 
 	Player player;
 	World world;
@@ -202,7 +203,7 @@ public class GameMaster : MonoBehaviour
 	void UpdateRoundWon ()
 	{
 		gameLoopActive = false;
-
+		climbCutScene.active = true;
 		gameTransition = true;
 	}
 
@@ -281,6 +282,7 @@ public class GameMaster : MonoBehaviour
 		ladderCount = 0;
 		AddScore (500);
 		RestartCounter ();
+		climbCutScene.active = false;
 		roundWon = false;
 		gameTransition = false;
 		gameState = States.gameActive;
