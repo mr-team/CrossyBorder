@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Ladder : MonoBehaviour
 {
+    public GameObject UIPICKUP;
+
 	GameMaster GM;
 	private bool CHECKED = false;
 
@@ -21,9 +23,12 @@ public class Ladder : MonoBehaviour
 				CHECKED = true;
 				if (GM.ladderCount < GM.maxLadder)
 				{
-					GM.ladderCount++;
+					//GM.ladderCount++;
 					GetComponent<CustomAudioSource> ().PlayOnce ();
 					GetComponent<SpriteRenderer> ().enabled = false;
+
+                    GameObject pickup = Instantiate(UIPICKUP, transform.position, Quaternion.identity) as GameObject;
+
 					Destroy (this.gameObject, 0.204f);
 
 				} else if (GM.ladderCount >= GM.maxLadder)

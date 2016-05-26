@@ -35,27 +35,10 @@ public class CountDown : MonoBehaviour
 			livesLeft.text = ("Lives left: " + GM.Player.Lives);
 			ladderCounter.text = (GM.ladderCount + " / " + GM.maxLadder);
 			scoreText.text = ("" + GM.score);
-			if (PC.shovelCount == 0)
-			{
-				ShovelGraphics [0].SetActive (false);
-				ShovelGraphics [1].SetActive (false);
-				ShovelGraphics [2].SetActive (false);
-			} else if (PC.shovelCount == 1)
-			{
-				ShovelGraphics [0].SetActive (true);
-				ShovelGraphics [1].SetActive (false);
-				ShovelGraphics [2].SetActive (false);
-			} else if (PC.shovelCount == 2)
-			{
-				ShovelGraphics [0].SetActive (true);
-				ShovelGraphics [1].SetActive (true);
-				ShovelGraphics [2].SetActive (false);
-			} else if (PC.shovelCount == 3)
-			{
-				ShovelGraphics [0].SetActive (true);
-				ShovelGraphics [1].SetActive (true);
-				ShovelGraphics [2].SetActive (true);
-			}	
+
+            ShovelGraphics[0].GetComponent<RawImage>().enabled = PC.shovelCount >= 1;
+            ShovelGraphics[1].GetComponent<RawImage>().enabled = PC.shovelCount >= 2;
+            ShovelGraphics[2].GetComponent<RawImage>().enabled = PC.shovelCount >= 3;
 		}
 
 		if (GM.gameLoopActive && !GM.gamePaused && !debugStopCount)
