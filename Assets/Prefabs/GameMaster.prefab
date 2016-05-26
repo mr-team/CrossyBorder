@@ -26,7 +26,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 138074}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.56552219, y: 4.40889072, z: -.044921875}
+  m_LocalPosition: {x: 4.565522, y: 4.4088907, z: -0.044921875}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -43,15 +43,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameState: 0
+  climbCutScene: {fileID: 0}
   worldWidth: 11
-  worldHeigth: 24
+  worldHeigth: 30
   EndWall: {fileID: 0}
   carSpawner: {fileID: 118070, guid: 0ef642d84be382348af1c5f9dcf049b1, type: 2}
+  catapultPrefab: {fileID: 170050, guid: 6e7bf30d54f90b24e9de6bcef8201f8c, type: 2}
   ladderCount: 0
   maxLadder: 0
-  noiseScale: .300000012
+  noiseScale: 0.3
   seed: 
   carLanes: 
+  carLaneObjects: []
   gameLoopActive: 0
   gamePaused: 0
   gameReset: 0
@@ -63,6 +66,8 @@ MonoBehaviour:
   fbiTroops: 0
   bearTraps: 0
   mines: 0
+  catapult: 1
+  score: 0
 --- !u!114 &11437336
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -106,8 +111,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ebbdc36530aa5d40b5263a87a47aa84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShovelGraphics:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  livesGraphics:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   timeText: {fileID: 0}
   livesLeft: {fileID: 0}
+  ladderCounter: {fileID: 0}
+  spadeCounter: {fileID: 0}
+  scoreText: {fileID: 0}
   debugStopCount: 0
 --- !u!1001 &100100000
 Prefab:

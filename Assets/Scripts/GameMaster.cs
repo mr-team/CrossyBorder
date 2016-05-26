@@ -82,7 +82,7 @@ public class GameMaster : MonoBehaviour
 
 	public void ReAwake ()
 	{
-		List<int> roads = CalculateRoadLocations (CalculateRoadAmount (worldHeigth), worldHeigth);
+		List<int> roads = CalculateRoadLocations (worldHeigth);
 		PlaceRoads (roads);
 		world = new World (worldWidth, worldHeigth, noiseScale);
 		world.GenerateWorld (seed);
@@ -94,7 +94,7 @@ public class GameMaster : MonoBehaviour
 
 	void Awake ()
 	{
-		List<int> roads = CalculateRoadLocations (CalculateRoadAmount (worldHeigth), worldHeigth);
+		List<int> roads = CalculateRoadLocations (worldHeigth);
 		PlaceRoads (roads);
 		world = new World (worldWidth, worldHeigth, noiseScale);
 		world.GenerateWorld (seed);
@@ -110,7 +110,22 @@ public class GameMaster : MonoBehaviour
 		return Mathf.RoundToInt (mapHeight / 10);
 	}
 
-	public List<int> CalculateRoadLocations (int amount, int mapHeight)
+    public List<int> CalculateRoadLocations(int mapHeight) {
+        int left = Mathf.RoundToInt((mapHeight / 100f) * 20f);
+        List<int> result = new List<int>();
+        System.Random rand = new System.Random(seed.GetHashCode());
+        while(left > 0) {
+            int lane = rand.Next(4, (mapHeight - 4));
+            if(!result.Contains(lane - 1) && !result.Contains(lane) && !result.Contains(lane + 1)) {
+                result.Add(lane);
+                left--;
+            }
+        }
+        result.Sort();
+        return result;
+    }
+
+    public List<int> CalculateRoadLocationsOLD (int amount, int mapHeight)
 	{
 		int left = amount;
 		List<int> result = new List<int> ();
