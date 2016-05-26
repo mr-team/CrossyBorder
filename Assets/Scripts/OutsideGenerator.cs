@@ -21,14 +21,14 @@ public class OutsideGenerator : MonoBehaviour {
         GM = GameObject.Find("GameMaster").GetComponent<GameMaster>();
         height = GM.worldHeigth;
         outside = new List<GameObject>();
-        rand = new System.Random(GM.seed.GetHashCode());
+        rand = new System.Random((GM.seed + " " + (leftSide ? "Asgeir" : "Nisse")).GetHashCode());
         GenerateOutside();
     }
 
     void Update() {
         if(GM.worldHeigth != height) {
             height = GM.worldHeigth;
-            rand = new System.Random(GM.seed.GetHashCode());
+            rand = new System.Random((GM.seed + " " + (leftSide ? "Asgeir" : "Nisse")).GetHashCode());
             GenerateOutside();
         }
     }
@@ -68,7 +68,15 @@ public class OutsideGenerator : MonoBehaviour {
                     if(percentage <= 15) {
                         GameObject decor = Instantiate(decoration[rand.Next(0, decoration.Length)], Vector3.zero, Quaternion.identity) as GameObject;
                         decor.transform.parent = decorParent.transform;
-                        decor.transform.localPosition = new Vector3(x * dist, y);
+                        if(decor.name == "cactus(Clone)") {
+                            if(GM.carLanes.Contains(y) || GM.carLanes.Contains(y + 1) || y >= GM.worldHeigth - 3) {
+                                Destroy(decor);
+                                continue;
+                            }  
+                            decor.transform.localPosition = new Vector3(x * dist, y + .5f);
+                        } else {
+                            decor.transform.localPosition = new Vector3(x * dist, y);
+                        }
                         outside.Add(decor);
                     }
                 }

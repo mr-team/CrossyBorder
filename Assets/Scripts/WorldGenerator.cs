@@ -62,7 +62,7 @@ public class WorldGenerator : MonoBehaviour
 					    GM.maxLadder++;
 					laddr.transform.parent = tileObj.transform;
 				} else if(GM.catapult && catapultRand >= 2f && catapultRand <= 3f && !spawnedCatapult) {
-                    if(u <= 4)
+                    if(u <= 4 || u >= (GM.worldHeigth - 13) || GM.carLanes.Contains(u))
                         continue;
                     GameObject catapult = Instantiate(GM.catapultPrefab, new Vector3(GM.World.GetTilePos(i, u).x, GM.World.GetTilePos(i, u).y, -0.1f), Quaternion.identity) as GameObject;
                     catapult.name = ("Catapult");
@@ -72,7 +72,7 @@ public class WorldGenerator : MonoBehaviour
 
                 } else if(GM.mines && mineRan >= 2f && mineRan <= 3f)
 				{
-                    if(u <= 2)
+                    if(u <= 2 || GM.carLanes.Contains(u))
                         continue;
                     GameObject mine = Instantiate (mineprefab, new Vector3 (GM.World.GetTilePos (i, u).x, GM.World.GetTilePos (i, u).y, -0.1f), Quaternion.identity) as GameObject;
 					mine.name = ("mine");
@@ -80,7 +80,7 @@ public class WorldGenerator : MonoBehaviour
 					
 				} else if (GM.bearTraps && BTrand >= 2f && BTrand <= 3f)
 				{
-                    if(u == 1 && i == 5)
+                    if(u == 1 && i == 5 || GM.carLanes.Contains(u))
                         continue;
                     GameObject BearTrap = Instantiate (bearTrapPrefab, new Vector3 (GM.World.GetTilePos (i, u).x, GM.World.GetTilePos (i, u).y, -0.1f), Quaternion.identity) as GameObject;
 					BearTrap.name = ("BearTrap");
