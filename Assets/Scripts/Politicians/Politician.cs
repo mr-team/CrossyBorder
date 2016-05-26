@@ -14,30 +14,31 @@ public class politician : MonoBehaviour
 	public ClickCB clickCB;
 	public Canvas UI;
 	public RawImage abilityCard;
-    public Sprite[] quotes;
+	public Sprite[] quotes;
 
 	protected GameMaster GM;
-    protected GameObject speechBubble;
+	protected GameObject speechBubble;
 
 	protected bool cardChosen;
 	protected int cardNum;
 
 	protected virtual void Start ()
 	{
-		GM = GameObject.Find ("GameMaster").GetComponent<GameMaster>();
-        speechBubble = transform.FindChild("Speech Bubble").gameObject;
-        speechBubble.SetActive(false);
-        speechBubble.GetComponent<SpriteRenderer>().sprite = quotes[Random.Range(0, quotes.Length)];
-        abilityCard.enabled = false;
+		GM = GameObject.Find ("GameMaster").GetComponent<GameMaster> ();
+		speechBubble = transform.FindChild ("Speech Bubble").gameObject;
+		speechBubble.SetActive (false);
+		speechBubble.GetComponent<SpriteRenderer> ().sprite = quotes [Random.Range (0, quotes.Length)];
+		abilityCard.enabled = false;
 	}
 
 	protected virtual void Update ()
 	{
-        if(GM.roundWon && !cardChosen) {
-            cardNum = Random.Range(0, 2);
-            cardChosen = true;
-            speechBubble.GetComponent<SpriteRenderer>().sprite = quotes[Random.Range(0, quotes.Length)];
-        }
+		if (GM.roundWon && !cardChosen)
+		{
+			cardNum = Random.Range (0, 2);
+			cardChosen = true;
+			speechBubble.GetComponent<SpriteRenderer> ().sprite = quotes [Random.Range (0, quotes.Length)];
+		}
 	}
 
 	protected virtual void OnMouseDown ()
@@ -45,24 +46,24 @@ public class politician : MonoBehaviour
 		ActivateAbility (cardNum);
 		//clickCB (this.gameObject);
 		cardChosen = false;
-        speechBubble.SetActive(false);
-    }
+		speechBubble.SetActive (false);
+	}
 
 	void OnMouseOver ()
 	{
 		abilityCard.enabled = true;
 		abilityCard.texture = abilityCardTextures [cardNum];
-        int offset = Input.mousePosition.x < (Screen.width / 2f) ? 100 : -100;
-        abilityCard.transform.position = new Vector2 (Input.mousePosition.x + offset, Input.mousePosition.y + 110);
-        speechBubble.SetActive(true);
+		int offset = Input.mousePosition.x < (Screen.width / 2f) ? 100 : -100;
+		abilityCard.transform.position = new Vector2 (Input.mousePosition.x + offset, Input.mousePosition.y + 110);
+		speechBubble.SetActive (true);
 
-    }
+	}
 
 	void OnMouseExit ()
 	{
 		abilityCard.enabled = false;
-        speechBubble.SetActive(false);
-    }
+		speechBubble.SetActive (false);
+	}
 
 	protected virtual void ActivateAbility (int cardNum)
 	{
