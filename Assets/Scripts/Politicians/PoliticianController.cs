@@ -24,7 +24,7 @@ public class PoliticianController : MonoBehaviour
 		
 		sanders.clickCB = ClickOnpolitician;
 		clinton.clickCB = ClickOnpolitician;
-		cruz.clickCB = ClickOnpolitician;
+		//cruz.clickCB = ClickOnpolitician;
 		trump.clickCB = ClickOnpolitician;
 
 	}
