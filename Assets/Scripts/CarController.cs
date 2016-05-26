@@ -55,7 +55,8 @@ public class CarController : MonoBehaviour
 
 	public void DestroyCar ()
 	{
-		GM.score += 10;
+		
+        GM.score += (moveSpeed == 6) ? 30 : 50; //30 score for normal cars, 50 score for FBI car
 
 		Destroy (gameObject);
 	}
