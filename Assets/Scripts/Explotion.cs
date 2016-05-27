@@ -3,6 +3,18 @@ using System.Collections;
 
 public class Explotion : MonoBehaviour
 {
+	bool giveScore = false;
+
+	public bool GiveScore {
+		get
+		{
+			return giveScore;
+		}
+		set
+		{
+			giveScore = value;
+		}
+	}
 
 	void Update ()
 	{
@@ -14,6 +26,9 @@ public class Explotion : MonoBehaviour
 	{
 		if (other.transform.tag == "Car")
 		{
+			if (giveScore)
+				other.gameObject.GetComponent<CarController> ().DestroyCarScore ();
+
 			other.gameObject.GetComponent<CarController> ().DestroyCar ();
 		}
 	}
@@ -22,6 +37,9 @@ public class Explotion : MonoBehaviour
 	{
 		if (other.transform.tag == "Car")
 		{
+			if (giveScore)
+				other.gameObject.GetComponent<CarController> ().DestroyCarScore ();
+
 			other.gameObject.GetComponent<CarController> ().DestroyCar ();
 		}
 	}
