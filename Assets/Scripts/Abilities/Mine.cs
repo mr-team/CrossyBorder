@@ -86,7 +86,7 @@ public class Mine : MonoBehaviour
 			{
 				for (int o = -1; o < 2; o++)
 				{
-					int ran = Random.Range (0, 900);
+                    int ran = Random.Range (0, 900);
 
 					Vector2 pos = new Vector2 (transform.position.x + i, transform.position.y + o);
 					GameObject exp = Instantiate (explotion, pos, Quaternion.identity) as GameObject;

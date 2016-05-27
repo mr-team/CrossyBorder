@@ -11,6 +11,10 @@ public class WorldGenerator : MonoBehaviour
 	public GameObject bearTrapPrefab;
 	public GameObject[] tileGraphic = new GameObject[10];
 	public System.Random rand;
+    [Range(0, 100)]
+    public float worldHeightGrowPercentage = 20f;
+
+    private int startWorldHeight;
 
     void Awake() {
         GM = GameObject.Find ("GameMaster").GetComponent<GameMaster> ();
@@ -20,6 +24,7 @@ public class WorldGenerator : MonoBehaviour
 
 	void Start()
 	{
+        startWorldHeight = GM.worldHeigth;
 		GM.onNextRound += ClearWorld;
         GM.onNextRound += GM.ReAwake;
 		GM.onNextRound += DrawWorld;
@@ -101,7 +106,7 @@ public class WorldGenerator : MonoBehaviour
         GM.maxLadder = 0;
         rand = new System.Random(GM.seed.GetHashCode());
 
-        GM.worldHeigth += rand.Next(5, 15);
+        GM.worldHeigth += Mathf.RoundToInt((startWorldHeight / 100f) * worldHeightGrowPercentage);
 
         foreach (Transform child in tileParent)
 		{

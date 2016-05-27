@@ -3,7 +3,8 @@ using System.Collections;
 
 public class Powerup_shovel : MonoBehaviour
 {
-	GameMaster GM;
+    public GameObject UIPICKUP;
+    GameMaster GM;
 
 	void Start ()
 	{
@@ -16,8 +17,11 @@ public class Powerup_shovel : MonoBehaviour
 		{
 			if (other.GetComponent<PlayerController> ().shovelCount < 3)
 			{
-				other.GetComponent<PlayerController> ().shovelCount++;
-			} else if (other.GetComponent<PlayerController> ().shovelCount >= 3)
+                //other.GetComponent<PlayerController> ().shovelCount++;
+
+                GameObject pickup = Instantiate(UIPICKUP, transform.position, Quaternion.identity) as GameObject;
+
+            } else if (other.GetComponent<PlayerController> ().shovelCount >= 3)
 			{
 				GM.AddScore (50);
 			}
