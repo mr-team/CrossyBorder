@@ -3,6 +3,7 @@ using System.Collections;
 
 public class CarController : MonoBehaviour
 {
+	public GameObject carExplotion;
 	GameMaster GM;
 	public float moveSpeed = 6f;
 	bool moveLeft;
@@ -55,9 +56,17 @@ public class CarController : MonoBehaviour
 
 	public void DestroyCar ()
 	{
-		
-        GM.score += (moveSpeed == 6) ? 30 : 50; //30 score for normal cars, 50 score for FBI car
+		//GM.score += (moveSpeed == 6) ? 30 : 50; //30 score for normal cars, 50 score for FBI car
+		GameObject carExp = Instantiate (carExplotion, transform.position, Quaternion.identity) as GameObject;
 
 		Destroy (gameObject);
 	}
+
+	public void DestroyCarScore ()
+	{
+		GM.score += (moveSpeed == 6) ? 30 : 50; //30 score for normal cars, 50 score for FBI car
+		GameObject carExp = Instantiate (carExplotion, transform.position, Quaternion.identity) as GameObject;
+		Destroy (gameObject);
+	}
+
 }
