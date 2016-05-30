@@ -5,7 +5,6 @@ using System.Collections;
 public class ShowWallWin : MonoBehaviour {
     public GameObject win;
     public GameObject politicians;
-    public RawImage abilityCard;
 
     private GameMaster GM;
 
@@ -15,7 +14,6 @@ public class ShowWallWin : MonoBehaviour {
 	
 	void Update() {
         if(GM.showCards) {
-            abilityCard.enabled = false;
             win.SetActive(GM.cards.Count == 0);
             politicians.SetActive(GM.cards.Count != 0);
         }
