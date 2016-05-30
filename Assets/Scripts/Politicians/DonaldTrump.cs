@@ -21,7 +21,7 @@ public class DonaldTrump : politician
 		clickCB (this.gameObject);
 	}
 
-	protected override void ActivateAbility (int cardNum)
+	/*protected override void ActivateAbility (int cardNum)
 	{
 		if (cardNum == 0)
 		{
@@ -33,6 +33,6 @@ public class DonaldTrump : politician
 			GM.mines = true;
 
 		}
-	}
+	}*/
 
 }

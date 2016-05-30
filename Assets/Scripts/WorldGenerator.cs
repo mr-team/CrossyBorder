@@ -99,6 +99,7 @@ public class WorldGenerator : MonoBehaviour
 	void ClearWorld ()
 	{
 		Debug.Log ("cleared the world");
+        GM.showCards = true;
         GM.carLanes.Clear();
         if(GM.seed.Length >= 10)
             GM.seed = GM.seed.Remove(10, GM.seed.Length - 10);
