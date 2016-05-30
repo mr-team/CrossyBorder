@@ -10,7 +10,7 @@ public class politician : MonoBehaviour
 
 	public delegate void ClickCB (GameObject thisObj);
 
-	public Texture[] abilityCardTextures = new Texture[2];
+    //public Texture[] abilityCardTextures = new Texture[2];
 	public ClickCB clickCB;
 	public Canvas UI;
 	public RawImage abilityCard;
@@ -20,7 +20,11 @@ public class politician : MonoBehaviour
 	protected GameObject speechBubble;
 
 	protected bool cardChosen;
-	protected int cardNum;
+	//protected int cardNum;
+
+    protected Texture texture;
+    protected float timer = 0f;
+    protected float timeDelay = 5f;
 
 	protected virtual void Start ()
 	{
@@ -29,34 +33,38 @@ public class politician : MonoBehaviour
 		speechBubble.SetActive (false);
 		speechBubble.GetComponent<SpriteRenderer> ().sprite = quotes [Random.Range (0, quotes.Length)];
 		abilityCard.enabled = false;
-	}
+    }
 
 	protected virtual void Update ()
 	{
-		if (GM.roundWon && !cardChosen)
+        if(GM.cards.Count != 0)
+            texture = GM.pickRandomCard(gameObject.name + "@" + GM.cards.Count + "@" + GM.seed);
+        if (GM.roundWon && !cardChosen)
 		{
-			cardNum = Random.Range (0, 2);
+			//cardNum = Random.Range (0, 2);
 			cardChosen = true;
 			speechBubble.GetComponent<SpriteRenderer> ().sprite = quotes [Random.Range (0, quotes.Length)];
-		}
+        }
 	}
 
 	protected virtual void OnMouseDown ()
 	{
-		ActivateAbility (cardNum);
-		//clickCB (this.gameObject);
+        //ActivateAbility (cardNum);
+        //clickCB (this.gameObject);
+        ActivateAbility(texture);
+        GM.showCards = false;
 		cardChosen = false;
 		speechBubble.SetActive (false);
 	}
 
 	void OnMouseOver ()
 	{
-		abilityCard.enabled = true;
-		abilityCard.texture = abilityCardTextures [cardNum];
+		abilityCard.enabled = GM.showCards;
+        //abilityCard.texture = abilityCardTextures [cardNum];
+        abilityCard.texture = texture;
 		int offset = Input.mousePosition.x < (Screen.width / 2f) ? 100 : -100;
 		abilityCard.transform.position = new Vector2 (Input.mousePosition.x + offset, Input.mousePosition.y + 110);
 		speechBubble.SetActive (true);
-
 	}
 
 	void OnMouseExit ()
@@ -65,7 +73,27 @@ public class politician : MonoBehaviour
 		speechBubble.SetActive (false);
 	}
 
-	protected virtual void ActivateAbility (int cardNum)
+    protected virtual void ActivateAbility(Texture t) {
+        if(!GM.showCards)
+            return;
+        switch(t.name) {
+            case "BearTrapCard":
+                GM.bearTraps = true;
+            break;
+            case "FBICard":
+                GM.fbiTroops = true;
+            break;
+            case "MineCard":
+                GM.mines = true;
+            break;
+            case "SkillCard":
+                GM.CarpetBombing = true;
+            break;
+        }
+        GM.cards.Remove(t);
+    }
+
+    /*protected virtual void ActivateAbility (int cardNum)
 	{
 		if (cardNum == 0)
 		{
@@ -75,5 +103,5 @@ public class politician : MonoBehaviour
 		{
 			//Debug.Log ("card " + cardNum + " on " + gameObject.name + " was activated");
 		}
-	}
+	}*/
 }
