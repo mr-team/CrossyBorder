@@ -11,21 +11,31 @@ public class GetTextCutScene : MonoBehaviour
 		end,
 	}
 
-	public Transform[] movePoints = new Transform[2];
-
 	Cuts cuts;
-	public GameObject mobile;
-	public bool active;
+
+
+	public PlayerController playerControl;
 	public GameObject textScreen;
 	RawImage rawImage;
 	public Texture[] textMessages = new Texture[7];
-	public bool exitPhone;
+
+
+	//Anims
+	public Animator phoneAnim;
+
+	// Timers
+	float timer;
+	float timer2;
+	float timer3;
+
+	public bool active;
 
 	void Start ()
 	{
 		rawImage = textScreen.GetComponent<RawImage> ();
-		mobile.transform.position = movePoints [0].position;
+
 		textScreen.SetActive (false);
+		cuts = Cuts.end;
 	}
 
 	void Update ()
@@ -62,15 +72,29 @@ public class GetTextCutScene : MonoBehaviour
 
 	void CutOne ()
 	{
-		if (!exitPhone)
-			StartCoroutine (MovePhoneUp (1));
-		if (exitPhone)
-			StartCoroutine (MovePhoneUp (2));
+		playerControl.StunPlayer ();
+		playerControl.Player.Imortal = true;
+
+		timer += Time.deltaTime;
+		phoneAnim.SetBool ("GoUp", true);
+		if (timer >= 1f)
+		{
+			textScreen.SetActive (true);
+
+		}
 	}
 
 	void CutTwo ()
 	{
-		
+		timer += Time.deltaTime;
+		phoneAnim.SetBool ("GoUp", false);
+		if (timer >= 1f)
+		{
+			textScreen.SetActive (false);
+			playerControl.DeStunPlayer ();
+			playerControl.Player.Imortal = false;
+			reset ();
+		}
 	}
 
 	void End ()
@@ -78,45 +102,27 @@ public class GetTextCutScene : MonoBehaviour
 		
 	}
 
-
-	IEnumerator MovePhoneUp (float id)
-	{
-		if (id == 1)
-		{
-			mobile.transform.position = Vector3.MoveTowards (mobile.transform.position, movePoints [1].position, 3.2f);
-
-			yield return new WaitUntil (() => mobile.transform.position == movePoints [1].position);
-			yield return new WaitForSeconds (1f);
-
-			textScreen.SetActive (true);
-
-		}
-
-		if (id == 2)
-		{	
-			textScreen.SetActive (false);
-			yield return new WaitForSeconds (0.5f);
-			mobile.transform.position = Vector3.MoveTowards (mobile.transform.position, movePoints [0].position, 3.2f);
-			yield return new WaitUntil (() => mobile.transform.position == movePoints [0].position);
-			active = false;
-		}
-	}
-
 	void reset ()
 	{
-		textScreen.SetActive (false);
+		timer = 0;
 		cuts = Cuts.end;
-		mobile.transform.position = movePoints [0].position;
-		exitPhone = false;
 	}
 
 	public void CloseText ()
 	{
-		exitPhone = true;
+		timer = 0;
+		cuts = Cuts.cutTwo;
 	}
 
 	void changeTexture (int index)
 	{
 		rawImage.texture = textMessages [index];
+	}
+
+	public void Activate (int index)
+	{
+		rawImage.texture = textMessages [index];
+		active = true;
+		cuts = Cuts.cutOne;
 	}
 }

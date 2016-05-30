@@ -20,14 +20,15 @@ public class GameMaster : MonoBehaviour
 
 	}
 
-    [Header("Ability Cards")]
-    public List<Texture> cards = new List<Texture>();
-    [HideInInspector]
-    public bool showCards = true;
-    [Space(20)]
+	[Header ("Ability Cards")]
+	public List<Texture> cards = new List<Texture> ();
+	[HideInInspector]
+	public bool showCards = true;
+	[Space (20)]
 
 	public States gameState;
 
+	public GetTextCutScene textCutScene;
 	public OnNextRoun onNextRound;
 	public OnPlayerLostLife onPlayerLostLife;
 	public PlayerClimbLadder climbCutScene;
@@ -116,22 +117,25 @@ public class GameMaster : MonoBehaviour
 		return Mathf.RoundToInt (mapHeight / 10);
 	}
 
-    public List<int> CalculateRoadLocations(int mapHeight) {
-        int left = Mathf.RoundToInt((mapHeight / 100f) * 20f);
-        List<int> result = new List<int>();
-        System.Random rand = new System.Random(seed.GetHashCode());
-        while(left > 0) {
-            int lane = rand.Next(4, (mapHeight - 4));
-            if(!result.Contains(lane - 1) && !result.Contains(lane) && !result.Contains(lane + 1)) {
-                result.Add(lane);
-                left--;
-            }
-        }
-        result.Sort();
-        return result;
-    }
+	public List<int> CalculateRoadLocations (int mapHeight)
+	{
+		int left = Mathf.RoundToInt ((mapHeight / 100f) * 20f);
+		List<int> result = new List<int> ();
+		System.Random rand = new System.Random (seed.GetHashCode ());
+		while (left > 0)
+		{
+			int lane = rand.Next (4, (mapHeight - 4));
+			if (!result.Contains (lane - 1) && !result.Contains (lane) && !result.Contains (lane + 1))
+			{
+				result.Add (lane);
+				left--;
+			}
+		}
+		result.Sort ();
+		return result;
+	}
 
-    public List<int> CalculateRoadLocationsOLD (int amount, int mapHeight)
+	public List<int> CalculateRoadLocationsOLD (int amount, int mapHeight)
 	{
 		int left = amount;
 		List<int> result = new List<int> ();
@@ -168,38 +172,42 @@ public class GameMaster : MonoBehaviour
 		}
 	}
 
-    void RemoveCards() {
-        foreach(Texture t in cards) {
-            bool enabled = false;
-            switch(t.name) {
-                case "BearTrapCard":
-                    enabled = bearTraps;
-                    break;
-                case "FBICard":
-                    enabled = fbiTroops;
-                    break;
-                case "MineCard":
-                    enabled = mines;
-                    break;
-                case "SkillCard":
-                    enabled = CarpetBombing;
-                    break;
-            }
-            if(enabled)
-                cards.Remove(t);
-        }
-    }
+	void RemoveCards ()
+	{
+		foreach (Texture t in cards)
+		{
+			bool enabled = false;
+			switch (t.name)
+			{
+				case "BearTrapCard":
+					enabled = bearTraps;
+					break;
+				case "FBICard":
+					enabled = fbiTroops;
+					break;
+				case "MineCard":
+					enabled = mines;
+					break;
+				case "SkillCard":
+					enabled = CarpetBombing;
+					break;
+			}
+			if (enabled)
+				cards.Remove (t);
+		}
+	}
 
-    public Texture pickRandomCard(string _seed) {
-        System.Random rand = new System.Random(_seed.GetHashCode());
-        int i = rand.Next(0, cards.Count);
-        return cards[i];
-    }
+	public Texture pickRandomCard (string _seed)
+	{
+		System.Random rand = new System.Random (_seed.GetHashCode ());
+		int i = rand.Next (0, cards.Count);
+		return cards [i];
+	}
 
 	void Update ()
 	{
-        RemoveCards();
-        switch (gameState)
+		RemoveCards ();
+		switch (gameState)
 		{
 			case States.gameActive:
 				UpdateGameActive ();
@@ -303,6 +311,7 @@ public class GameMaster : MonoBehaviour
 
 	public void StartGame ()
 	{
+		textCutScene.Activate (0);
 		gameState = States.gameActive;
 	}
 
@@ -327,7 +336,7 @@ public class GameMaster : MonoBehaviour
 	public void NextRound ()
 	{
 
-        //world.GenerateWorld (seed);
+		//world.GenerateWorld (seed);
 		onNextRound ();
 		ladderCount = 0;
 		AddScore (500);
