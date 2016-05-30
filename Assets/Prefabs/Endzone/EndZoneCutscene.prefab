@@ -238,6 +238,7 @@ GameObject:
   - 4: {fileID: 406976}
   - 114: {fileID: 11417384}
   - 114: {fileID: 11475890}
+  - 114: {fileID: 11480878}
   m_Layer: 0
   m_Name: EndZoneCutscene
   m_TagString: Untagged
@@ -382,6 +383,21 @@ GameObject:
   - 212: {fileID: 21289750}
   m_Layer: 0
   m_Name: ladder (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &149502
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 457716}
+  m_Layer: 0
+  m_Name: WinScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -572,7 +588,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &163130
 GameObject:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -908,8 +924,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 457716}
   - {fileID: 466204}
   - {fileID: 479478}
+  - {fileID: 498908}
   - {fileID: 440892}
   - {fileID: 449776}
   - {fileID: 476632}
@@ -1133,7 +1151,7 @@ Transform:
   m_LocalScale: {x: 1.416246, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 406976}
-  m_RootOrder: 2
+  m_RootOrder: 4
 --- !u!4 &442680
 Transform:
   m_ObjectHideFlags: 1
@@ -1175,7 +1193,7 @@ Transform:
   - {fileID: 447026}
   - {fileID: 409988}
   m_Father: {fileID: 406976}
-  m_RootOrder: 3
+  m_RootOrder: 5
 --- !u!4 &450516
 Transform:
   m_ObjectHideFlags: 1
@@ -1227,7 +1245,7 @@ Transform:
   - {fileID: 487322}
   - {fileID: 437276}
   m_Father: {fileID: 406976}
-  m_RootOrder: 5
+  m_RootOrder: 7
 --- !u!4 &454894
 Transform:
   m_ObjectHideFlags: 1
@@ -1240,6 +1258,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 454064}
   m_RootOrder: 9
+--- !u!4 &457716
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 149502}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 406976}
+  m_RootOrder: 0
 --- !u!4 &462584
 Transform:
   m_ObjectHideFlags: 1
@@ -1254,7 +1284,7 @@ Transform:
   - {fileID: 404096}
   - {fileID: 462684}
   m_Father: {fileID: 406976}
-  m_RootOrder: 7
+  m_RootOrder: 9
 --- !u!4 &462684
 Transform:
   m_ObjectHideFlags: 1
@@ -1304,9 +1334,8 @@ Transform:
   - {fileID: 442680}
   - {fileID: 450516}
   - {fileID: 495726}
-  - {fileID: 498908}
   m_Father: {fileID: 406976}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!4 &471686
 Transform:
   m_ObjectHideFlags: 1
@@ -1361,7 +1390,7 @@ Transform:
   - {fileID: 479948}
   - {fileID: 473456}
   m_Father: {fileID: 406976}
-  m_RootOrder: 4
+  m_RootOrder: 6
 --- !u!4 &479478
 Transform:
   m_ObjectHideFlags: 1
@@ -1373,7 +1402,7 @@ Transform:
   m_LocalScale: {x: 1.2, y: 1.2, z: 1}
   m_Children: []
   m_Father: {fileID: 406976}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!4 &479948
 Transform:
   m_ObjectHideFlags: 1
@@ -1449,7 +1478,7 @@ Transform:
   - {fileID: 419554}
   - {fileID: 414830}
   m_Father: {fileID: 406976}
-  m_RootOrder: 6
+  m_RootOrder: 8
 --- !u!4 &495726
 Transform:
   m_ObjectHideFlags: 1
@@ -1482,11 +1511,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 163130}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -55.5, y: 17.1, z: -3.5}
+  m_LocalPosition: {x: -55.5, y: 17.1, z: -5}
   m_LocalScale: {x: 1.2, y: 1.2, z: 1}
   m_Children:
   - {fileID: 431502}
-  m_Father: {fileID: 466204}
+  m_Father: {fileID: 406976}
   m_RootOrder: 3
 --- !u!20 &2065966
 Camera:
@@ -1826,9 +1855,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47628da65480f8040b002b189138569e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityCardTextures:
-  - {fileID: 2800000, guid: 8b10c8dd0bf3c9d4b9a3e1a0b2a6f787, type: 3}
-  - {fileID: 2800000, guid: f7c0a389fd140214b92ca1cb5ce1c350, type: 3}
   UI: {fileID: 0}
   abilityCard: {fileID: 0}
   quotes:
@@ -1860,9 +1886,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96e8983a9993b61418f305aab69fc564, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityCardTextures:
-  - {fileID: 2800000, guid: 65ba04e7806aa5540a2e6f8ab75ee4cb, type: 3}
-  - {fileID: 2800000, guid: c640c9078ae337940913d3fe45687e77, type: 3}
   UI: {fileID: 0}
   abilityCard: {fileID: 0}
   quotes:
@@ -1880,15 +1903,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f04edbe61b7dfb245993cefd717a5349, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityCardTextures:
-  - {fileID: 2800000, guid: c640c9078ae337940913d3fe45687e77, type: 3}
-  - {fileID: 2800000, guid: f7c0a389fd140214b92ca1cb5ce1c350, type: 3}
   UI: {fileID: 0}
   abilityCard: {fileID: 0}
   quotes:
   - {fileID: 21300000, guid: e523116a4facf0d41acdb0570c17e5b0, type: 3}
   - {fileID: 21300000, guid: aab72d9da4cfc0d4484801e1de90029e, type: 3}
   - {fileID: 21300000, guid: 33cce9a1c7be55545a9b60d41e979cab, type: 3}
+--- !u!114 &11480878
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 138602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af3aba8ab88e4f947b1743875b23cc8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  win: {fileID: 149502}
+  politicians: {fileID: 149716}
+  abilityCard: {fileID: 0}
 --- !u!114 &11491386
 MonoBehaviour:
   m_ObjectHideFlags: 1

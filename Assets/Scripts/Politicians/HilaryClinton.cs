@@ -21,7 +21,7 @@ public class HilaryClinton : politician
 		clickCB (this.gameObject);
 	}
 
-	protected override void ActivateAbility (int cardNum)
+	/*protected override void ActivateAbility (int cardNum)
 	{
 		if (cardNum == 0)
 		{
@@ -33,5 +33,5 @@ public class HilaryClinton : politician
 			GM.fbiTroops = true;
 
 		}
-	}
+	}*/
 }

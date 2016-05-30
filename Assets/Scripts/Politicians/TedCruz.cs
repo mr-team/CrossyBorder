@@ -21,7 +21,7 @@ public class TedCruz : politician
 		clickCB (this.gameObject);
 	}
 
-	protected override void ActivateAbility (int cardNum)
+	/*protected override void ActivateAbility (int cardNum)
 	{
 		if (cardNum == 0)
 		{
@@ -33,5 +33,5 @@ public class TedCruz : politician
 			GM.CarpetBombing = true;
 
 		}
-	}
+	}*/
 }
