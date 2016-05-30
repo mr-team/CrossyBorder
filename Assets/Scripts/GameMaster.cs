@@ -89,6 +89,7 @@ public class GameMaster : MonoBehaviour
 
 	public void ReAwake ()
 	{
+		
 		List<int> roads = CalculateRoadLocations (worldHeigth);
 		PlaceRoads (roads);
 		world = new World (worldWidth, worldHeigth, noiseScale);
@@ -101,6 +102,7 @@ public class GameMaster : MonoBehaviour
 
 	void Awake ()
 	{
+		textCutScene = GameObject.Find ("GetTextCutScene").GetComponent<GetTextCutScene> ();
 		List<int> roads = CalculateRoadLocations (worldHeigth);
 		PlaceRoads (roads);
 		world = new World (worldWidth, worldHeigth, noiseScale);

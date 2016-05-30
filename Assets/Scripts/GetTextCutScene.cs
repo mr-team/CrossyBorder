@@ -13,7 +13,6 @@ public class GetTextCutScene : MonoBehaviour
 
 	Cuts cuts;
 
-
 	public PlayerController playerControl;
 	public GameObject textScreen;
 	RawImage rawImage;
@@ -29,6 +28,11 @@ public class GetTextCutScene : MonoBehaviour
 	float timer3;
 
 	public bool active;
+
+	void Awake ()
+	{
+		playerControl = GameObject.Find ("Player").GetComponent<PlayerController> ();
+	}
 
 	void Start ()
 	{
