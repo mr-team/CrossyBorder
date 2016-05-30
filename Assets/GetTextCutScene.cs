@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class GetTextCutScene : MonoBehaviour
 {
@@ -16,11 +17,13 @@ public class GetTextCutScene : MonoBehaviour
 	public GameObject mobile;
 	public bool active;
 	public GameObject textScreen;
-
+	RawImage rawImage;
+	public Texture[] textMessages = new Texture[7];
 	public bool exitPhone;
 
 	void Start ()
 	{
+		rawImage = textScreen.GetComponent<RawImage> ();
 		mobile.transform.position = movePoints [0].position;
 		textScreen.SetActive (false);
 	}
@@ -90,8 +93,7 @@ public class GetTextCutScene : MonoBehaviour
 		}
 
 		if (id == 2)
-		{
-			
+		{	
 			textScreen.SetActive (false);
 			yield return new WaitForSeconds (0.5f);
 			mobile.transform.position = Vector3.MoveTowards (mobile.transform.position, movePoints [0].position, 3.2f);
@@ -111,5 +113,10 @@ public class GetTextCutScene : MonoBehaviour
 	public void CloseText ()
 	{
 		exitPhone = true;
+	}
+
+	void changeTexture (int index)
+	{
+		rawImage.texture = textMessages [index];
 	}
 }
