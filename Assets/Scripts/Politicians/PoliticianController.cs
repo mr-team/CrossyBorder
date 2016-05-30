@@ -17,6 +17,7 @@ public class PoliticianController : MonoBehaviour
 	public politician cruz;
 	public politician trump;
 	public politician clinton;
+	public PlayerKickedFromWall cutScenePlayerKicked;
 
 	void Start ()
 	{
@@ -50,7 +51,9 @@ public class PoliticianController : MonoBehaviour
 
 	void UpdateChosen ()
 	{
-		GM.NextRound ();
+		
+		cutScenePlayerKicked.active = true;
+		//GM.NextRound ();
 		choseState = ChoseState.notchosen;
 	}
 
