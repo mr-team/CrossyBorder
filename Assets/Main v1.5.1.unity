@@ -1413,10 +1413,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 11426734, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
-      propertyPath: cards.Array.size
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 411722, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
       propertyPath: m_LocalPosition.x
       value: 4.565522
@@ -1449,30 +1445,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 11460782, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
-      propertyPath: sanders
-      value: 
-      objectReference: {fileID: 236749053}
-    - target: {fileID: 11460782, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
-      propertyPath: cruz
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 11460782, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
-      propertyPath: trump
-      value: 
-      objectReference: {fileID: 1325997378}
-    - target: {fileID: 11460782, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
-      propertyPath: clinton
-      value: 
-      objectReference: {fileID: 172659754}
-    - target: {fileID: 11494804, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
-      propertyPath: timeText
-      value: 
-      objectReference: {fileID: 2019011361}
-    - target: {fileID: 11494804, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
-      propertyPath: livesLeft
-      value: 
-      objectReference: {fileID: 189679538}
     - target: {fileID: 11437336, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
       propertyPath: mainMenu
       value: 
@@ -1493,46 +1465,6 @@ Prefab:
       propertyPath: winScreen
       value: 
       objectReference: {fileID: 367139373}
-    - target: {fileID: 11426734, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
-      propertyPath: mines
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11426734, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
-      propertyPath: worldHeigth
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 11426734, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
-      propertyPath: EndWall
-      value: 
-      objectReference: {fileID: 338163063}
-    - target: {fileID: 11426734, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
-      propertyPath: seed
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 11426734, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
-      propertyPath: bearTraps
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11426734, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
-      propertyPath: CarpetBombing
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11494804, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
-      propertyPath: ladderCounter
-      value: 
-      objectReference: {fileID: 803118031}
-    - target: {fileID: 11494804, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
-      propertyPath: spadeCounter
-      value: 
-      objectReference: {fileID: 855872774}
-    - target: {fileID: 11426734, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
-      propertyPath: catapultPrefab
-      value: 
-      objectReference: {fileID: 170050, guid: 6e7bf30d54f90b24e9de6bcef8201f8c, type: 2}
-    - target: {fileID: 11426734, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
-      propertyPath: catapult
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 11494804, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
       propertyPath: ShovelGraphics.Array.data[0]
       value: 
@@ -1546,57 +1478,57 @@ Prefab:
       value: 
       objectReference: {fileID: 1779354098}
     - target: {fileID: 11494804, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
+      propertyPath: timeText
+      value: 
+      objectReference: {fileID: 2019011361}
+    - target: {fileID: 11494804, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
+      propertyPath: livesLeft
+      value: 
+      objectReference: {fileID: 189679538}
+    - target: {fileID: 11494804, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
+      propertyPath: ladderCounter
+      value: 
+      objectReference: {fileID: 803118031}
+    - target: {fileID: 11494804, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
+      propertyPath: spadeCounter
+      value: 
+      objectReference: {fileID: 855872774}
+    - target: {fileID: 11494804, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
       propertyPath: scoreText
       value: 
       objectReference: {fileID: 1738847016}
-    - target: {fileID: 11426734, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
-      propertyPath: fbiTroops
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11426734, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
-      propertyPath: PredatorDrones
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11426734, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
-      propertyPath: roundWon
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11426734, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
-      propertyPath: worldWidth
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 11426734, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
-      propertyPath: climbCutScene
-      value: 
-      objectReference: {fileID: 1164938302}
     - target: {fileID: 11460782, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
-      propertyPath: cutScenePlayerClimbLadder
+      propertyPath: sanders
       value: 
-      objectReference: {fileID: 1164938302}
+      objectReference: {fileID: 236749053}
+    - target: {fileID: 11460782, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
+      propertyPath: trump
+      value: 
+      objectReference: {fileID: 1325997378}
+    - target: {fileID: 11460782, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
+      propertyPath: clinton
+      value: 
+      objectReference: {fileID: 172659754}
     - target: {fileID: 11460782, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
       propertyPath: cutScenePlayerKicked
       value: 
       objectReference: {fileID: 1164938303}
     - target: {fileID: 11426734, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
-      propertyPath: cards.Array.data[0]
+      propertyPath: UI
       value: 
-      objectReference: {fileID: 2800000, guid: 8b10c8dd0bf3c9d4b9a3e1a0b2a6f787, type: 3}
-    - target: {fileID: 11426734, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
-      propertyPath: cards.Array.data[1]
-      value: 
-      objectReference: {fileID: 2800000, guid: c640c9078ae337940913d3fe45687e77, type: 3}
-    - target: {fileID: 11426734, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
-      propertyPath: cards.Array.data[2]
-      value: 
-      objectReference: {fileID: 2800000, guid: f7c0a389fd140214b92ca1cb5ce1c350, type: 3}
-    - target: {fileID: 11426734, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
-      propertyPath: cards.Array.data[3]
-      value: 
-      objectReference: {fileID: 2800000, guid: 65ba04e7806aa5540a2e6f8ab75ee4cb, type: 3}
+      objectReference: {fileID: 1958085979}
     - target: {fileID: 11426734, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
       propertyPath: textCutScene
       value: 
       objectReference: {fileID: 398585371}
+    - target: {fileID: 11426734, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
+      propertyPath: climbCutScene
+      value: 
+      objectReference: {fileID: 1164938302}
+    - target: {fileID: 11426734, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
+      propertyPath: EndWall
+      value: 
+      objectReference: {fileID: 338163063}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ccc9d62aed78fab43bd028f68700b203, type: 2}
   m_IsPrefabParent: 0
