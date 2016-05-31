@@ -74,10 +74,4 @@ public class CustomAudioSource : MonoBehaviour
 		source.clip = clip;
 		return clip;
 	}
-
-	public void PlayDefaultAduio ()
-	{
-		source.clip = clip;
-		source.PlayOneShot (clip);
-	}
 }
