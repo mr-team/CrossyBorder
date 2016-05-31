@@ -18,8 +18,8 @@ public class PlayerKickedFromWall : MonoBehaviour
 	Animator playerAnim;
 	public Animator trumpAnim;
 
-
 	public bool active;
+	public bool kicked;
 	public bool invokeActive;
 	float timer;
 
@@ -27,37 +27,45 @@ public class PlayerKickedFromWall : MonoBehaviour
 	{
 		GM = GameObject.Find ("GameMaster").GetComponent<GameMaster> ();
 		playerAnim = player.GetComponent<Animator> ();
-		active = false;
+		kicked = false;
 		holderMethod = ser;
+		player.GetComponent<SpriteRenderer> ().enabled = false;
 	}
 
 	void Update ()
 	{
 		if (active)
 		{
-			timer += Time.deltaTime;
-			trumpAnim.SetBool ("Kick", true);
-
-			playerAnim.SetBool ("GetKicked", true);	
-
-			if (customAudioSource.source.clip != KickedFromWallSong)
+			player.GetComponent<SpriteRenderer> ().enabled = true;
+		
+			if (kicked)
 			{
-				customAudioSource.source.clip = KickedFromWallSong;
-				customAudioSource.Play (KickedFromWallSong);
-				invokeActive = true;
-			}
+				timer += Time.deltaTime;
+				trumpAnim.SetBool ("Kick", true);
 
-			if (timer >= 1)
-			{
-				GM.NextRound ();
-				playerAnim.SetBool ("GetKicked", false);
-				trumpAnim.SetBool ("Kick", false);
-				timer = 0;
+				playerAnim.SetBool ("GetKicked", true);	
 
-				active = false;
-			}
+				if (customAudioSource.source.clip != KickedFromWallSong)
+				{
+					customAudioSource.source.clip = KickedFromWallSong;
+					customAudioSource.Play (KickedFromWallSong);
+					invokeActive = true;
+				}
+
+				if (timer >= 1)
+				{
+					GM.NextRound ();
+					playerAnim.SetBool ("GetKicked", false);
+					trumpAnim.SetBool ("Kick", false);
+					timer = 0;
+
+					kicked = false;
+				}
+			} 
+		} else if (!active)
+		{
+			player.GetComponent<SpriteRenderer> ().enabled = false;
 		}
-
 		if (invokeActive)
 		{
 

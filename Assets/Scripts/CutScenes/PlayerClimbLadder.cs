@@ -7,9 +7,11 @@ public class PlayerClimbLadder : MonoBehaviour
 	{
 		firstCut,
 		secondCut,
+		end,
 	}
 
 	GameMaster GM;
+	PlayerKickedFromWall KickedFromWall;
 
 	public Cuts cuts;
 	public Camera cutSceneCamera;
@@ -34,6 +36,7 @@ public class PlayerClimbLadder : MonoBehaviour
 
 	void Start ()
 	{
+		KickedFromWall = GetComponent<PlayerKickedFromWall> ();
 		GM = GameObject.Find ("GameMaster").GetComponent<GameMaster> ();
 		cutSceneCamera.transform.position = panPoints [0].transform.position;
 		player.transform.position = playerPanPoints [0].transform.position;
@@ -46,10 +49,15 @@ public class PlayerClimbLadder : MonoBehaviour
 	void Update ()
 	{
 		if (Input.GetKeyDown (KeyCode.K))
+		{
 			active = true;
+			cuts = Cuts.firstCut;
+		}
+
 		
 		if (active)
 		{
+			GM.Player.Imortal = true;
 			switch (cuts)
 			{
 				case Cuts.firstCut:
@@ -57,7 +65,10 @@ public class PlayerClimbLadder : MonoBehaviour
 					break;
 
 				case Cuts.secondCut:
-					
+					SecondCut ();
+					break;
+
+				case Cuts.end:
 					break;
 			}
 		}
@@ -83,39 +94,56 @@ public class PlayerClimbLadder : MonoBehaviour
 		playerAnim.SetBool ("Climbing", true);
 		cutSceneCamera.transform.position = Vector3.MoveTowards (cutSceneCamera.transform.position, panPoints [1].transform.position, 0.02f);
 
-		if (timer >= 6)
+		if (timer >= 2)
 		{
 			TransistToSecondCut ();
-			timer = 0;
-			//active = false;
+
+
 		}
-
-		//StartCoroutine (FirstMovement ());
-
 	}
+
+	void SecondCut ()
+	{
+		timer += Time.deltaTime;
+
+		if (timer >= 2)
+			TransistToEnd ();
+	}
+
 
 	void TransistToSecondCut ()
 	{
 		if (cuts != Cuts.secondCut)
 		{
-			//cutSceneCamera.cullingMask = 0;
+			timer = 0;
+			playerMove.SetBool ("Climbing", false);
+			playerMove.SetBool ("Climbing2", true);
 			cutSceneCamera.transform.position = panPoints [2].transform.position;
 			cutSceneCamera.orthographicSize = 9;
-			playerAnim.SetBool ("Climbing", false);
-			playerMove.SetBool ("Climbing", false);
-			//cutSceneCamera.cullingMask = -1;
-			player.GetComponent<SpriteRenderer> ().enabled = false;
 			cuts = Cuts.secondCut;
 		}
 	}
 
+	void TransistToEnd ()
+	{
+		timer = 0;
+		playerAnim.SetBool ("Climbing", false);
+		playerMove.SetBool ("Climbing2", false);
+		player.GetComponent<SpriteRenderer> ().enabled = false;
+		KickedFromWall.active = true;
+		cuts = Cuts.end;
+	}
+
 	void Reset ()
 	{
+		timer = 0;
+		KickedFromWall.active = false;
 		cutSceneCamera.transform.position = panPoints [0].transform.position;
 		player.transform.position = playerPanPoints [0].transform.position;
 		cuts = Cuts.firstCut;
 		cutSceneCamera.orthographicSize = 5;
 		player.GetComponent<SpriteRenderer> ().enabled = true;
+		playerMove.SetBool ("Climbing2", false);
 		playerAnim.SetBool ("Climbing", true);
 		cutSceneCamera.enabled = false;
 	}

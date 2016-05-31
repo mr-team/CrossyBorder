@@ -197,8 +197,8 @@ public class PlayerController : MonoBehaviour
 			{
 
 				actionStates = ActionStates.tunneling;
-			} else
-				Debug.Log ("you aint got no shovels to be shovelin no tunnel");
+			} 
+
 		}
 	}
 
