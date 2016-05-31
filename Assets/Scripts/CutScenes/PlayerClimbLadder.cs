@@ -15,6 +15,11 @@ public class PlayerClimbLadder : MonoBehaviour
 	public Camera cutSceneCamera;
 	public GameObject player;
 
+	//Sound
+	public CustomAudioSource customAudioSource;
+	public AudioClip walkUpLadderSong;
+	public AudioClip standardSong;
+
 	Animator playerAnim;
 	public Animator trumpAnim;
 	public Animator playerMove;
@@ -67,6 +72,12 @@ public class PlayerClimbLadder : MonoBehaviour
 	{
 		timer += Time.deltaTime;
 
+		if (customAudioSource.source.clip != walkUpLadderSong)
+		{
+			customAudioSource.source.clip = walkUpLadderSong;
+			customAudioSource.Play (walkUpLadderSong);
+			
+		}
 		cutSceneCamera.enabled = true;
 		playerMove.SetBool ("Climbing", true);
 		playerAnim.SetBool ("Climbing", true);
