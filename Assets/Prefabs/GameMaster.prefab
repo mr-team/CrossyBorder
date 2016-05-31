@@ -42,7 +42,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 122d39bdce1a50c4f825dd0180c977fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cards:
+  - {fileID: 2800000, guid: 8b10c8dd0bf3c9d4b9a3e1a0b2a6f787, type: 3}
+  - {fileID: 2800000, guid: c640c9078ae337940913d3fe45687e77, type: 3}
+  - {fileID: 2800000, guid: f7c0a389fd140214b92ca1cb5ce1c350, type: 3}
+  - {fileID: 2800000, guid: 65ba04e7806aa5540a2e6f8ab75ee4cb, type: 3}
+  showCards: 1
+  scorePopupPrefab: {fileID: 161324, guid: dad307056ffb3f54fa2516bdc57beb5f, type: 2}
+  UI: {fileID: 0}
   gameState: 0
+  textCutScene: {fileID: 0}
   climbCutScene: {fileID: 0}
   worldWidth: 11
   worldHeigth: 30
@@ -100,6 +109,7 @@ MonoBehaviour:
   cruz: {fileID: 0}
   trump: {fileID: 0}
   clinton: {fileID: 0}
+  cutScenePlayerKicked: {fileID: 0}
 --- !u!114 &11494804
 MonoBehaviour:
   m_ObjectHideFlags: 1

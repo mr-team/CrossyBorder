@@ -56,15 +56,13 @@ public class CarController : MonoBehaviour
 
 	public void DestroyCar ()
 	{
-		//GM.score += (moveSpeed == 6) ? 30 : 50; //30 score for normal cars, 50 score for FBI car
 		GameObject carExp = Instantiate (carExplotion, transform.position, Quaternion.identity) as GameObject;
-
 		Destroy (gameObject);
 	}
 
 	public void DestroyCarScore ()
 	{
-		GM.score += (moveSpeed == 6) ? 30 : 50; //30 score for normal cars, 50 score for FBI car
+		GM.AddScore((moveSpeed == 6) ? 30 : 50); //30 score for normal cars, 50 score for FBI car
 		GameObject carExp = Instantiate (carExplotion, transform.position, Quaternion.identity) as GameObject;
 		Destroy (gameObject);
 	}

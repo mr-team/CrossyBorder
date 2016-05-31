@@ -118,5 +118,5 @@ public class WorldGenerator : MonoBehaviour
             Destroy(obj);
         }
         GM.carLaneObjects.Clear();
-	}
+    }
 }
