@@ -80,6 +80,7 @@ MonoBehaviour:
   clip: {fileID: 8300000, guid: f3998e38d35eaa64aa7d12a877a568d2, type: 3}
   loop: 0
   playOnWake: 0
+  source: {fileID: 0}
 --- !u!114 &11475988
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -92,6 +93,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UIPICKUP: {fileID: 180958, guid: 4f38c3db5bce3dc4b8d822bec8f53e89, type: 2}
+  smoke: {fileID: 189530, guid: 4eee4f2cd4080ee47b169a6b1a4f2b07, type: 2}
+  pointSprite: {fileID: 21300000, guid: 6d144e3f70a841f49938ba60e10fa99f, type: 3}
 --- !u!212 &21241350
 SpriteRenderer:
   m_ObjectHideFlags: 1
