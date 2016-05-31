@@ -3404,6 +3404,34 @@ Prefab:
       propertyPath: abilityCard
       value: 
       objectReference: {fileID: 371306641}
+    - target: {fileID: 11417384, guid: 4d547d9d71dddb041aa2918b23c5f554, type: 2}
+      propertyPath: customAudioSource
+      value: 
+      objectReference: {fileID: 2132914951}
+    - target: {fileID: 11417384, guid: 4d547d9d71dddb041aa2918b23c5f554, type: 2}
+      propertyPath: walkUpLadderSong
+      value: 
+      objectReference: {fileID: 8300000, guid: f31ac776df6d4864b92bcd1030972be9, type: 3}
+    - target: {fileID: 11417384, guid: 4d547d9d71dddb041aa2918b23c5f554, type: 2}
+      propertyPath: standardSong
+      value: 
+      objectReference: {fileID: 8300000, guid: 370afe1086f937f48b89de9aea55edaf, type: 3}
+    - target: {fileID: 11475890, guid: 4d547d9d71dddb041aa2918b23c5f554, type: 2}
+      propertyPath: customAudioSource
+      value: 
+      objectReference: {fileID: 2132914951}
+    - target: {fileID: 11475890, guid: 4d547d9d71dddb041aa2918b23c5f554, type: 2}
+      propertyPath: standardSong
+      value: 
+      objectReference: {fileID: 8300000, guid: 370afe1086f937f48b89de9aea55edaf, type: 3}
+    - target: {fileID: 11475890, guid: 4d547d9d71dddb041aa2918b23c5f554, type: 2}
+      propertyPath: walkUpLadderSong
+      value: 
+      objectReference: {fileID: 8300000, guid: 985c23da565e45944b28166e93c2decb, type: 3}
+    - target: {fileID: 11475890, guid: 4d547d9d71dddb041aa2918b23c5f554, type: 2}
+      propertyPath: KickedFromWallSong
+      value: 
+      objectReference: {fileID: 8300000, guid: 985c23da565e45944b28166e93c2decb, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4d547d9d71dddb041aa2918b23c5f554, type: 2}
   m_IsPrefabParent: 0
@@ -6081,9 +6109,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioType: 0
-  clip: {fileID: 8300000, guid: 95392b6ebe6d3e243b26795ab0a35ea0, type: 3}
+  clip: {fileID: 8300000, guid: 370afe1086f937f48b89de9aea55edaf, type: 3}
   loop: 1
   playOnWake: 1
+  source: {fileID: 0}
 --- !u!82 &2132914952
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6093,7 +6122,7 @@ AudioSource:
   m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 95392b6ebe6d3e243b26795ab0a35ea0, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 370afe1086f937f48b89de9aea55edaf, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

@@ -27,7 +27,7 @@ public class BearTrap : MonoBehaviour
 			Debug.Log ("timer");
 			if (timer < maxCloseTime)
 			{
-				Debug.Log ("the trap is closed on the player");
+				//Debug.Log ("the trap is closed on the player");
 				player.gameObject.GetComponent<PlayerController> ().stunned = true;
 				anim.SetBool ("Close", true);
 			}
@@ -37,7 +37,7 @@ public class BearTrap : MonoBehaviour
 			}
 			if (timer > maxCloseTime)
 			{
-				Debug.Log ("the trap opened for the player");
+				//Debug.Log ("the trap opened for the player");
 				player.gameObject.GetComponent<PlayerController> ().stunned = false;
 
 			}
@@ -60,7 +60,7 @@ public class BearTrap : MonoBehaviour
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
-		if (other.tag == "Player") 
+		if (other.tag == "Player")
 		{
 			GetComponent<CustomAudioSource> ().Play ();
 		}
