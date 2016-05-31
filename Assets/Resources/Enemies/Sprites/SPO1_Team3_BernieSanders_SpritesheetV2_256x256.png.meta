@@ -1,0 +1,272 @@
+fileFormatVersion: 2
+guid: 891f896e80fa8884ba9a9f7152a85fc4
+timeCreated: 1464725447
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: SPO1_Team3_BernieSanders_SpritesheetV2_256x256_0
+    21300002: SPO1_Team3_BernieSanders_SpritesheetV2_256x256_1
+    21300004: SPO1_Team3_BernieSanders_SpritesheetV2_256x256_2
+    21300006: SPO1_Team3_BernieSanders_SpritesheetV2_256x256_3
+    21300008: SPO1_Team3_BernieSanders_SpritesheetV2_256x256_4
+    21300010: SPO1_Team3_BernieSanders_SpritesheetV2_256x256_5
+    21300012: SPO1_Team3_BernieSanders_SpritesheetV2_256x256_6
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: SPO1_Team3_BernieSanders_SpritesheetV2_256x256_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 92, y: 44}
+        - {x: 96, y: 44}
+        - {x: 102, y: 47}
+        - {x: 103, y: 59}
+        - {x: 98, y: 62}
+        - {x: 108, y: 97}
+        - {x: 108, y: 111}
+        - {x: 88, y: 120}
+        - {x: -86, y: 120}
+        - {x: -96, y: 111}
+        - {x: -96, y: 90}
+        - {x: -94, y: 87}
+        - {x: -89, y: 83}
+        - {x: -96, y: 75}
+        - {x: -96, y: -81}
+        - {x: -79, y: -128}
+        - {x: 71, y: -128}
+        - {x: 108, y: -93}
+        - {x: 108, y: 42}
+        - {x: 94, y: 44}
+    - name: SPO1_Team3_BernieSanders_SpritesheetV2_256x256_1
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 256
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 94, y: 44}
+        - {x: 92, y: 44}
+        - {x: 96, y: 44}
+        - {x: 102, y: 47}
+        - {x: 103, y: 59}
+        - {x: 98, y: 62}
+        - {x: 108, y: 97}
+        - {x: 108, y: 111}
+        - {x: 88, y: 120}
+        - {x: -86, y: 120}
+        - {x: -96, y: 111}
+        - {x: -96, y: -112}
+        - {x: -77, y: -128}
+        - {x: 77, y: -128}
+        - {x: 108, y: -26}
+        - {x: 108, y: 38}
+        - {x: 105, y: 41}
+    - name: SPO1_Team3_BernieSanders_SpritesheetV2_256x256_2
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 256
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 94, y: 46}
+        - {x: 92, y: 46}
+        - {x: 96, y: 46}
+        - {x: 102, y: 49}
+        - {x: 103, y: 61}
+        - {x: 98, y: 64}
+        - {x: 108, y: 90}
+        - {x: 108, y: 116}
+        - {x: 88, y: 122}
+        - {x: -96, y: 122}
+        - {x: -96, y: -123}
+        - {x: -87, y: -128}
+        - {x: 95, y: -128}
+        - {x: 108, y: -59}
+        - {x: 108, y: 45}
+        - {x: 104, y: 42}
+    - name: SPO1_Team3_BernieSanders_SpritesheetV2_256x256_3
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 256
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 94, y: 48}
+        - {x: 92, y: 48}
+        - {x: 96, y: 48}
+        - {x: 102, y: 51}
+        - {x: 103, y: 63}
+        - {x: 98, y: 66}
+        - {x: 96, y: 81}
+        - {x: 90, y: 101}
+        - {x: 72, y: 124}
+        - {x: -86, y: 124}
+        - {x: -96, y: 114}
+        - {x: -96, y: -128}
+        - {x: 75, y: -128}
+        - {x: 108, y: 7}
+        - {x: 108, y: 42}
+        - {x: 104, y: 44}
+    - name: SPO1_Team3_BernieSanders_SpritesheetV2_256x256_4
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 256
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 94, y: 46}
+        - {x: 92, y: 46}
+        - {x: 96, y: 46}
+        - {x: 102, y: 49}
+        - {x: 103, y: 61}
+        - {x: 98, y: 64}
+        - {x: 108, y: 90}
+        - {x: 108, y: 116}
+        - {x: 88, y: 122}
+        - {x: -96, y: 122}
+        - {x: -96, y: -123}
+        - {x: -87, y: -128}
+        - {x: 95, y: -128}
+        - {x: 108, y: -59}
+        - {x: 108, y: 45}
+        - {x: 104, y: 42}
+    - name: SPO1_Team3_BernieSanders_SpritesheetV2_256x256_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 93, y: -34}
+        - {x: 109, y: 37}
+        - {x: 104, y: 40}
+        - {x: 94, y: 44}
+        - {x: 92, y: 44}
+        - {x: 96, y: 44}
+        - {x: 102, y: 47}
+        - {x: 103, y: 59}
+        - {x: 98, y: 62}
+        - {x: 111, y: 110}
+        - {x: 88, y: 120}
+        - {x: -86, y: 120}
+        - {x: -104, y: 103}
+        - {x: -94, y: 87}
+        - {x: -89, y: 83}
+        - {x: -96, y: 75}
+        - {x: -99, y: 58}
+        - {x: -104, y: 11}
+        - {x: -128, y: -16}
+        - {x: -128, y: -52}
+        - {x: -106, y: -77}
+        - {x: -57, y: -128}
+        - {x: 68, y: -128}
+        - {x: 128, y: -66}
+        - {x: 128, y: -25}
+        - {x: 115, y: -22}
+    - name: SPO1_Team3_BernieSanders_SpritesheetV2_256x256_6
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 99, y: -24}
+        - {x: 109, y: 37}
+        - {x: 104, y: 40}
+        - {x: 94, y: 44}
+        - {x: 92, y: 44}
+        - {x: 96, y: 44}
+        - {x: 102, y: 47}
+        - {x: 103, y: 59}
+        - {x: 98, y: 62}
+        - {x: 111, y: 110}
+        - {x: 88, y: 120}
+        - {x: -86, y: 120}
+        - {x: -104, y: 103}
+        - {x: -128, y: 2}
+        - {x: -128, y: -69}
+        - {x: -74, y: -128}
+        - {x: 79, y: -128}
+        - {x: 128, y: -71}
+        - {x: 128, y: -30}
+        - {x: 119, y: -25}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

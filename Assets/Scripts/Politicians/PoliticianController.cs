@@ -52,7 +52,7 @@ public class PoliticianController : MonoBehaviour
 	void UpdateChosen ()
 	{
 		
-		cutScenePlayerKicked.active = true;
+		cutScenePlayerKicked.kicked = true;
 		//GM.NextRound ();
 		choseState = ChoseState.notchosen;
 	}

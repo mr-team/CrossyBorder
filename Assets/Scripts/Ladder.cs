@@ -22,7 +22,7 @@ public class Ladder : MonoBehaviour
 		if (GM.ladderCount >= GM.maxLadder && !Once)
 		{
 			Instantiate (smoke, transform.position, Quaternion.identity);
-			GetComponent<SpriteRenderer> ().sprite = pointSprite;
+			//GetComponent<SpriteRenderer> ().sprite = pointSprite;
 			Once = true;
 		}
 	}

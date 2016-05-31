@@ -24,7 +24,7 @@ public class BearTrap : MonoBehaviour
 		{
 			timer += Time.deltaTime; 
 
-			Debug.Log ("timer");
+			//Debug.Log ("timer");
 			if (timer < maxCloseTime)
 			{
 				//Debug.Log ("the trap is closed on the player");
