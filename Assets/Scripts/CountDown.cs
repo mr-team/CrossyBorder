@@ -31,14 +31,14 @@ public class CountDown : MonoBehaviour
 		
 		if (GM.gameLoopActive)
 		{
-			timeText.text = ("Time left: " + ParseSeconds (timeLimit - timeLeft));
-			livesLeft.text = ("Lives left: " + GM.Player.Lives);
+			//timeText.text = ("Time left: " + ParseSeconds (timeLimit - timeLeft));
+			//livesLeft.text = ("Lives left: " + GM.Player.Lives);
 			ladderCounter.text = (GM.ladderCount + " / " + GM.maxLadder);
 			scoreText.text = ("" + GM.score);
 
-            ShovelGraphics[0].GetComponent<RawImage>().enabled = PC.shovelCount >= 1;
-            ShovelGraphics[1].GetComponent<RawImage>().enabled = PC.shovelCount >= 2;
-            ShovelGraphics[2].GetComponent<RawImage>().enabled = PC.shovelCount >= 3;
+			ShovelGraphics [0].GetComponent<RawImage> ().enabled = PC.shovelCount >= 1;
+			ShovelGraphics [1].GetComponent<RawImage> ().enabled = PC.shovelCount >= 2;
+			ShovelGraphics [2].GetComponent<RawImage> ().enabled = PC.shovelCount >= 3;
 		}
 
 		if (GM.gameLoopActive && !GM.gamePaused && !debugStopCount)

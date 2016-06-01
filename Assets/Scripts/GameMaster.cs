@@ -372,5 +372,4 @@ public class GameMaster : MonoBehaviour
 			rt.position = new Vector3 (screenPosX, screenPosY, 0f);
 		}
 	}
-		
 }
