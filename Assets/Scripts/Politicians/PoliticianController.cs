@@ -22,7 +22,6 @@ public class PoliticianController : MonoBehaviour
 	void Start ()
 	{
 		GM = GameObject.Find ("GameMaster").GetComponent<GameMaster> ();
-		
 		sanders.clickCB = ClickOnpolitician;
 		clinton.clickCB = ClickOnpolitician;
 		//cruz.clickCB = ClickOnpolitician;
