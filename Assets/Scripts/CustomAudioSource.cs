@@ -69,6 +69,10 @@ public class CustomAudioSource : MonoBehaviour
 		source.PlayOneShot (_clip);
 	}
 
+    public void Stop() {
+        source.Stop();
+    }
+
 	public AudioClip setClip (AudioClip clip)
 	{
 		source.clip = clip;

@@ -50,7 +50,6 @@ public class politician : MonoBehaviour
 		if (GM.gameState == GameMaster.States.gameActive)
 		{
 			abilityCard.enabled = false;
-			Debug.Log ("fuck da");
 		}
 
 	}

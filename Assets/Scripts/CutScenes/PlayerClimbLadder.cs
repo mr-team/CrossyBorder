@@ -34,7 +34,10 @@ public class PlayerClimbLadder : MonoBehaviour
 
 	float timer;
 
-	void Start ()
+    CustomAudioSource customAudio;
+    bool playedFanfare = false;
+
+    void Start ()
 	{
 		KickedFromWall = GetComponent<PlayerKickedFromWall> ();
 		GM = GameObject.Find ("GameMaster").GetComponent<GameMaster> ();
@@ -44,7 +47,8 @@ public class PlayerClimbLadder : MonoBehaviour
 		cutSceneCamera.enabled = false;
 		playerAnim = player.GetComponent<Animator> ();
 		playerAnim.SetBool ("Climbing", true);
-	}
+        customAudio = GetComponent<CustomAudioSource>();
+    }
 
 	void Update ()
 	{
@@ -94,7 +98,13 @@ public class PlayerClimbLadder : MonoBehaviour
 		playerAnim.SetBool ("Climbing", true);
 		cutSceneCamera.transform.position = Vector3.MoveTowards (cutSceneCamera.transform.position, panPoints [1].transform.position, 0.02f);
 
-		if (timer >= 2)
+
+        if(!customAudio.isPlaying() && !playedFanfare) {
+            customAudio.PlayOnce();
+            playedFanfare = true;
+        }
+
+        if (timer >= 2)
 		{
 			TransistToSecondCut ();
 
@@ -121,7 +131,8 @@ public class PlayerClimbLadder : MonoBehaviour
 			cutSceneCamera.transform.position = panPoints [2].transform.position;
 			cutSceneCamera.orthographicSize = 9;
 			cuts = Cuts.secondCut;
-		}
+            playedFanfare = false;
+        }
 	}
 
 	void TransistToEnd ()

@@ -29,6 +29,9 @@ public class GetTextCutScene : MonoBehaviour
 
 	public bool active;
 
+    CustomAudioSource cas;
+    bool hasPlayed = false;
+
 	void Awake ()
 	{
 		playerControl = GameObject.Find ("Player").GetComponent<PlayerController> ();
@@ -37,14 +40,20 @@ public class GetTextCutScene : MonoBehaviour
 	void Start ()
 	{
 		rawImage = textScreen.GetComponent<RawImage> ();
-
+        cas = GetComponent<CustomAudioSource>();
 		textScreen.SetActive (false);
 		cuts = Cuts.end;
 	}
 
 	void Update ()
 	{
-		if (Input.GetKeyDown (KeyCode.T))
+        if(cuts != Cuts.end) {
+            if(!hasPlayed) {
+                cas.PlayOnce();
+                hasPlayed = true;
+            }
+        }
+        if (Input.GetKeyDown (KeyCode.T))
 		{
 			active = true;
 			cuts = Cuts.cutOne;
@@ -110,7 +119,8 @@ public class GetTextCutScene : MonoBehaviour
 	{
 		timer = 0;
 		cuts = Cuts.end;
-	}
+        hasPlayed = false;
+    }
 
 	public void CloseText ()
 	{
