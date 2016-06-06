@@ -47,11 +47,6 @@ public class politician : MonoBehaviour
 			speechBubble.GetComponent<SpriteRenderer> ().sprite = quotes [Random.Range (0, quotes.Length)];
 		}
 
-		if (GM.gameState == GameMaster.States.gameActive)
-		{
-			abilityCard.enabled = false;
-		}
-
 	}
 
 	protected virtual void OnMouseDown ()
