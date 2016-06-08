@@ -64,6 +64,12 @@ MonoBehaviour:
   - {fileID: 21300006, guid: 108e565210a5bb24f9565f092cc2326f, type: 3}
   - {fileID: 21300004, guid: 108e565210a5bb24f9565f092cc2326f, type: 3}
   - {fileID: 21300002, guid: 108e565210a5bb24f9565f092cc2326f, type: 3}
+  - {fileID: 21300002, guid: 108e565210a5bb24f9565f092cc2326f, type: 3}
+  - {fileID: 21300000, guid: 35a091c47051b21459fcef9397ec7727, type: 3}
+  - {fileID: 21300000, guid: b997961f90626f64589f5a256bd4c4eb, type: 3}
+  - {fileID: 21300000, guid: 102ab247ee2a6d9468cef65e547abbc7, type: 3}
+  - {fileID: 21300000, guid: d8114367fb6645f41b2ba88394a8aa7c, type: 3}
+  - {fileID: 21300000, guid: 31d0396e24ebf7a4f910b0234b9bd95e, type: 3}
   speed: 0.045
 --- !u!114 &11469262
 MonoBehaviour:
@@ -80,6 +86,7 @@ MonoBehaviour:
   clip: {fileID: 8300000, guid: f3998e38d35eaa64aa7d12a877a568d2, type: 3}
   loop: 0
   playOnWake: 0
+  source: {fileID: 0}
 --- !u!114 &11475988
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -92,6 +99,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UIPICKUP: {fileID: 180958, guid: 4f38c3db5bce3dc4b8d822bec8f53e89, type: 2}
+  smoke: {fileID: 189530, guid: 4eee4f2cd4080ee47b169a6b1a4f2b07, type: 2}
+  pointSprite: {fileID: 21300000, guid: 6d144e3f70a841f49938ba60e10fa99f, type: 3}
 --- !u!212 &21241350
 SpriteRenderer:
   m_ObjectHideFlags: 1

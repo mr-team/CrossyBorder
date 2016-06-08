@@ -22,7 +22,6 @@ public class PoliticianController : MonoBehaviour
 	void Start ()
 	{
 		GM = GameObject.Find ("GameMaster").GetComponent<GameMaster> ();
-		
 		sanders.clickCB = ClickOnpolitician;
 		clinton.clickCB = ClickOnpolitician;
 		//cruz.clickCB = ClickOnpolitician;
@@ -52,7 +51,7 @@ public class PoliticianController : MonoBehaviour
 	void UpdateChosen ()
 	{
 		
-		cutScenePlayerKicked.active = true;
+		cutScenePlayerKicked.kicked = true;
 		//GM.NextRound ();
 		choseState = ChoseState.notchosen;
 	}

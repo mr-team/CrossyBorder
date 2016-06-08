@@ -25,14 +25,14 @@ public class GameMaster : MonoBehaviour
 	public List<Texture> cards = new List<Texture> ();
 	[HideInInspector]
 	public bool showCards = true;
-    [Space(20)]
+	[Space (20)]
 
-    [Header("Score Animation")]
-    public GameObject scorePopupPrefab;
-    public GameObject UI;
-    [Space(20)]
+	[Header ("Score Animation")]
+	public GameObject scorePopupPrefab;
+	public GameObject UI;
+	[Space (20)]
 
-    public States gameState;
+	public States gameState;
 
 	public GetTextCutScene textCutScene;
 	public OnNextRoun onNextRound;
@@ -104,7 +104,7 @@ public class GameMaster : MonoBehaviour
 		player.OnLoseLife += RestartCounter;
 		prevlife = player.Lives;
 		EndWall.transform.position = new Vector3 (EndWall.transform.position.x, (worldHeigth - 24), EndWall.transform.position.z);
-    }
+	}
 
 	void Awake ()
 	{
@@ -352,22 +352,24 @@ public class GameMaster : MonoBehaviour
 		roundWon = false;
 		gameTransition = false;
 		gameState = States.gameActive;
-        AddScore(500, Screen.width / 2f, Screen.height / 2f);
-    }
+		player.Imortal = false;
+		AddScore (500, Screen.width / 2f, Screen.height / 2f);
+	}
 
 	public void AddScore (int amount, float screenPosX = -1337f, float screenPosY = -1337f)
 	{
 		score += amount;
-        GameObject scorePopup = (GameObject) Instantiate(scorePopupPrefab, Vector3.zero, Quaternion.identity);
-        scorePopup.GetComponent<Text>().text = "+" + amount;
-        //scorePopup.transform.parent = UI.transform;
-        RectTransform rt = scorePopup.GetComponent<RectTransform>();
-        rt.SetParent(UI.transform);
-        if(screenPosX == -1337f && screenPosY == -1337f) {
-            rt.position = Camera.main.WorldToScreenPoint(new Vector3(player.IntPos.X, player.IntPos.Y, 0f));
-        } else {
-            rt.position = new Vector3(screenPosX, screenPosY, 0f);
-        }
-    }
-		
+		GameObject scorePopup = (GameObject)Instantiate (scorePopupPrefab, Vector3.zero, Quaternion.identity);
+		scorePopup.GetComponent<Text> ().text = "+" + amount;
+		//scorePopup.transform.parent = UI.transform;
+		RectTransform rt = scorePopup.GetComponent<RectTransform> ();
+		rt.SetParent (UI.transform);
+		if (screenPosX == -1337f && screenPosY == -1337f)
+		{
+			rt.position = Camera.main.WorldToScreenPoint (new Vector3 (player.IntPos.X, player.IntPos.Y, 0f));
+		} else
+		{
+			rt.position = new Vector3 (screenPosX, screenPosY, 0f);
+		}
+	}
 }

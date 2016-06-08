@@ -3,15 +3,28 @@ using System.Collections;
 
 public class Ladder : MonoBehaviour
 {
-    public GameObject UIPICKUP;
+	public GameObject UIPICKUP;
+	public GameObject smoke;
+	public Sprite pointSprite;
 
 	GameMaster GM;
 	private bool CHECKED = false;
+	private bool Once = false;
 
 	void Start ()
 	{
 		
 		GM = GameObject.Find ("GameMaster").GetComponent<GameMaster> ();
+	}
+
+	void Update ()
+	{
+		if (GM.ladderCount >= GM.maxLadder && !Once)
+		{
+			Instantiate (smoke, transform.position, Quaternion.identity);
+			//GetComponent<SpriteRenderer> ().sprite = pointSprite;
+			Once = true;
+		}
 	}
 
 	void OnTriggerEnter2D (Collider2D other)
@@ -27,7 +40,7 @@ public class Ladder : MonoBehaviour
 					GetComponent<CustomAudioSource> ().PlayOnce ();
 					GetComponent<SpriteRenderer> ().enabled = false;
 
-                    GameObject pickup = Instantiate(UIPICKUP, transform.position, Quaternion.identity) as GameObject;
+					GameObject pickup = Instantiate (UIPICKUP, transform.position, Quaternion.identity) as GameObject;
 
 					Destroy (this.gameObject, 0.204f);
 

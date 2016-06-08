@@ -10,7 +10,9 @@ public class CanvasHandler : MonoBehaviour
 	public Canvas deathScreen;
 	public Canvas winScreen;
 
-	void Start ()
+    public GameObject mainCamera;
+
+    void Start ()
 	{
 		
 		GM = GameObject.Find ("GameMaster").GetComponent<GameMaster> ();
@@ -34,7 +36,14 @@ public class CanvasHandler : MonoBehaviour
 			deathScreen.enabled = true;
 			ui.enabled = false;
 
-		} else
+            //Hacky place to make it play the lose music. Sorry :(
+            CustomAudioSource cas = deathScreen.GetComponent<CustomAudioSource>();
+            if(!cas.isPlaying()) {
+                mainCamera.GetComponent<CustomAudioSource>().Stop();
+                cas.Play();
+            }
+
+        } else
 			deathScreen.enabled = false;
 
 		//pasue menu handler
