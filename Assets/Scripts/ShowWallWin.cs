@@ -6,6 +6,7 @@ public class ShowWallWin : MonoBehaviour {
     public GameObject win;
     public GameObject politicians;
     public GameObject MainCamera;
+    public RawImage tooltip;
 
     private GameMaster GM;
     private PlayerClimbLadder pcl;
@@ -24,6 +25,8 @@ public class ShowWallWin : MonoBehaviour {
         }
         if(GM.showCards) {
             win.SetActive(GM.cards.Count == 0);
+            if(GM.cards.Count == 0)
+                tooltip.enabled = false;
             politicians.SetActive(GM.cards.Count != 0);
         }
     }

@@ -61,7 +61,6 @@ public class politician : MonoBehaviour
 
 	void OnMouseOver ()
 	{
-		Debug.Log ("im over card");
 		abilityCard.enabled = GM.showCards;
 		//abilityCard.texture = abilityCardTextures [cardNum];
 		abilityCard.texture = texture;
