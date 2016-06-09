@@ -33,7 +33,7 @@ public class CountDown : MonoBehaviour
 		{
 			//timeText.text = ("Time left: " + ParseSeconds (timeLimit - timeLeft));
 			//livesLeft.text = ("Lives left: " + GM.Player.Lives);
-			ladderCounter.text = (GM.ladderCount + " / " + GM.maxLadder);
+			ladderCounter.text = (GM.ladderCount + "/" + GM.maxLadder);
 			scoreText.text = ("" + GM.score);
 
 			ShovelGraphics [0].GetComponent<RawImage> ().enabled = PC.shovelCount >= 1;

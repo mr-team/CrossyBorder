@@ -373,6 +373,22 @@ Prefab:
       propertyPath: playerControl
       value: 
       objectReference: {fileID: 1518739059}
+    - target: {fileID: 11414438, guid: 29de2448d300d864dad6f36989eca3eb, type: 2}
+      propertyPath: m_FontData.m_FontSize
+      value: 57
+      objectReference: {fileID: 0}
+    - target: {fileID: 22479946, guid: 29de2448d300d864dad6f36989eca3eb, type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -20
+      objectReference: {fileID: 0}
+    - target: {fileID: 22457734, guid: 29de2448d300d864dad6f36989eca3eb, type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -71
+      objectReference: {fileID: 0}
+    - target: {fileID: 22488016, guid: 29de2448d300d864dad6f36989eca3eb, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 212
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 29de2448d300d864dad6f36989eca3eb, type: 2}
   m_IsPrefabParent: 0
@@ -1706,21 +1722,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
---- !u!1 &1894435546 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 153118, guid: 29de2448d300d864dad6f36989eca3eb, type: 2}
-  m_PrefabInternal: {fileID: 441410529}
---- !u!114 &1894435547
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1894435546}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 178dc5dac01b0e34e99bab5d2ebd86eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1907376403 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 164322, guid: 29de2448d300d864dad6f36989eca3eb, type: 2}
