@@ -9,6 +9,7 @@ public class CanvasHandler : MonoBehaviour
 	public Canvas ui;
 	public Canvas deathScreen;
 	public Canvas winScreen;
+    public Canvas tutorial;
 
     public GameObject mainCamera;
 
@@ -51,8 +52,10 @@ public class CanvasHandler : MonoBehaviour
 			pauseMenu.enabled = true;
 		else
 			pauseMenu.enabled = false;
-		
-		if (GM.roundWon)
+
+        tutorial.enabled = GM.inTutorial;
+
+        if (GM.roundWon)
 		{
 			winScreen.enabled = true;
 		}
