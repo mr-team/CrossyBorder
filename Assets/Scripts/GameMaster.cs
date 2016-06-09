@@ -64,6 +64,7 @@ public class GameMaster : MonoBehaviour
 	public bool roundWon;
 	public bool gameLost;
 	public bool gameTransition;
+    public int currentLevel = 1;
 
 	int prevlife;
 

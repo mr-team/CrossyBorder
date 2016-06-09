@@ -63,8 +63,12 @@ public class WorldGenerator : MonoBehaviour
                         continue;
                     GameObject laddr = Instantiate (ladderPrefab, new Vector3 (GM.World.GetTilePos (i, u).x, GM.World.GetTilePos (i, u).y, -0.1f), Quaternion.identity) as GameObject;
 					laddr.name = ("Ladder");
-                    if(rand.Next(0, 100) <= 50 /* % */) //Percentage needed to complete the level
-					    GM.maxLadder++;
+                    if(GM.maxLadder < (3 * GM.currentLevel)) {
+                        GM.maxLadder++;
+                    } else {
+                        if(rand.Next(0, 100) <= (5 * GM.currentLevel) /* % */) //Percentage needed to complete the level
+					        GM.maxLadder++;
+                    }
 					laddr.transform.parent = tileObj.transform;
 				} else if(GM.catapult && catapultRand >= 2f && catapultRand <= 3f && !spawnedCatapult) {
                     if(u <= 4 || u >= (GM.worldHeigth - 13) || GM.carLanes.Contains(u))

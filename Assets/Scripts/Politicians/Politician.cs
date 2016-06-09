@@ -95,7 +95,8 @@ public class politician : MonoBehaviour
 				break;
 		}
 		GM.cards.Remove (t);
-	}
+        GM.currentLevel++;
+    }
 	/*protected virtual void ActivateAbility (int cardNum)
 	{
 		if (cardNum == 0)
