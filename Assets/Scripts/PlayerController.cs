@@ -54,6 +54,12 @@ public class PlayerController : MonoBehaviour
 	float getOutOfHoleTimer;
 	float waitBeforeRun = 0.5f;
 
+	//throwing player
+	float distanceToThrow;
+	float distanceToGo;
+	float playerscale;
+	bool distSet;
+
 	bool moving;
 	bool tunnel;
 	bool flashSprites;
@@ -96,6 +102,8 @@ public class PlayerController : MonoBehaviour
 		player.Pos = new Vector2 (startX, startY);
 		transform.position = player.Pos;
 		playerRenderer.enabled = false;
+		playerscale = transform.localScale.x;
+	
 	}
 
 	public void Update ()
@@ -433,6 +441,54 @@ public class PlayerController : MonoBehaviour
 			playerAnim.SetBool ("FaceDown", false);
 			playerAnim.SetBool ("FaceRight", false);
 			return true;
+		}
+		return false;
+	}
+
+	public bool ThrowPlayer (Vector3 pos, float delay)
+	{
+		tpDelayTimer += Time.deltaTime;
+
+		if (!distSet)
+		{
+			distanceToThrow = Vector2.Distance (transform.position, pos);
+			distSet = true;
+		}
+
+		distanceToGo = Vector2.Distance (transform.position, pos);
+
+		if (tpDelayTimer >= delay)
+		{
+			if (distanceToGo > distanceToThrow / 2)
+			{
+				playerscale = Mathf.Lerp (1, 1.5f, (0.35f * 2));
+			}
+			if (distanceToGo < distanceToThrow / 2)
+			{
+				playerscale = Mathf.Lerp (1.5f, 1, (0.35f * 2));
+			}
+
+			Vector2 scale = new Vector2 (playerscale, playerscale);
+			transform.localScale = scale;
+
+
+			GetComponent<BoxCollider2D> ().enabled = false;
+			player.Imortal = true;
+			transform.position = Vector2.MoveTowards (transform.position, pos, 0.35f);
+			playerAnim.SetBool ("FaceUp", true);
+			playerAnim.SetBool ("FaceLeft", false);
+			playerAnim.SetBool ("FaceDown", false);
+			playerAnim.SetBool ("FaceRight", false);
+
+			if (transform.position == pos)
+			{
+				tpDelayTimer = 0f;
+				player.Pos = pos;
+				transform.localScale = new Vector2 (1, 1);
+				GetComponent<BoxCollider2D> ().enabled = true;
+				player.Imortal = false;
+				return true;
+			}
 		}
 		return false;
 	}

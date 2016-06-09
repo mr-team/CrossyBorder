@@ -16,6 +16,8 @@ public class CatapultController : MonoBehaviour
 	public bool activated;
 	public bool deStun;
 
+	bool tileChosen;
+
 	void Start ()
 	{
 		GM = GameObject.Find ("GameMaster").GetComponent<GameMaster> ();
@@ -27,27 +29,34 @@ public class CatapultController : MonoBehaviour
 	{
 		if (playerByCatapult && Input.GetKeyDown (KeyCode.E))
 		{
-			playerControl.Player.Imortal = true;
+			//playerControl.Player.Imortal = true;
 			activated = true;
 			catapultAnim.SetBool ("Load", true);
 		}
 			
-		
 		if (activated)
 		{
-			
 			playerControl.StunPlayer ();
 			//chose a tile
-			ChooseTile ();
+			if (!tileChosen)
+				ChooseTile ();
+			
 			catapultAnim.SetBool ("Fire", true);
 			//delay tp the player to the tile
-			if (playerControl.tpPlayer (new Vector2 (targetIntPos.X, targetIntPos.Y), 1.3f))
+
+			/*if (playerControl.tpPlayer (new Vector2 (targetIntPos.X, targetIntPos.Y), 1.3f))
+			{
+				catapultAnim.SetBool ("Load", false);
+
+				deStun = true;
+			}*/
+
+			if (playerControl.ThrowPlayer (new Vector2 (targetIntPos.X, targetIntPos.Y), 1.3f))
 			{
 				catapultAnim.SetBool ("Load", false);
 
 				deStun = true;
 			}
-
 			if (deStun)
 			{
 				playerControl.tpDelayTimer = 0;
@@ -58,7 +67,7 @@ public class CatapultController : MonoBehaviour
 					playerControl.stunTimer = 0;
 					deStun = false;
 					activated = false;
-
+					tileChosen = false;
 				}
 			}
 			//handle animations
@@ -94,12 +103,14 @@ public class CatapultController : MonoBehaviour
 	{
 		targetIntPos = new IntPosition2D (Random.Range (0, 11), intPos.Y + range);
 		CheckTile (targetIntPos);
+
 	}
 
 	void CheckTile (IntPosition2D pos)
 	{
 		if (GM.World.Tiles [pos.X, pos.Y].Walkable == true)
 		{
+			tileChosen = true;
 			LaunchPlayer ();
 		} else
 		{
