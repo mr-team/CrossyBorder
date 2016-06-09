@@ -59,6 +59,7 @@ public class GameMaster : MonoBehaviour
 	//game state stuff
 	public bool gameLoopActive;
 	public bool gamePaused;
+    public bool inTutorial = false;
 	public bool gameReset;
 	public bool roundWon;
 	public bool gameLost;

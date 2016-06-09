@@ -66,6 +66,7 @@ MonoBehaviour:
   carLaneObjects: []
   gameLoopActive: 0
   gamePaused: 0
+  inTutorial: 0
   gameReset: 0
   roundWon: 0
   gameLost: 0
@@ -93,6 +94,8 @@ MonoBehaviour:
   ui: {fileID: 0}
   deathScreen: {fileID: 0}
   winScreen: {fileID: 0}
+  tutorial: {fileID: 0}
+  mainCamera: {fileID: 0}
 --- !u!114 &11460782
 MonoBehaviour:
   m_ObjectHideFlags: 1
