@@ -14,7 +14,15 @@ public class LivesCounter : MonoBehaviour
 
 	void Update ()
 	{
-		switch (GM.Player.Lives)
+        lifeHats[4].SetActive(GM.Player.Lives >= 5);
+        lifeHats[3].SetActive(GM.Player.Lives >= 4);
+        lifeHats[2].SetActive(GM.Player.Lives >= 3);
+        lifeHats[1].SetActive(GM.Player.Lives >= 2);
+        lifeHats[0].SetActive(GM.Player.Lives >= 1);
+
+        //wtf is dis?
+
+        /*switch (GM.Player.Lives)
 		{
 
 			case 5:
@@ -71,6 +79,6 @@ public class LivesCounter : MonoBehaviour
 					lifeHats [0].SetActive (false);
 				}
 				break;
-		}
-	}
+		}*/
+    }
 }
