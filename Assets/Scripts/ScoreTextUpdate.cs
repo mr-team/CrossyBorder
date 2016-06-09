@@ -14,6 +14,6 @@ public class ScoreTextUpdate : MonoBehaviour {
 	}
 	
 	void Update() {
-        tm.text = Mathf.Clamp(gm.score, 0, 9999999999).ToString();
+        tm.text = Mathf.Clamp(gm.score, 0, 999999999).ToString();
 	}
 }
