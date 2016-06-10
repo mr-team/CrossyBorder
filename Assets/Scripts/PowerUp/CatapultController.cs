@@ -54,7 +54,7 @@ public class CatapultController : MonoBehaviour
 			if (playerControl.ThrowPlayer (new Vector2 (targetIntPos.X, targetIntPos.Y), 1.3f))
 			{
 				catapultAnim.SetBool ("Load", false);
-
+                playerByCatapult = false;
 				deStun = true;
 			}
 			if (deStun)
